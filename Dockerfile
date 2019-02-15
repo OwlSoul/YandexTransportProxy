@@ -6,12 +6,17 @@ FROM ubuntu:18.04
 RUN apt-get update -y
 
 # Dealing with goddamn locales
-RUN apt-get install -y locales
+RUN apt-get install -y locales=2.27-3ubuntu1
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     locale-gen
 ENV LANG en_US.UTF-8  
 ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8 
+ENV LC_ALL en_US.UTF-8
+
+# Setting the goddamn TimeZone
+RUN apt-get install -y tzdata=2018i-0ubuntu0.18.04
+ENV TZ=Europe/Moscow
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone 
 
 # Install wget
 RUN apt-get install -y wget=1.19.4-1ubuntu2.1
