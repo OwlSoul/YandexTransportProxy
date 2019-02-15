@@ -5,7 +5,7 @@ import re
 import psycopg2
 import datetime
 
-class PageParser:
+class YTMPageParser:
 
     # Filename to parse
     _filename=''
@@ -41,7 +41,7 @@ class PageParser:
            Currently only up to two prognosis values are available.
            If prognosis data is available, usually no "transit_frequency" data is present.
         """
-        f = open(parser.filename, "r")
+        f = open(self.filename, "r")
 
         soup=BeautifulSoup(f, "lxml")
 
@@ -138,7 +138,7 @@ class PageParser:
                     query = query + subquery + ", "
 
                 query = query[:-2]+";"
-                print(query)
+                #print(query)
 
                 cur.execute(query)
 
@@ -163,7 +163,7 @@ class PageParser:
 
 
 if __name__=='__main__':
-    parser=PageParser('saves/page-2019-02-14 17:49:45.097074.html')
+    parser=YTMPageParser('saves/page-2019-02-14 17:49:45.097074.html')
     parser.parse()
     for line in parser.data:
         print(line)
