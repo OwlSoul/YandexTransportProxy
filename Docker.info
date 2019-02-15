@@ -1,0 +1,11 @@
+Command to build docker image:
+
+docker build -t "ytmonitor:1.0.0" .
+
+Command to start docker image:
+
+docker run -it --privileged ytmonitor:1.0.0 /home/ytmonitor/start-monitor
+
+Command to remove "dangling" images:
+
+docker rmi -f $(docker images -f "dangling=true" -q)

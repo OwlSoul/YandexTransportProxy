@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Launch script for Yandex Transport Monitor
+
+su ytmonitor -c "/home/ytmonitor/ytmonitor_wd.py"

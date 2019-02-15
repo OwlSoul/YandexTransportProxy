@@ -29,11 +29,14 @@ class Application:
     driver = None
 
     def __init__(self):
+
         setproctitle.setproctitle("ytmonitor_wd")
 
         self.is_running = True
 
-        self._chrome_driver_location = '/home/astreinw/Apps/ChromeDriver/chromedriver'
+        #self._chrome_driver_location = '/home/astreinw/Apps/ChromeDriver/chromedriver'
+        #self._chrome_driver_location = '/usr/bin/chromedriver'
+        self._chrome_driver_location = '/usr/sbin/chromedriver'
         self._savefile = 'page-'+str(uuid.uuid4())+".html"
 
         self._url = "https://yandex.ru/maps/214/dolgoprudniy/?ll=37.493989%2C55.932101&masstransit%5BstopId%5D=stop__9898970&mode=stop&z=16.05"
@@ -63,7 +66,7 @@ class Application:
 
                 driver.get(self._url)
 
-                with open(self._savefile, 'w') as file:
+                with open(self._savefile, 'w', encoding="utf-8") as file:
                     file.write(driver.page_source)
                 file.close()
 

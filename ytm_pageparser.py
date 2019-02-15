@@ -41,9 +41,9 @@ class YTMPageParser:
            Currently only up to two prognosis values are available.
            If prognosis data is available, usually no "transit_frequency" data is present.
         """
-        f = open(self.filename, "r")
+        f = open(self.filename, "r", encoding="utf-8")
 
-        soup=BeautifulSoup(f, "lxml")
+        soup=BeautifulSoup(f, "lxml", from_encoding="utf-8")
 
         cnt = 1
         rows = soup.find_all("div", {"class": "masstransit-stop-panel-view__row"})
@@ -104,7 +104,7 @@ class YTMPageParser:
 
         # 1. Connect to database
         try:
-            conn = psycopg2.connect(host="127.0.0.1",
+            conn = psycopg2.connect(host="172.17.0.1",
                                     database="ytmonitor",
                                     user="ytmonitor",
                                     password="password",
