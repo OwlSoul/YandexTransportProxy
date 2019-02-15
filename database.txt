@@ -1,0 +1,20 @@
+CREATE ROLE ytmonitor WITH LOGIN ENCRYPTED PASSWORD 'password';
+
+CREATE DATABASE ytmonitor WITH OWNER ytmonitor;
+
+CREATE TABLE transit(
+seq_id serial primary key,
+stop_id varchar,
+stamp timestamptz,
+route varchar,
+type varchar,
+frequency varchar,
+prognosis varchar,
+prognosis_more varchar
+);
+
+GRANT ALL PRIVILEGES ON DATABASE ytmonitor TO ytmonitor;
+
+GRANT ALL PRIVILEGES ON TABLE transit TO ytmonitor;
+
+GRANT USAGE, SELECT ON SEQUENCE transit_seq_id_seq TO ytmonitor;
