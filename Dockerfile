@@ -54,9 +54,8 @@ RUN chown ytmonitor:ytmonitor /usr/sbin/chromedriver
 RUN rm chromedriver_linux64.zip
 
 # Copying the project
-ADD ytmonitor_wd.py /home/ytmonitor
+ADD ytm_wd /home/ytmonitor
 ADD ytm_pageparser.py /home/ytmonitor
-ADD start-monitor /home/ytmonitor/start-monitor
 
 # Setting permissions
 RUN chown -R ytmonitor:ytmonitor /home/ytmonitor

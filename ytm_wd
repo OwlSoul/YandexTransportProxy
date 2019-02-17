@@ -173,14 +173,14 @@ class Application:
         # Parsing the CLI arguments
         args = parser.parse_args()
         if args.version:
-            print("Yandex Transport Monitor, Version:",str(self.VERSION))
+            print("Yandex Transport Monitor, Version:", str(self.VERSION))
             return self.RESULT_VERSION
 
         self.verbose = int(args.verbose)
 
         self.chrome_driver_location = args.chrome_driver_location
 
-        self.wait_time = args.wait_time
+        self.wait_time = int(args.wait_time)
 
         self.run_once = args.run_once
 
@@ -226,7 +226,6 @@ class Application:
             self.log(self.LOG_DEBUG, "   db_password = " + "\"" + str(self.db_password) + "\"")
         if self.run_once:
             self.log(self.LOG_DEBUG, "Run once: " + str(self.run_once))
-        print("",file=sys.stderr)
 
         return self.RESULT_OK
 
@@ -254,7 +253,12 @@ class Application:
                 # Parse the page
                 parser = YTMPageParser(self._savefile)
                 result = parser.parse()
+
                 # Printing the result
+                self.log(self.LOG_DEBUG, "Printing output...")
+                if self.verbose>=self.LOG_DEBUG:
+                    print("", file=sys.stderr)
+
                 print("Timestamp :", time_now)
                 print("Station ID:", self.station_id)
                 for line in result:
@@ -277,6 +281,7 @@ class Application:
                 if self.run_once:
                     self.is_running = False
                 else:
+                    self.log(self.LOG_DEBUG, "Waiting " + str(self.wait_time) + " seconds.")
                     time.sleep(self.wait_time)
             driver.quit()
             os.remove(self._savefile)
