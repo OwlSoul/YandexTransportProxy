@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
+"""
+Yandex Transport Monitor - WebDriver Version
+Very, very, very, very ,very dirty hack thing.
 
-# Yandex Transport Monitor - WebDriver Version
-#  Very, very, very, very ,very dirty hack thing.
-#
-#  Uses Selenium web automation tool to scan for public transport.
-#  Exceptionally heavy, or maybe not so heavy if used in headless mode.
-#
+Uses Selenium web automation tool to scan for public transport.
+Exceptionally heavy, or maybe not so heavy if used in headless mode.
+"""
+
 # Workflow pipeline:
 #  1. Get the page source code via Selenium Automation + WebDriver
 #  2. Parse the page.
@@ -19,17 +20,20 @@ import datetime
 import re
 import argparse
 import signal
-import selenium
-from selenium import webdriver
 import sys
 import uuid
-from ytm_pageparser import YTMPageParser
 import os
+import selenium
+from selenium import webdriver
+from ytm_pageparser import YTMPageParser
 import setproctitle
 
 
 class Application:
-    VERSION = "1.0.3"
+    """
+    Yandex traffic monitor application
+    """
+    VERSION = "1.0.4"
 
     driver = None
 
@@ -81,17 +85,17 @@ class Application:
 
         self.is_running = True
 
-        #self._chrome_driver_location = '/home/astreinw/Apps/ChromeDriver/chromedriver'
-        #self._chrome_driver_location = '/usr/bin/chromedriver'
-        #self._chrome_driver_location = '/usr/sbin/chromedriver'
         self._savefile = 'page-'+str(uuid.uuid4())+".html"
-
-        #self._url = "https://yandex.ru/maps/214/dolgoprudniy/?ll=37.493989%2C55.932101&masstransit%5BstopId%5D=stop__9898970&mode=stop&z=16.05"
-        #self._station_id = "stop__9898970"
 
         signal.signal(signal.SIGINT, self.sigint_handler)
 
     def log(self, log_level, text):
+        """
+        Log data to stderr
+        :param log_level: log level, see Application.LOG_SOMETHING constants.
+        :param text: text to print
+        :return: nothing
+        """
         if log_level == self.LOG_ERROR:
             if self.verbose >= self.LOG_ERROR:
                 print("ERROR:", str(text), file=sys.stderr)
@@ -112,7 +116,13 @@ class Application:
                 print("DEBUG:", str(text), file=sys.stderr)
                 return
 
-    def sigint_handler(self, signal, time):
+    def sigint_handler(self, _signal, _time):
+        """
+        SIGINT signal handler
+        :param _signal: signal
+        :param _time: time
+        :return: nothing
+        """
         self.log(self.LOG_INFO, "SIGINT received! Graceful termination is in progress...")
         self.is_running = False
         if self.driver is not None:
@@ -143,8 +153,7 @@ class Application:
                                  "  1: Error messages only\n"
                                  "  2: Errors and warnings\n"
                                  "  3: Errors, warning and info\n"
-                                 "  4: Debug"
-                            )
+                                 "  4: Debug")
         parser.add_argument("--chrome_driver_location", default=self.chrome_driver_location,
                             help="Chrome/Chromium Web Driver location.")
         parser.add_argument("--wait_time", default=self.wait_time,
@@ -185,7 +194,7 @@ class Application:
         self.run_once = args.run_once
 
         self.url = args.url
-        if self.url=="":
+        if self.url == "":
             self.log(self.LOG_ERROR, "No URL being provided, terminating the program.")
             return self.ERROR_NO_URL
 
@@ -193,9 +202,9 @@ class Application:
         if self.station_id == "":
             self.log(self.LOG_WARNING, "No station ID provided, trying to derive from URL.")
             # Question marks means regexp is not greedy.
-            result = re.match(r".*stopId.*?=(.*?)&.*", self.url)
-            if result is not None:
-                self.station_id = result.group(1)
+            res = re.match(r".*stopId.*?=(.*?)&.*", self.url)
+            if res is not None:
+                self.station_id = res.group(1)
             if self.station_id == "":
                 self.log(self.LOG_WARNING, "Could not parse Station ID, it will be left blank.\n"
                          "You sure this is a Yandex Maps URL of public transport top?")
@@ -252,16 +261,16 @@ class Application:
 
                 # Parse the page
                 parser = YTMPageParser(self._savefile)
-                result = parser.parse()
+                res = parser.parse()
 
                 # Printing the result
                 self.log(self.LOG_DEBUG, "Printing output...")
-                if self.verbose>=self.LOG_DEBUG:
+                if self.verbose >= self.LOG_DEBUG:
                     print("", file=sys.stderr)
 
                 print("Timestamp :", time_now)
                 print("Station ID:", self.station_id)
-                for line in result:
+                for line in res:
                     print(line)
                 print("")
 
@@ -273,8 +282,8 @@ class Application:
                                         self.db_username,
                                         self.db_password)
                     self.log(self.LOG_DEBUG, "Saving to database...")
-                    result = parser.write_to_database(self.station_id, time_now, parser.data)
-                    if result==0:
+                    res = parser.write_to_database(self.station_id, time_now, parser.data)
+                    if res == 0:
                         self.log(self.LOG_DEBUG, "Saved!")
 
                 # Exit if run_once was specified.
@@ -287,12 +296,15 @@ class Application:
             os.remove(self._savefile)
             self.log(self.LOG_INFO, "Program terminated.")
             sys.exit(0)
+        # pylint: disable=C0103
         except selenium.common.exceptions.WebDriverException as e:
             self.log(self.LOG_ERROR, "Exception:" + str(e))
             sys.exit(1)
+        # pylint: enable=C0103
 
 
-if __name__=='__main__':
+# pylint: disable=C0103
+if __name__ == '__main__':
     app = Application()
     result = app.configure()
     if result == app.RESULT_VERSION:

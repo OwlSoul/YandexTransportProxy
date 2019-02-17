@@ -1,39 +1,28 @@
 #!/usr/bin/env python3
 
-from bs4 import BeautifulSoup
+"""
+Yandex Transport Monitor page parser
+"""
+
+import datetime
 import re
 import psycopg2
-import datetime
+from bs4 import BeautifulSoup
 
 class YTMPageParser:
+    """
+    Yandex Transport Monitor page parser class.
+    """
 
-    # Filename to parse
-    _filename=''
+    def __init__(self, filename):
+        self.filename = ""
+        self.data = ()
 
-    @property
-    def filename(self):
-        return self._filename
-
-    @filename.setter
-    def filename(self, value):
-        self._filename = value
-
-    # Data returned by parser, tuple of CSV-formatted string
-    _data=()
-
-    @property
-    def data(self):
-        return self._data
-
-    def __init__(self):
         self.db_host = "localhost"
         self.db_port = "5432"
         self.db_name = "ytmonitor"
         self.db_username = "ytmonitor"
         self.db_password = "password"
-
-    def __init__(self, filename):
-        super(YTMPageParser, self).__init__()
         self.filename = filename
 
     def set_database(self,
@@ -42,6 +31,15 @@ class YTMPageParser:
                      db_name="ytmonitor",
                      db_username="ytmonitor",
                      db_password="password"):
+        """
+        Set PostgreSQL database settings.
+        :param db_host: PostgreSQL database host
+        :param db_port: PostgreSQL database port
+        :param db_name: PostgreSQL database name
+        :param db_username: PostgreSQL database username
+        :param db_password: PostgreSQL database password
+        :return:
+        """
         self.db_host = db_host
         self.db_port = db_port
         self.db_name = db_name
@@ -59,9 +57,9 @@ class YTMPageParser:
            Currently only up to two prognosis values are available.
            If prognosis data is available, usually no "transit_frequency" data is present.
         """
-        f = open(self.filename, "r", encoding="utf-8")
+        file = open(self.filename, "r", encoding="utf-8")
 
-        soup=BeautifulSoup(f, "lxml", from_encoding="utf-8")
+        soup = BeautifulSoup(file, "lxml", from_encoding="utf-8")
 
         cnt = 1
         rows = soup.find_all("div", {"class": "masstransit-stop-panel-view__row"})
@@ -92,7 +90,7 @@ class YTMPageParser:
             if query is not None:
                 line_cnt = 0
                 for line in query:
-                    if line_cnt==0:
+                    if line_cnt == 0:
                         transit_prognosis = line.string.replace(u'\xa0', u' ')
                     else:
                         transit_prognosis_more += line.string.replace(u'\xa0', u' ')+"/"
@@ -102,20 +100,14 @@ class YTMPageParser:
                     transit_prognosis_more = transit_prognosis_more[:-1]
 
             # Saving the result
-            #dataline = str(cnt)+"," + \
-            #           transit_number + "," + \
-            #           transit_type+"," + \
-            #           transit_frequency + "," + \
-            #           transit_prognosis
-            #self._data = self._data_csv + (dataline,)
             datatuple = (str(cnt), transit_number, transit_type, transit_frequency,
                          transit_prognosis, transit_prognosis_more)
-            self._data = self._data + (datatuple,)
+            self.data = self.data + (datatuple,)
 
             cnt = cnt + 1
 
-        f.close()
-        return self._data
+        file.close()
+        return self.data
 
     def write_to_database(self, station_id, timestamp, data):
         """Write data to PostgreSQL database."""
@@ -128,11 +120,13 @@ class YTMPageParser:
                                     user=self.db_username,
                                     password=self.db_password,
                                     connect_timeout=10)
+        # pylint: disable=C0103
         except psycopg2.OperationalError as e:
             print("ERROR: " + str(datetime.datetime.now()) +
                   " Unable to connect to database (data_init_from_db)")
             print("ERROR: " + str(datetime.datetime.now()) + " " + str(e))
             return 1
+        # pylint: enable=C0103
         else:
             if conn is not None:
                 cur = conn.cursor()
@@ -153,11 +147,10 @@ class YTMPageParser:
                         "'" + str(line[3]) + "'" + ", " + \
                         "'" + str(line[4]) + "'" + ", " + \
                         "'" + str(line[5]) + "'" + \
-                        ")";
+                        ")"
                     query = query + subquery + ", "
 
                 query = query[:-2]+";"
-                #print(query)
 
                 cur.execute(query)
                 conn.commit()
@@ -168,10 +161,5 @@ class YTMPageParser:
         return 0
 
 
-if __name__=='__main__':
-    parser=YTMPageParser('saves/page-2019-02-14 17:49:45.097074.html')
-    parser.parse()
-    for line in parser.data:
-        print(line)
-    timestamp = datetime.datetime.now()
-    parser.write_to_database("station_test", timestamp, parser.data)
+if __name__ == '__main__':
+    print("Do not run this on its own!")
