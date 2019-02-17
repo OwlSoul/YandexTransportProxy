@@ -2,6 +2,8 @@ CREATE ROLE ytmonitor WITH LOGIN ENCRYPTED PASSWORD 'password';
 
 CREATE DATABASE ytmonitor WITH OWNER ytmonitor;
 
+\c ytmonitor;
+
 CREATE TABLE transit(
 seq_id serial primary key,
 stop_id varchar,

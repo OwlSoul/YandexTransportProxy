@@ -26,10 +26,28 @@ class YTMPageParser:
         return self._data
 
     def __init__(self):
-        pass
+        self.db_host = "localhost"
+        self.db_port = "5432"
+        self.db_name = "ytmonitor"
+        self.db_username = "ytmonitor"
+        self.db_password = "password"
 
     def __init__(self, filename):
+        super(YTMPageParser, self).__init__()
         self.filename = filename
+
+    def set_database(self,
+                     db_host="localhost",
+                     db_port="5432",
+                     db_name="ytmonitor",
+                     db_username="ytmonitor",
+                     db_password="password"):
+        self.db_host = db_host
+        self.db_port = db_port
+        self.db_name = db_name
+        self.db_username = db_username
+        self.db_password = db_password
+
 
     def parse(self):
         """Parse the file, will return tuple of tuples containing the result, and will
@@ -104,11 +122,12 @@ class YTMPageParser:
 
         # 1. Connect to database
         try:
-            conn = psycopg2.connect(host="172.17.0.1",
-                                    database="ytmonitor",
-                                    user="ytmonitor",
-                                    password="password",
-                                    connect_timeout=5)
+            conn = psycopg2.connect(host=self.db_host,
+                                    port=self.db_port,
+                                    database=self.db_name,
+                                    user=self.db_username,
+                                    password=self.db_password,
+                                    connect_timeout=10)
         except psycopg2.OperationalError as e:
             print("ERROR: " + str(datetime.datetime.now()) +
                   " Unable to connect to database (data_init_from_db)")
@@ -141,25 +160,12 @@ class YTMPageParser:
                 #print(query)
 
                 cur.execute(query)
-
-                """   cur.execute("INSERT INTO "
-                                            "transit(stop_id, stamp, route, type, "
-                                            "frequency, prognosis, prognosis_more)"
-                                            "VALUES "
-                                            "("+
-                                            "'" + str(station_id) + "'" + ", " +
-                                            "TIMESTAMPTZ '"+str(timestamp)+"', "+
-                                            "'666'"+", "+
-                                            "'test_bus'"+", "+
-                                            "'66 мин.'"+", "+
-                                            "'12 мин.'"+", "+
-                                            "'77 мин.'"+" )")"""
-
-
                 conn.commit()
+
                 # 3. Disconnect from database
                 cur.close()
                 conn.close()
+        return 0
 
 
 if __name__=='__main__':

@@ -3,3 +3,4 @@ Errors
 .idea
 __pycache__
 Dockerfile.save
+.Dockerfile.swp
