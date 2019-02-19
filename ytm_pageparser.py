@@ -4,6 +4,14 @@
 Yandex Transport Monitor page parser
 """
 
+# String Quotation Policy
+# The string quotation policy is as follows:
+#  - Strings which are visible to end user should be double-quoted (print, log).
+#  - Strings which are "internal", such as values, dictionary keys etc. are single-quoted.
+#  - Do not mix single-quoted and double-quoted strings in one statement.
+#  - Since SQL queries usually contain single-quotes, it's better to put the whole query
+#    in double quotes.
+
 import datetime
 import re
 import psycopg2
@@ -15,22 +23,22 @@ class YTMPageParser:
     """
 
     def __init__(self, filename):
-        self.filename = ""
+        self.filename = ''
         self.data = ()
 
-        self.db_host = "localhost"
-        self.db_port = "5432"
-        self.db_name = "ytmonitor"
-        self.db_username = "ytmonitor"
-        self.db_password = "password"
+        self.db_host = 'localhost'
+        self.db_port = '5432'
+        self.db_name = 'ytmonitor'
+        self.db_username = 'ytmonitor'
+        self.db_password = 'password'
         self.filename = filename
 
     def set_database(self,
-                     db_host="localhost",
-                     db_port="5432",
-                     db_name="ytmonitor",
-                     db_username="ytmonitor",
-                     db_password="password"):
+                     db_host='localhost',
+                     db_port='5432',
+                     db_name='ytmonitor',
+                     db_username='ytmonitor',
+                     db_password='password'):
         """
         Set PostgreSQL database settings.
         :param db_host: PostgreSQL database host
@@ -57,52 +65,52 @@ class YTMPageParser:
            Currently only up to two prognosis values are available.
            If prognosis data is available, usually no "transit_frequency" data is present.
         """
-        file = open(self.filename, "r", encoding="utf-8")
+        file = open(self.filename, 'r', encoding='utf-8')
 
-        soup = BeautifulSoup(file, "lxml", from_encoding="utf-8")
+        soup = BeautifulSoup(file, 'lxml', from_encoding='utf-8')
 
         cnt = 1
-        rows = soup.find_all("div", {"class": "masstransit-stop-panel-view__row"})
+        rows = soup.find_all('div', {'class': 'masstransit-stop-panel-view__row'})
         for row in rows:
-            # Transit number
-            query = row.find('a', {"class": "masstransit-stop-panel-view__vehicle-name"})
+            # Getting transit route number
+            query = row.find('a', {'class': 'masstransit-stop-panel-view__vehicle-name'})
             if query is not None:
                 transit_number = query.string.replace(u'\xa0', u' ')
             else:
-                transit_number = ""
+                transit_number = ''
 
-            # Transit type
-            query = row.find("div", {"class": "masstransit-icon"})
+            # Getting transit type
+            query = row.find('div', {'class': 'masstransit-icon'})
             result = re.match(r'.*_type_([^ ]+) *.*', str(query))
             transit_type = result.group(1)
 
             # Bus frequency
-            query = row.find("span", {"class": "masstransit-prognoses-view__frequency-time-value"})
+            query = row.find('span', {'class': 'masstransit-prognoses-view__frequency-time-value'})
             if query is not None:
                 transit_frequency = query.string.replace(u'\xa0', u' ')
             else:
-                transit_frequency = ""
+                transit_frequency = ''
 
             # Transit prognosis
-            query = row.find_all("span", {"class": "prognosis-value"})
-            transit_prognosis = ""
-            transit_prognosis_more = ""
+            query = row.find_all('span', {'class': 'prognosis-value'})
+            transit_prognosis = ''
+            transit_prognosis_more = ''
             if query is not None:
                 line_cnt = 0
                 for line in query:
                     if line_cnt == 0:
                         transit_prognosis = line.string.replace(u'\xa0', u' ')
                     else:
-                        transit_prognosis_more += line.string.replace(u'\xa0', u' ')+"/"
+                        transit_prognosis_more += line.string.replace(u'\xa0', u' ')+'/'
                     line_cnt += 1
 
                 if line_cnt > 1:
                     transit_prognosis_more = transit_prognosis_more[:-1]
 
             # Saving the result
-            datatuple = (str(cnt), transit_number, transit_type, transit_frequency,
-                         transit_prognosis, transit_prognosis_more)
-            self.data = self.data + (datatuple,)
+            data_tuple = (str(cnt), transit_number, transit_type, transit_frequency,
+                          transit_prognosis, transit_prognosis_more)
+            self.data = self.data + (data_tuple,)
 
             cnt = cnt + 1
 
@@ -123,7 +131,7 @@ class YTMPageParser:
         # pylint: disable=C0103
         except psycopg2.OperationalError as e:
             print("ERROR: " + str(datetime.datetime.now()) +
-                  " Unable to connect to database (data_init_from_db)")
+                  " Unable to connect to database (method: write_to_database)")
             print("ERROR: " + str(datetime.datetime.now()) + " " + str(e))
             return 1
         # pylint: enable=C0103

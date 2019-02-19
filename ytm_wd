@@ -15,6 +15,14 @@ Exceptionally heavy, or maybe not so heavy if used in headless mode.
 #  5. Wait (1 minute is enough).
 #  6. Repeat.
 
+# String Quotation Policy
+# The string quotation policy is as follows:
+#  - Strings which are visible to end user should be double-quoted (print, log).
+#  - Strings which are "internal", such as values, dictionary keys etc. are single-quoted.
+#  - Do not mix single-quoted and double-quoted strings in one statement.
+#  - Since SQL queries usually contain single-quotes, it's better to put the whole query
+#    in double quotes.
+
 import time
 import datetime
 import re
@@ -48,7 +56,7 @@ class Application:
 
     def __init__(self):
 
-        setproctitle.setproctitle("ytmonitor_wd")
+        setproctitle.setproctitle('ytm_wd')
 
         # Verbosity level
         #  0 - stdout output only, no errors/warnings/info/debug
@@ -59,7 +67,7 @@ class Application:
         self.verbose = 1
 
         # Chrome WebDriver location
-        self.chrome_driver_location = "/usr/sbin/chromedriver"
+        self.chrome_driver_location = '/usr/sbin/chromedriver'
 
         # Time to wait between queries, in seconds.
         self.wait_time = 60
@@ -68,24 +76,24 @@ class Application:
         self.run_once = False
 
         # Yandex Maps query URL, if empty the program will exit.
-        self.url = ""
+        self.url = ''
 
         # Station_id, if empty - will try and get station_id from url.
-        self.station_id = ""
+        self.station_id = ''
 
         # Save data to database (PostgreSQL)?
         self.save_to_database = False
 
         # Database settings
-        self.db_host = "localhost"
-        self.db_port = "5432"
-        self.db_name = "ytmonitor"
-        self.db_username = "ytmonitor"
-        self.db_password = "password"
+        self.db_host = 'localhost'
+        self.db_port = '5432'
+        self.db_name = 'ytmonitor'
+        self.db_username = 'ytmonitor'
+        self.db_password = 'password'
 
         self.is_running = True
 
-        self._savefile = 'page-'+str(uuid.uuid4())+".html"
+        self._savefile = 'page-'+str(uuid.uuid4())+'.html'
 
         signal.signal(signal.SIGINT, self.sigint_handler)
 
@@ -244,7 +252,7 @@ class Application:
         """
         try:
             options = webdriver.ChromeOptions()
-            options.add_argument("--headless")
+            options.add_argument('--headless')
 
             self.log(self.LOG_INFO, "Running Chrome in headless mode...")
             if self.verbose >= self.LOG_INFO:
@@ -255,7 +263,7 @@ class Application:
 
                 driver.get(self.url)
 
-                with open(self._savefile, 'w', encoding="utf-8") as file:
+                with open(self._savefile, 'w', encoding='utf-8') as file:
                     file.write(driver.page_source)
                 file.close()
 
@@ -306,7 +314,7 @@ class Application:
 # pylint: disable=C0103
 if __name__ == '__main__':
     app = Application()
-    result = app.configure()
+    result = app.configur*e()
     if result == app.RESULT_VERSION:
         sys.exit(0)
     if result != app.RESULT_OK:
