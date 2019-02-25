@@ -85,9 +85,6 @@ class YTMPageParser:
                 transit_type = query.string.replace(u'\xa0', u' ')
             else:
                 transit_type = ''
-            #query = row.find('div', {'class': 'masstransit-icon'})
-            #result = re.match(r'.*_type_([^ ]+) *.*', str(query))
-            #transit_type = result.group(1)
 
             # Bus frequency
             query = row.find('span', {'class': 'masstransit-prognoses-view__frequency-time-value'})
@@ -120,7 +117,7 @@ class YTMPageParser:
                 # Converting to output format
                 transit_prognosis = str(prognosis)
                 for i in range(0, len(prognosis_more)-1):
-                    transit_prognosis_more += str(prognosis_more[i])+', '
+                    transit_prognosis_more += str(prognosis_more[i])+' '
                 # Adding the last element
                 if len(prognosis_more) >= 1:
                     transit_prognosis_more += str(prognosis_more[-1])

@@ -41,7 +41,7 @@ class Application:
     """
     Yandex traffic monitor application
     """
-    VERSION = "1.1.1"
+    VERSION = "1.1.2"
 
     driver = None
 
@@ -74,6 +74,9 @@ class Application:
 
         # Run the script only once, wait_time will be ignored
         self.run_once = False
+
+        # Output mode (plain, csv, json, xml, yaml)
+        self.out_mode = 'plain'
 
         # Yandex Maps query URL, if empty the program will exit.
         self.url = ''
@@ -166,6 +169,8 @@ class Application:
                             help="Chrome/Chromium Web Driver location.")
         parser.add_argument("--wait_time", default=self.wait_time,
                             help="Time to wait between queries.")
+        parser.add_argument("--out_mode", default=self.out_mode,
+                            help="Output mode (plain, csv)")
         parser.add_argument("--run_once", action="store_true", default=self.run_once,
                             help="Run the script only once.")
         parser.add_argument("--url", default=self.url,
@@ -246,6 +251,46 @@ class Application:
 
         return self.RESULT_OK
 
+    def print_data(self, mode, data):
+        """
+        Prints the data in desired format
+        :param mode: print mode ('plain', 'csv')
+        :param data: data tuple to print, containing parsed info of transit schedule.
+        :return:
+        """
+        if mode=='plain':
+            self.print_data_plain(data)
+            return
+        if mode=='csv':
+            self.print_data_csv(data)
+            return
+
+    def print_data_plain(self, data):
+        """
+        Prints data in plain format
+        :param data: data tuple to print, containing parsed info of transit schedule.
+        :return: nothing
+        """
+        print("Timestamp :", self.time_now)
+        print("Station ID:", self.station_id)
+        for line in data:
+            print(line)
+        print("")
+
+    def print_data_csv(self, data):
+        """
+        Prints data in plain format
+        :param data: data tuple to print, containing parsed info of transit schedule.
+        :return: nothing
+        """
+        for line in data:
+            print(str(line[0]), end=",")
+            print(self.time_now, end=",")
+            print(str(self.station_id), end=",")
+            for i in range(1, len(line)-1):
+                print(str(line[i]), end=",")
+            print(str(line[-1]), end="\n")
+
     def run(self):
         """
         Main body of the script
@@ -259,7 +304,7 @@ class Application:
                 print("", file=sys.stderr)
             driver = webdriver.Chrome(self.chrome_driver_location, chrome_options=options)
             while self.is_running:
-                time_now = datetime.datetime.now()
+                self.time_now = datetime.datetime.now()
 
                 driver.get(self.url)
 
@@ -276,11 +321,7 @@ class Application:
                 if self.verbose >= self.LOG_DEBUG:
                     print("", file=sys.stderr)
 
-                print("Timestamp :", time_now)
-                print("Station ID:", self.station_id)
-                for line in res:
-                    print(line)
-                print("")
+                self.print_data(self.out_mode, res)
 
                 # Write to database
                 if self.save_to_database:
@@ -290,7 +331,7 @@ class Application:
                                         self.db_username,
                                         self.db_password)
                     self.log(self.LOG_DEBUG, "Saving to database...")
-                    res = parser.write_to_database(self.station_id, time_now, parser.data)
+                    res = parser.write_to_database(self.station_id, self.time_now, parser.data)
                     if res == 0:
                         self.log(self.LOG_DEBUG, "Saved!")
 
