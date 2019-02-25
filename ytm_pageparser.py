@@ -70,19 +70,24 @@ class YTMPageParser:
         soup = BeautifulSoup(file, 'lxml', from_encoding='utf-8')
 
         cnt = 1
-        rows = soup.find_all('div', {'class': 'masstransit-stop-panel-view__row'})
+        rows = soup.find_all('div', {'class': 'masstransit-stop-panel-view__vehicle-row'})
         for row in rows:
             # Getting transit route number
-            query = row.find('a', {'class': 'masstransit-stop-panel-view__vehicle-name'})
+            query = row.find('div', {'class': 'masstransit-stop-panel-view__vehicle-name'})
             if query is not None:
                 transit_number = query.string.replace(u'\xa0', u' ')
             else:
                 transit_number = ''
 
             # Getting transit type
-            query = row.find('div', {'class': 'masstransit-icon'})
-            result = re.match(r'.*_type_([^ ]+) *.*', str(query))
-            transit_type = result.group(1)
+            query = row.find('div', {'class': 'masstransit-stop-panel-view__vehicle-type'})
+            if query is not None:
+                transit_type = query.string.replace(u'\xa0', u' ')
+            else:
+                transit_type = ''
+            #query = row.find('div', {'class': 'masstransit-icon'})
+            #result = re.match(r'.*_type_([^ ]+) *.*', str(query))
+            #transit_type = result.group(1)
 
             # Bus frequency
             query = row.find('span', {'class': 'masstransit-prognoses-view__frequency-time-value'})
@@ -90,22 +95,36 @@ class YTMPageParser:
                 transit_frequency = query.string.replace(u'\xa0', u' ')
             else:
                 transit_frequency = ''
+            # Recalculate to minutes
+            query = transit_frequency.split(u' ')
+            if len(query) >= 2:
+                value = int(query[0])
+                units = query[1]
+                if units=='ч':
+                    transit_frequency = str(value*60)
+                else:
+                    transit_frequency = str(value)
+
 
             # Transit prognosis
-            query = row.find_all('span', {'class': 'prognosis-value'})
+            query = row.find('span', {'class': 'masstransit-prognoses-view__less-hour'})
             transit_prognosis = ''
             transit_prognosis_more = ''
             if query is not None:
-                line_cnt = 0
-                for line in query:
-                    if line_cnt == 0:
-                        transit_prognosis = line.string.replace(u'\xa0', u' ')
-                    else:
-                        transit_prognosis_more += line.string.replace(u'\xa0', u' ')+'/'
-                    line_cnt += 1
-
-                if line_cnt > 1:
-                    transit_prognosis_more = transit_prognosis_more[:-1]
+                data = query.string.replace(u'\xa0', u' ')
+                # Things were so much easier before...
+                # Splitting prognosis and prognosis_more
+                data = data.replace(u',', u'').split(u' ')
+                units = data[-1]
+                prognosis = data[0]
+                prognosis_more = data[1:-1]
+                # Converting to output format
+                transit_prognosis = str(prognosis)
+                for i in range(0, len(prognosis_more)-1):
+                    transit_prognosis_more += str(prognosis_more[i])+', '
+                # Adding the last element
+                if len(prognosis_more) >= 1:
+                    transit_prognosis_more += str(prognosis_more[-1])
 
             # Saving the result
             data_tuple = (str(cnt), transit_number, transit_type, transit_frequency,

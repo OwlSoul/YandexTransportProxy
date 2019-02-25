@@ -4,3 +4,4 @@ Errors
 __pycache__
 Dockerfile.save
 .Dockerfile.swp
+launch/page-*.html

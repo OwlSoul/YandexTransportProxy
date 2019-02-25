@@ -41,7 +41,7 @@ class Application:
     """
     Yandex traffic monitor application
     """
-    VERSION = "1.0.4"
+    VERSION = "1.1.0"
 
     driver = None
 
@@ -314,7 +314,7 @@ class Application:
 # pylint: disable=C0103
 if __name__ == '__main__':
     app = Application()
-    result = app.configur*e()
+    result = app.configure()
     if result == app.RESULT_VERSION:
         sys.exit(0)
     if result != app.RESULT_OK:
