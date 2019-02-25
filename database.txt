@@ -12,7 +12,8 @@ route varchar,
 type varchar,
 frequency varchar,
 prognosis varchar,
-prognosis_more varchar
+prognosis_more varchar,
+departures varchar
 );
 
 GRANT ALL PRIVILEGES ON DATABASE ytmonitor TO ytmonitor;
@@ -20,3 +21,15 @@ GRANT ALL PRIVILEGES ON DATABASE ytmonitor TO ytmonitor;
 GRANT ALL PRIVILEGES ON TABLE transit TO ytmonitor;
 
 GRANT USAGE, SELECT ON SEQUENCE transit_seq_id_seq TO ytmonitor;
+
+# Table to store stop information (or, actually, route information by
+# stop)
+
+CREATE TABLE stop_info(
+seq_id serial primary key,
+stop_id varchar,
+stop_name varchar,
+route_no varchar,
+schedule_start varchar,
+schedule_end varchar
+);

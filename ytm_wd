@@ -41,7 +41,7 @@ class Application:
     """
     Yandex traffic monitor application
     """
-    VERSION = "1.1.0"
+    VERSION = "1.1.1"
 
     driver = None
 

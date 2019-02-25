@@ -105,7 +105,6 @@ class YTMPageParser:
                 else:
                     transit_frequency = str(value)
 
-
             # Transit prognosis
             query = row.find('span', {'class': 'masstransit-prognoses-view__less-hour'})
             transit_prognosis = ''
@@ -126,9 +125,16 @@ class YTMPageParser:
                 if len(prognosis_more) >= 1:
                     transit_prognosis_more += str(prognosis_more[-1])
 
+            # Amazing new things!
+            # Expected exact times of next departures!
+            query = row.find('span', {'class': 'masstransit-prognoses-view__more-hour'})
+            transit_departures = ''
+            if query is not None:
+                transit_departures = query.string.replace(u'\xa0', u' ')
+
             # Saving the result
             data_tuple = (str(cnt), transit_number, transit_type, transit_frequency,
-                          transit_prognosis, transit_prognosis_more)
+                          transit_prognosis, transit_prognosis_more, transit_departures)
             self.data = self.data + (data_tuple,)
 
             cnt = cnt + 1
@@ -162,7 +168,8 @@ class YTMPageParser:
 
                 query = "INSERT INTO " + \
                         "transit(stop_id, stamp, route, type, " + \
-                        "frequency, prognosis, prognosis_more) " + \
+                        "frequency, prognosis, prognosis_more," \
+                        "departures) " + \
                         "VALUES "
 
                 for line in data:
@@ -173,7 +180,8 @@ class YTMPageParser:
                         "'" + str(line[2]) + "'" + ", " + \
                         "'" + str(line[3]) + "'" + ", " + \
                         "'" + str(line[4]) + "'" + ", " + \
-                        "'" + str(line[5]) + "'" + \
+                        "'" + str(line[5]) + "'" + ", " + \
+                        "'" + str(line[6]) + "'" + \
                         ")"
                     query = query + subquery + ", "
 
