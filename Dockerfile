@@ -32,6 +32,10 @@ RUN apt-get install -y chromium-browser=71.0.3578.98-0ubuntu0.18.04.1
 # Installing WebDriver, note that it has the same version as Chromium
 RUN apt-get install -y chromium-chromedriver=71.0.3578.98-0ubuntu0.18.04.1
 
+# Because life can't be easy, isn't it?
+# psycopg2-binary refuses to install on armhf without this thing.
+RUN apt-get install -y libpq-dev=10.6-0ubuntu0.18.04.1
+
 # Install python3
 RUN apt-get install -y python3=3.6.7-1~18.04
 
