@@ -36,6 +36,12 @@ RUN apt-get install -y chromium-chromedriver=71.0.3578.98-0ubuntu0.18.04.1
 # psycopg2-binary refuses to install on armhf without this thing.
 RUN apt-get install -y libpq-dev=10.6-0ubuntu0.18.04.1
 
+# It seems life is suffering and you should suffer till you the very end.
+# lxml requires, surprise, xml libraries.
+# This is not a problem on x86-64 Ubuntu, but it is on armhf machines.
+RUN apt-get install -y libxml2-dev=2.9.4+dfsg1-6.1ubuntu1.2
+RUN apt-get install -y libxslt1-dev=1.1.29-5
+
 # Install python3
 RUN apt-get install -y python3=3.6.7-1~18.04
 
