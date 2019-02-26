@@ -1,5 +1,5 @@
 # Dockerfile for Yandex Transport Monitor
-# Architectures: armhf 
+# Architectures: armhf (Orange PI, Raspberry PI)
 #                x86-64
 
 # Use Ubuntu 18.04 as basis
