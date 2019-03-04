@@ -2,7 +2,7 @@
 
 Скрипт, позволяющий собирать статистику Яндекс.Транспорта по конкретной остановке общественного транспорта.
 
-[Yandex Transport Monitor Screenshot](https://github.com/OwlSoul/YandexTransportMonitor/raw/master/images/sample-01.jpg)
+![Yandex Transport Monitor Screenshot](https://github.com/OwlSoul/YandexTransportMonitor/raw/master/images/sample-01.jpg)
 
 
 ## Что это такое и какую проблему оно решает?
