@@ -206,6 +206,8 @@ class Application:
 
         self.run_once = args.run_once
 
+        self.out_mode = args.out_mode
+
         self.url = args.url
         if self.url == "":
             self.log(self.LOG_ERROR, "No URL being provided, terminating the program.")
@@ -239,6 +241,7 @@ class Application:
         self.log(self.LOG_DEBUG, "   wait_time = " + str(self.wait_time))
         self.log(self.LOG_DEBUG, "   url = " + str(self.url))
         self.log(self.LOG_DEBUG, "   station_id = " + str(self.station_id))
+        self.log(self.LOG_DEBUG, "   out_mode = " + str(self.out_mode))
         self.log(self.LOG_DEBUG, "Use database: "+str(self.save_to_database))
         if self.save_to_database:
             self.log(self.LOG_DEBUG, "   db_host = " + "\"" + str(self.db_host) + "\"")

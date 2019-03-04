@@ -14,4 +14,5 @@ su ytmonitor -c \
 --db_port 5432 \
 --db_name "ytmonitor" \
 --db_username "ytmonitor" \
---db_password "password"'
+--db_password "password" \
+'

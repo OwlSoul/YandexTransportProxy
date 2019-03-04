@@ -6,6 +6,7 @@ python3 ../ytm_wd \
 --chrome_driver_location "/usr/lib/chromium-browser/chromedriver" \
 --wait_time 60 \
 --run_once \
+--out_mode "csv" \
 --save_to_database \
 --db_host "localhost" \
 --db_port 5432 \
