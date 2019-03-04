@@ -53,8 +53,8 @@
 
 2. Установка браузера (Chromium) и WebDriver. Здесь очень важно чтобы браузер и WebDriver были совместимы друг с другом.
 
-   `apt-get install -y chromium-browser=71.0.3578.98-0ubuntu0.18.04.1``` \
-   ```apt-get install -y chromium-chromedriver=71.0.3578.98-0ubuntu0.18.04.1```
+   `apt-get install -y chromium-browser=71.0.3578.98-0ubuntu0.18.04.1` \
+   `apt-get install -y chromium-chromedriver=71.0.3578.98-0ubuntu0.18.04.1`
 
 3. Установка "Python 3" и "pip".
 
