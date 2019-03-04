@@ -2,15 +2,15 @@
 # Architectures: armhf (Orange PI, Raspberry PI)
 #                x86-64
 
+# Use Ubuntu 18.04 as basis
+FROM ubuntu:18.04
+
 # ----- CHANGE THESE ARGUMENTS TO YOUR DESIRES ----- #
 # -- ИЗМЕНИТЕ ДАННЫЕ АРГУМЕНТЫ ДЛЯ ВАШЕЙ СИТУАЦИИ -- #
 # TimeZone / Часовой Пояс
-ARG timezone="Europe/Moscow"
+ARG timezone=Europe/Moscow
 
 # -------------------------------------------------- #
-
-# Use Ubuntu 18.04 as basis
-FROM ubuntu:18.04
 
 RUN apt-get update -y
 
@@ -24,7 +24,7 @@ ENV LC_ALL en_US.UTF-8
 
 # Setting the goddamn TimeZone
 RUN apt-get install -y tzdata=2018i-0ubuntu0.18.04
-ENV TZ=$timezone
+ENV TZ=${timezone}
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone 
 
 # Install wget
