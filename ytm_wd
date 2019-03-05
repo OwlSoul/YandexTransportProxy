@@ -67,7 +67,7 @@ class Application:
         self.verbose = 1
 
         # Chrome WebDriver location
-        self.chrome_driver_location = '/usr/sbin/chromedriver'
+        self.chrome_driver_location = '/usr/lib/chromium-browser/chromedriver'
 
         # Time to wait between queries, in seconds.
         self.wait_time = 60
@@ -335,8 +335,12 @@ class Application:
                                         self.db_password)
                     self.log(self.LOG_DEBUG, "Saving to database...")
                     res = parser.write_to_database(self.station_id, self.time_now, parser.data)
-                    if res == 0:
+                    if res == YTMPageParser.DB_RESULT_OK:
                         self.log(self.LOG_DEBUG, "Saved!")
+                    elif res == YTMPageParser.DB_RESULT_NODATA:
+                        self.log(self.LOG_DEBUG, "No data supplied!")
+                    else:
+                        self.log(self.LOG_DEBUG, "This should not happen...")
 
                 # Exit if run_once was specified.
                 if self.run_once:

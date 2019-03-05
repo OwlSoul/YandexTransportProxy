@@ -1,6 +1,6 @@
 Command to build docker image:
 
-docker build -t "ytmonitor:1.0.0" .
+docker build -t "ytmonitor:latest" .
 
 Command to start docker image (Chromium is picky and requires "priveleges"):
 

@@ -22,7 +22,11 @@ class YTMPageParser:
     Yandex Transport Monitor page parser class.
     """
 
+    DB_RESULT_OK = 0
+    DB_RESULT_NODATA = 1
+
     def __init__(self, filename):
+
         self.filename = ''
         self.data = ()
 
@@ -32,6 +36,7 @@ class YTMPageParser:
         self.db_username = 'ytmonitor'
         self.db_password = 'password'
         self.filename = filename
+
 
     def set_database(self,
                      db_host='localhost',
@@ -71,25 +76,28 @@ class YTMPageParser:
 
         cnt = 1
         rows = soup.find_all('div', {'class': 'masstransit-stop-panel-view__vehicle-row'})
+
+        # NOTE: strip() is used to remove trailing \n, this was an issue for "Троллейбус" transit type.
+
         for row in rows:
             # Getting transit route number
             query = row.find('div', {'class': 'masstransit-stop-panel-view__vehicle-name'})
             if query is not None:
-                transit_number = query.string.replace(u'\xa0', u' ')
+                transit_number = query.string.replace(u'\xa0', u' ').strip()
             else:
                 transit_number = ''
 
             # Getting transit type
             query = row.find('div', {'class': 'masstransit-stop-panel-view__vehicle-type'})
             if query is not None:
-                transit_type = query.string.replace(u'\xa0', u' ')
+                transit_type = query.string.replace(u'\xa0', u' ').strip()
             else:
                 transit_type = ''
 
             # Bus frequency
             query = row.find('span', {'class': 'masstransit-prognoses-view__frequency-time-value'})
             if query is not None:
-                transit_frequency = query.string.replace(u'\xa0', u' ')
+                transit_frequency = query.string.replace(u'\xa0', u' ').strip()
             else:
                 transit_frequency = ''
             # Recalculate to minutes
@@ -107,7 +115,7 @@ class YTMPageParser:
             transit_prognosis = ''
             transit_prognosis_more = ''
             if query is not None:
-                data = query.string.replace(u'\xa0', u' ')
+                data = query.string.replace(u'\xa0', u' ').strip()
                 # Things were so much easier before...
                 # Splitting prognosis and prognosis_more
                 data = data.replace(u',', u'').split(u' ')
@@ -127,7 +135,7 @@ class YTMPageParser:
             query = row.find('span', {'class': 'masstransit-prognoses-view__more-hour'})
             transit_departures = ''
             if query is not None:
-                transit_departures = query.string.replace(u'\xa0', u' ')
+                transit_departures = query.string.replace(u'\xa0', u' ').strip()
 
             # Saving the result
             data_tuple = (str(cnt), transit_number, transit_type, transit_frequency,
@@ -142,7 +150,12 @@ class YTMPageParser:
     def write_to_database(self, station_id, timestamp, data):
         """Write data to PostgreSQL database."""
 
+        #0. Check if data is not empty
+        if len(data) == 0:
+            return self.DB_RESULT_NODATA
+
         # 1. Connect to database
+
         try:
             conn = psycopg2.connect(host=self.db_host,
                                     port=self.db_port,
@@ -190,7 +203,7 @@ class YTMPageParser:
                 # 3. Disconnect from database
                 cur.close()
                 conn.close()
-        return 0
+        return self.DB_RESULT_OK
 
 
 if __name__ == '__main__':
