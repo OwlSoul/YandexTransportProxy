@@ -1,6 +1,6 @@
 # Yandex Transport Monitor
 
-*This project is for "Yandex.Maps" and "Yandex.Transport" services, so it's expected that majority of potential users are from Russian Federation, thus the README is written in Russian.*
+*This project is for "Yandex.Maps" and "Yandex.Transport" services, so it's expected that majority of potential users are from Russian Federation, thus the README is written in russian language.*
 
 Скрипт, позволяющий собирать данные Яндекс.Транспорта по конкретной остановке общественного транспорта, что делает возможным создание своего собственного табло прибытия для конкретной остановки, или автоматизировать какой-либо процесс в зависимости о данных о транспорте - например, будильник, вытаскивающий с мягкого и уютного дивана когда твой автобус подъезжает к дому или работе, а также собрать статистику по движению транспорта для дальнейшего анализа (следует ли он расписанию, когда прекращает ходить на самом деле).
 
