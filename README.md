@@ -1,6 +1,6 @@
 # Yandex Transport Monitor
 
-**Status (experemental):** \
+**Status (Experemental Glorious Huge Soviet Badges):** \
 [![Last test time](http://owlsoul.biz.tm/status/YandexTransportMonitor/status.php?image=out-last-test.png)](http://owlsoul.biz.tm/status/YandexTransportMonitor/status.php?image=out-last-test.png)
 [![Test status](http://owlsoul.biz.tm/status/YandexTransportMonitor/status.php?image=out-test-status.png)](http://owlsoul.biz.tm/status/YandexTransportMonitor/status.php?image=out-test-status.png)
 
