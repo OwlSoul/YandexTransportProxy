@@ -1,7 +1,7 @@
 # Yandex Transport Monitor
 
 **Status report:** \
-![Last test time](http://104.224.144.194/status/YandexTransportMonitor/out-last-test.png) \
+![Last test time](http://104.224.144.194/status/YandexTransportMonitor/out-last-test.png)
 ![Test status](http://104.224.144.194/status/YandexTransportMonitor/out-test-status.png)
 
 *This project is for "Yandex.Maps" and "Yandex.Transport" services, so it's expected that majority of potential users are from Russian Federation, thus the README is written in russian language.*
