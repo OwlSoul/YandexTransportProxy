@@ -1,8 +1,8 @@
 # Yandex Transport Monitor
 
 **Status report:** \
-[![Last test time](http://owlsoul.biz.tm/status/YandexTransportMonitor/status.php?image=out-last-test.png)](http://http://owlsoul.biz.tm/status/YandexTransportMonitor/out-last-test.png)
-[![Test status](http://owlsoul.biz.tm/status/YandexTransportMonitor/status.php?image=out-test-status.png)](http://owlsoul.biz.tm/status/YandexTransportMonitor/out-test-status.png)
+[![Last test time](http://owlsoul.biz.tm/status/YandexTransportMonitor/status.php?image=out-last-test.png)](https://github.com/OwlSoul/YandexTransportMonitor/)
+[![Test status](http://owlsoul.biz.tm/status/YandexTransportMonitor/status.php?image=out-test-status.png)](https://github.com/OwlSoul/YandexTransportMonitor/)
 
 *This project is for "Yandex.Maps" and "Yandex.Transport" services, so it's expected that majority of potential users are from Russian Federation, thus the README is written in russian language.*
 
