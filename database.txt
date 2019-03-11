@@ -33,5 +33,3 @@ route_no varchar,
 schedule_start varchar,
 schedule_end varchar
 );
-
-# Test
