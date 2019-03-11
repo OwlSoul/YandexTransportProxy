@@ -34,10 +34,10 @@ RUN apt-get install -y wget=1.19.4-1ubuntu2.1
 RUN apt-get install -y unzip=6.0-21ubuntu1
 
 # Install Chromium browser
-RUN apt-get install -y chromium-browser=71.0.3578.98-0ubuntu0.18.04.1
+RUN apt-get install -y chromium-browser=72.0.3626.121-0ubuntu0.18.04.1
 
 # Installing WebDriver, note that it has the same version as Chromium
-RUN apt-get install -y chromium-chromedriver=71.0.3578.98-0ubuntu0.18.04.1
+RUN apt-get install -y chromium-chromedriver=72.0.3626.121-0ubuntu0.18.04.1
 
 # Because life can't be easy, isn't it?
 # psycopg2-binary refuses to install on armhf without this thing.
