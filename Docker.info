@@ -16,4 +16,4 @@ docker update --restart=no $(docker ps -a -q)
 
 Usage of --restart=unless-stopped is recommended.
 
-Test value = 2
+Test value = 3
