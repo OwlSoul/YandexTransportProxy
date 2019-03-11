@@ -9,3 +9,9 @@ docker run -it --privileged ytmonitor:1.0.0 /home/ytmonitor/start-monitor
 Command to remove "dangling" images:
 
 docker rmi -f $(docker images -f "dangling=true" -q)
+
+Commands to stop auto-restart containers:
+
+docker update --restart=no $(docker ps -a -q)
+
+Usage of --restart=unless-stopped is recommended.
