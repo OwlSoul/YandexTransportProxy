@@ -15,3 +15,5 @@ Commands to stop auto-restart containers:
 docker update --restart=no $(docker ps -a -q)
 
 Usage of --restart=unless-stopped is recommended.
+
+Test value = 1
