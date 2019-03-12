@@ -67,7 +67,7 @@ class Application:
         self.verbose = 1
 
         # Chrome WebDriver location
-        self.chrome_driver_location = '/usr/lib/chromium-browser/chromedriver'
+        self.chrome_driver_location = '/usr/bin/chromedriver'
 
         # Time to wait between queries, in seconds.
         self.wait_time = 60
