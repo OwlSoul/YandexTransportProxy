@@ -261,10 +261,10 @@ class Application:
         :param data: data tuple to print, containing parsed info of transit schedule.
         :return:
         """
-        if mode=='plain':
+        if mode == 'plain':
             self.print_data_plain(data)
             return
-        if mode=='csv':
+        if mode == 'csv':
             self.print_data_csv(data)
             return
 
