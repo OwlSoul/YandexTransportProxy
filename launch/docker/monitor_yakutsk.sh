@@ -5,7 +5,7 @@
 
 IMAGE="ytmonitor:latest"
 
-docker run -it --privileged $IMAGE \
+docker run -it --rm --privileged $IMAGE \
 su ytmonitor -c \
 'python3 /home/ytmonitor/ytm_wd \
 --verbose 4 \
