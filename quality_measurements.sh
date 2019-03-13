@@ -4,8 +4,8 @@
 
 # Linter command
 LINTER_COMMAND="pylint ytm_wd ytm_pageparser.py"
-CODE_QUALITY_FILE="code_quality.csv"
-DOCKER_SIZE_FILE="docker_image_size.csv"
+CODE_QUALITY_FILE="plots/code_quality.csv"
+DOCKER_SIZE_FILE="plots/docker_image_size.csv"
 
 echo "Current user: $USER"
 # Linter results
