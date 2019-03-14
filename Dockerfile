@@ -27,12 +27,6 @@ RUN apt-get install -y tzdata=2018i-0ubuntu0.18.04
 ENV TZ=${timezone}
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone 
 
-# Install wget
-RUN apt-get install -y wget=1.19.4-1ubuntu2.1
-
-# Install unzip
-RUN apt-get install -y unzip=6.0-21ubuntu1
-
 # Install Chromium browser
 RUN apt-get install -y chromium-browser=72.0.3626.121-0ubuntu0.18.04.1
 
@@ -61,6 +55,9 @@ RUN pip3 install selenium==3.141.0
 RUN pip3 install setproctitle==1.1.10
 RUN pip3 install beautifulsoup4==4.6.0
 RUN pip3 install lxml==4.2.1
+
+# Cleaning
+RUN apt-get clean
 
 # Creating the user
 RUN mkdir -p /home/ytmonitor
