@@ -1,0 +1,4830 @@
+[
+    {
+        "data": [
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492725,
+                                    55.948789
+                                ],
+                                [
+                                    37.492356,
+                                    55.948817
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 5,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492356,
+                                    55.948817
+                                ],
+                                [
+                                    37.492225,
+                                    55.948826
+                                ],
+                                [
+                                    37.492076999999995,
+                                    55.948837999999995
+                                ],
+                                [
+                                    37.491959,
+                                    55.948847
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 39,
+                                "time": 1552577728
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.491959,
+                                    55.948847
+                                ],
+                                [
+                                    37.491959,
+                                    55.948847
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 6,
+                                "time": 1552577767
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.491959,
+                                    55.948847
+                                ],
+                                [
+                                    37.491949999999996,
+                                    55.948848
+                                ],
+                                [
+                                    37.491761,
+                                    55.948859
+                                ],
+                                [
+                                    37.491583,
+                                    55.948867
+                                ],
+                                [
+                                    37.49156,
+                                    55.948868
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 10,
+                                "time": 1552577773
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.49156,
+                                    55.948868
+                                ],
+                                [
+                                    37.49156,
+                                    55.948868
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 0,
+                                "time": 1552577783
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276853",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|842"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492720999999996,
+                                    55.926852
+                                ],
+                                [
+                                    37.492714,
+                                    55.926752
+                                ],
+                                [
+                                    37.492639,
+                                    55.925948999999996
+                                ],
+                                [
+                                    37.492618,
+                                    55.925723999999995
+                                ],
+                                [
+                                    37.492611,
+                                    55.925534
+                                ],
+                                [
+                                    37.492604,
+                                    55.925363999999995
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 10,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492604,
+                                    55.925363999999995
+                                ],
+                                [
+                                    37.492595,
+                                    55.925104999999995
+                                ],
+                                [
+                                    37.492599,
+                                    55.924786
+                                ],
+                                [
+                                    37.492609,
+                                    55.924488
+                                ],
+                                [
+                                    37.492639,
+                                    55.924141
+                                ],
+                                [
+                                    37.492732,
+                                    55.923581999999996
+                                ],
+                                [
+                                    37.492732,
+                                    55.923579999999994
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 12,
+                                "time": 1552577733
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492732,
+                                    55.923579999999994
+                                ],
+                                [
+                                    37.492872,
+                                    55.922988
+                                ],
+                                [
+                                    37.492948999999996,
+                                    55.922658
+                                ],
+                                [
+                                    37.493106999999995,
+                                    55.922021
+                                ],
+                                [
+                                    37.49317,
+                                    55.921808999999996
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 26,
+                                "time": 1552577745
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.49317,
+                                    55.921808999999996
+                                ],
+                                [
+                                    37.493217,
+                                    55.921651
+                                ],
+                                [
+                                    37.493235999999996,
+                                    55.921586999999995
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 2,
+                                "time": 1552577771
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493235999999996,
+                                    55.921586999999995
+                                ],
+                                [
+                                    37.493235999999996,
+                                    55.921586999999995
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 6,
+                                "time": 1552577773
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493235999999996,
+                                    55.921586999999995
+                                ],
+                                [
+                                    37.493300999999995,
+                                    55.921366
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 2,
+                                "time": 1552577779
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493300999999995,
+                                    55.921366
+                                ],
+                                [
+                                    37.493367,
+                                    55.921144
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 2,
+                                "time": 1552577781
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276853",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|1102"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494091,
+                                    55.919523
+                                ],
+                                [
+                                    37.494091,
+                                    55.919523
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 8,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494091,
+                                    55.919523
+                                ],
+                                [
+                                    37.494088999999995,
+                                    55.919529999999995
+                                ],
+                                [
+                                    37.494032,
+                                    55.919745
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 4,
+                                "time": 1552577731
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494032,
+                                    55.919745
+                                ],
+                                [
+                                    37.493860999999995,
+                                    55.920393999999995
+                                ],
+                                [
+                                    37.493617,
+                                    55.921295
+                                ],
+                                [
+                                    37.493592,
+                                    55.921388
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 26,
+                                "time": 1552577735
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493592,
+                                    55.921388
+                                ],
+                                [
+                                    37.493559,
+                                    55.921509
+                                ],
+                                [
+                                    37.493432,
+                                    55.921980999999995
+                                ],
+                                [
+                                    37.49328,
+                                    55.922560999999995
+                                ],
+                                [
+                                    37.493162,
+                                    55.923012
+                                ],
+                                [
+                                    37.493156,
+                                    55.923032
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 22,
+                                "time": 1552577761
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493156,
+                                    55.923032
+                                ],
+                                [
+                                    37.493156,
+                                    55.923032
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 0,
+                                "time": 1552577783
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|389"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493384999999996,
+                                    55.907391
+                                ],
+                                [
+                                    37.493384999999996,
+                                    55.907391
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 5,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493384999999996,
+                                    55.907391
+                                ],
+                                [
+                                    37.493333,
+                                    55.907168999999996
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 2,
+                                "time": 1552577728
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493333,
+                                    55.907168999999996
+                                ],
+                                [
+                                    37.493291,
+                                    55.906988
+                                ],
+                                [
+                                    37.493206,
+                                    55.906690999999995
+                                ],
+                                [
+                                    37.493099,
+                                    55.906366
+                                ],
+                                [
+                                    37.492945,
+                                    55.906015999999994
+                                ],
+                                [
+                                    37.492784,
+                                    55.905693
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 6,
+                                "time": 1552577730
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492784,
+                                    55.905693
+                                ],
+                                [
+                                    37.492692,
+                                    55.905505999999995
+                                ],
+                                [
+                                    37.492508,
+                                    55.905173
+                                ],
+                                [
+                                    37.492275,
+                                    55.904827999999995
+                                ],
+                                [
+                                    37.492269,
+                                    55.904818999999996
+                                ],
+                                [
+                                    37.492239999999995,
+                                    55.904773999999996
+                                ],
+                                [
+                                    37.49209,
+                                    55.904543999999994
+                                ],
+                                [
+                                    37.491969999999995,
+                                    55.904340999999995
+                                ],
+                                [
+                                    37.491924999999995,
+                                    55.904253999999995
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 15,
+                                "time": 1552577736
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.491924999999995,
+                                    55.904253999999995
+                                ],
+                                [
+                                    37.491828999999996,
+                                    55.904075
+                                ],
+                                [
+                                    37.491596,
+                                    55.903631999999995
+                                ],
+                                [
+                                    37.491369999999996,
+                                    55.903237999999995
+                                ],
+                                [
+                                    37.491244,
+                                    55.903048
+                                ],
+                                [
+                                    37.491175999999996,
+                                    55.902946
+                                ],
+                                [
+                                    37.491105,
+                                    55.902837999999996
+                                ],
+                                [
+                                    37.491093,
+                                    55.90282
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 14,
+                                "time": 1552577751
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.491093,
+                                    55.90282
+                                ],
+                                [
+                                    37.490995,
+                                    55.90267
+                                ],
+                                [
+                                    37.49098,
+                                    55.902646
+                                ],
+                                [
+                                    37.490953999999995,
+                                    55.902609
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 2,
+                                "time": 1552577765
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.490953999999995,
+                                    55.902609
+                                ],
+                                [
+                                    37.490953999999995,
+                                    55.902609
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 6,
+                                "time": 1552577767
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.490953999999995,
+                                    55.902609
+                                ],
+                                [
+                                    37.490804,
+                                    55.902401
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 2,
+                                "time": 1552577773
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.490804,
+                                    55.902401
+                                ],
+                                [
+                                    37.490756,
+                                    55.902333999999996
+                                ],
+                                [
+                                    37.490337,
+                                    55.901697
+                                ],
+                                [
+                                    37.490249,
+                                    55.901573
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 8,
+                                "time": 1552577775
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276853",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|401"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494561,
+                                    55.917898
+                                ],
+                                [
+                                    37.494506,
+                                    55.918079
+                                ],
+                                [
+                                    37.494343,
+                                    55.918617
+                                ],
+                                [
+                                    37.494336,
+                                    55.918637999999994
+                                ],
+                                [
+                                    37.494278,
+                                    55.918834
+                                ],
+                                [
+                                    37.494209999999995,
+                                    55.919070999999995
+                                ],
+                                [
+                                    37.494149,
+                                    55.919301
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 24,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494149,
+                                    55.919301
+                                ],
+                                [
+                                    37.494091,
+                                    55.919523
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 6,
+                                "time": 1552577747
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494091,
+                                    55.919523
+                                ],
+                                [
+                                    37.494091,
+                                    55.919523
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 6,
+                                "time": 1552577753
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494091,
+                                    55.919523
+                                ],
+                                [
+                                    37.494088999999995,
+                                    55.919529999999995
+                                ],
+                                [
+                                    37.494032,
+                                    55.919745
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 3,
+                                "time": 1552577759
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494032,
+                                    55.919745
+                                ],
+                                [
+                                    37.493860999999995,
+                                    55.920393999999995
+                                ],
+                                [
+                                    37.493617,
+                                    55.921295
+                                ],
+                                [
+                                    37.493592,
+                                    55.921388
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 19,
+                                "time": 1552577762
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493592,
+                                    55.921388
+                                ],
+                                [
+                                    37.493559,
+                                    55.921509
+                                ],
+                                [
+                                    37.493518,
+                                    55.921662
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 2,
+                                "time": 1552577781
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|548"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.480067999999996,
+                                    55.87855
+                                ],
+                                [
+                                    37.480069,
+                                    55.878550999999995
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 86400,
+                                "time": 1552577598
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|661"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492652,
+                                    55.948519999999995
+                                ],
+                                [
+                                    37.492726,
+                                    55.948574
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 2,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492726,
+                                    55.948574
+                                ],
+                                [
+                                    37.492993,
+                                    55.948769
+                                ],
+                                [
+                                    37.493677,
+                                    55.948727
+                                ],
+                                [
+                                    37.494510999999996,
+                                    55.948668999999995
+                                ],
+                                [
+                                    37.494968,
+                                    55.948639
+                                ],
+                                [
+                                    37.495123,
+                                    55.948629999999994
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 42,
+                                "time": 1552577725
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.495123,
+                                    55.948629999999994
+                                ],
+                                [
+                                    37.495306,
+                                    55.948617999999996
+                                ],
+                                [
+                                    37.496148999999996,
+                                    55.94856
+                                ],
+                                [
+                                    37.496358,
+                                    55.948546
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 16,
+                                "time": 1552577767
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|765"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.480627,
+                                    55.88534
+                                ],
+                                [
+                                    37.480531,
+                                    55.885295
+                                ],
+                                [
+                                    37.480295,
+                                    55.8852
+                                ],
+                                [
+                                    37.480212,
+                                    55.88516
+                                ],
+                                [
+                                    37.480132,
+                                    55.88512
+                                ],
+                                [
+                                    37.480087999999995,
+                                    55.885092
+                                ],
+                                [
+                                    37.480046,
+                                    55.885061
+                                ],
+                                [
+                                    37.480005999999996,
+                                    55.885025999999996
+                                ],
+                                [
+                                    37.479982,
+                                    55.884989
+                                ],
+                                [
+                                    37.479962,
+                                    55.884932
+                                ],
+                                [
+                                    37.479957999999996,
+                                    55.884890999999996
+                                ],
+                                [
+                                    37.479963,
+                                    55.884848999999996
+                                ],
+                                [
+                                    37.479977999999996,
+                                    55.884789999999995
+                                ],
+                                [
+                                    37.480007,
+                                    55.884716
+                                ],
+                                [
+                                    37.480035,
+                                    55.884653
+                                ],
+                                [
+                                    37.480069,
+                                    55.884595999999995
+                                ],
+                                [
+                                    37.480105,
+                                    55.884539
+                                ],
+                                [
+                                    37.480233999999996,
+                                    55.884350999999995
+                                ],
+                                [
+                                    37.48028,
+                                    55.88431
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 33,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.48028,
+                                    55.88431
+                                ],
+                                [
+                                    37.48081,
+                                    55.883834
+                                ],
+                                [
+                                    37.480917,
+                                    55.883733
+                                ],
+                                [
+                                    37.481215,
+                                    55.883454
+                                ],
+                                [
+                                    37.481653,
+                                    55.883097
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 14,
+                                "time": 1552577756
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.481653,
+                                    55.883097
+                                ],
+                                [
+                                    37.481743,
+                                    55.883022999999994
+                                ],
+                                [
+                                    37.481916,
+                                    55.882877
+                                ],
+                                [
+                                    37.481995,
+                                    55.882794999999994
+                                ],
+                                [
+                                    37.482068999999996,
+                                    55.882708
+                                ],
+                                [
+                                    37.482164999999995,
+                                    55.882585999999996
+                                ],
+                                [
+                                    37.48223,
+                                    55.882489
+                                ],
+                                [
+                                    37.482346,
+                                    55.882295
+                                ],
+                                [
+                                    37.48241,
+                                    55.88218
+                                ],
+                                [
+                                    37.482448999999995,
+                                    55.882104
+                                ],
+                                [
+                                    37.482489,
+                                    55.882017
+                                ],
+                                [
+                                    37.482517,
+                                    55.881935999999996
+                                ],
+                                [
+                                    37.482534,
+                                    55.881862999999996
+                                ],
+                                [
+                                    37.482547,
+                                    55.881766999999996
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 8,
+                                "time": 1552577770
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.482547,
+                                    55.881766999999996
+                                ],
+                                [
+                                    37.482549,
+                                    55.881755999999996
+                                ],
+                                [
+                                    37.482565,
+                                    55.881605
+                                ],
+                                [
+                                    37.482591,
+                                    55.881215
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 5,
+                                "time": 1552577778
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276853",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|767"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.482371,
+                                    55.885607
+                                ],
+                                [
+                                    37.482358999999995,
+                                    55.885672
+                                ],
+                                [
+                                    37.482315,
+                                    55.885906
+                                ],
+                                [
+                                    37.482276,
+                                    55.88614
+                                ],
+                                [
+                                    37.482324,
+                                    55.886269
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 6,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.482324,
+                                    55.886269
+                                ],
+                                [
+                                    37.48234,
+                                    55.886309
+                                ],
+                                [
+                                    37.482374,
+                                    55.886399
+                                ],
+                                [
+                                    37.482420999999995,
+                                    55.886513
+                                ],
+                                [
+                                    37.482544,
+                                    55.886790999999995
+                                ],
+                                [
+                                    37.482651,
+                                    55.887026999999996
+                                ],
+                                [
+                                    37.482762,
+                                    55.887257999999996
+                                ],
+                                [
+                                    37.482873999999995,
+                                    55.88749
+                                ],
+                                [
+                                    37.482929999999996,
+                                    55.887605
+                                ],
+                                [
+                                    37.482949999999995,
+                                    55.887648
+                                ],
+                                [
+                                    37.482957,
+                                    55.887662
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 11,
+                                "time": 1552577729
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.482957,
+                                    55.887662
+                                ],
+                                [
+                                    37.482986,
+                                    55.887726
+                                ],
+                                [
+                                    37.483025,
+                                    55.887809
+                                ],
+                                [
+                                    37.48306,
+                                    55.887882999999995
+                                ],
+                                [
+                                    37.483197,
+                                    55.888172
+                                ],
+                                [
+                                    37.483333,
+                                    55.888431
+                                ],
+                                [
+                                    37.483473,
+                                    55.88865
+                                ],
+                                [
+                                    37.483498999999995,
+                                    55.88869
+                                ],
+                                [
+                                    37.483731,
+                                    55.889039999999994
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 9,
+                                "time": 1552577740
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.483731,
+                                    55.889039999999994
+                                ],
+                                [
+                                    37.483768,
+                                    55.889095999999995
+                                ],
+                                [
+                                    37.484052,
+                                    55.889508
+                                ],
+                                [
+                                    37.484347,
+                                    55.889905999999996
+                                ],
+                                [
+                                    37.484566,
+                                    55.89026
+                                ],
+                                [
+                                    37.484643,
+                                    55.890383
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 9,
+                                "time": 1552577749
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.484643,
+                                    55.890383
+                                ],
+                                [
+                                    37.48471,
+                                    55.89049
+                                ],
+                                [
+                                    37.484801999999995,
+                                    55.890626
+                                ],
+                                [
+                                    37.484877,
+                                    55.890747
+                                ],
+                                [
+                                    37.484985,
+                                    55.890937
+                                ],
+                                [
+                                    37.485033,
+                                    55.891042999999996
+                                ],
+                                [
+                                    37.485122,
+                                    55.891242
+                                ],
+                                [
+                                    37.485222,
+                                    55.891489
+                                ],
+                                [
+                                    37.48531,
+                                    55.891738
+                                ],
+                                [
+                                    37.485321,
+                                    55.891774999999996
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 9,
+                                "time": 1552577758
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.485321,
+                                    55.891774999999996
+                                ],
+                                [
+                                    37.485399,
+                                    55.892029
+                                ],
+                                [
+                                    37.485475,
+                                    55.892257
+                                ],
+                                [
+                                    37.485534,
+                                    55.892452
+                                ],
+                                [
+                                    37.485569,
+                                    55.892638
+                                ],
+                                [
+                                    37.485625,
+                                    55.892897
+                                ],
+                                [
+                                    37.485704,
+                                    55.893204999999995
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 11,
+                                "time": 1552577767
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.485704,
+                                    55.893204999999995
+                                ],
+                                [
+                                    37.485886,
+                                    55.893916
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 5,
+                                "time": 1552577778
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|768"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492132,
+                                    55.948834
+                                ],
+                                [
+                                    37.492076999999995,
+                                    55.948837999999995
+                                ],
+                                [
+                                    37.491959,
+                                    55.948847
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 17,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.491959,
+                                    55.948847
+                                ],
+                                [
+                                    37.491959,
+                                    55.948847
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 6,
+                                "time": 1552577740
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.491959,
+                                    55.948847
+                                ],
+                                [
+                                    37.491949999999996,
+                                    55.948848
+                                ],
+                                [
+                                    37.491761,
+                                    55.948859
+                                ],
+                                [
+                                    37.491583,
+                                    55.948867
+                                ],
+                                [
+                                    37.49156,
+                                    55.948868
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 10,
+                                "time": 1552577746
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.49156,
+                                    55.948868
+                                ],
+                                [
+                                    37.491462,
+                                    55.94887
+                                ],
+                                [
+                                    37.49147,
+                                    55.948758999999995
+                                ],
+                                [
+                                    37.491481,
+                                    55.94853
+                                ],
+                                [
+                                    37.491495,
+                                    55.948102
+                                ],
+                                [
+                                    37.491506,
+                                    55.947807
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 27,
+                                "time": 1552577756
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276853",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|769"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.482574,
+                                    55.878986999999995
+                                ],
+                                [
+                                    37.482580999999996,
+                                    55.878989
+                                ],
+                                [
+                                    37.482611999999996,
+                                    55.879
+                                ],
+                                [
+                                    37.482659,
+                                    55.87902
+                                ],
+                                [
+                                    37.482701999999996,
+                                    55.879045
+                                ],
+                                [
+                                    37.482737,
+                                    55.879068999999994
+                                ],
+                                [
+                                    37.482766999999996,
+                                    55.879093999999995
+                                ],
+                                [
+                                    37.482785,
+                                    55.879115
+                                ],
+                                [
+                                    37.482800999999995,
+                                    55.879135999999995
+                                ],
+                                [
+                                    37.482811999999996,
+                                    55.879154
+                                ],
+                                [
+                                    37.482822,
+                                    55.879172
+                                ],
+                                [
+                                    37.482828,
+                                    55.879191
+                                ],
+                                [
+                                    37.482828999999995,
+                                    55.879211999999995
+                                ],
+                                [
+                                    37.48283,
+                                    55.879231
+                                ],
+                                [
+                                    37.482827,
+                                    55.879244
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 60,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.482827,
+                                    55.879244
+                                ],
+                                [
+                                    37.482827,
+                                    55.879244
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 0,
+                                "time": 1552577783
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|772"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492725,
+                                    55.926911999999994
+                                ],
+                                [
+                                    37.492714,
+                                    55.926752
+                                ],
+                                [
+                                    37.492639,
+                                    55.925948999999996
+                                ],
+                                [
+                                    37.492618,
+                                    55.925723999999995
+                                ],
+                                [
+                                    37.492611,
+                                    55.925534
+                                ],
+                                [
+                                    37.492604,
+                                    55.925363999999995
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 26,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492604,
+                                    55.925363999999995
+                                ],
+                                [
+                                    37.492595,
+                                    55.925104999999995
+                                ],
+                                [
+                                    37.492599,
+                                    55.924786
+                                ],
+                                [
+                                    37.492609,
+                                    55.924488
+                                ],
+                                [
+                                    37.492639,
+                                    55.924141
+                                ],
+                                [
+                                    37.492732,
+                                    55.923581999999996
+                                ],
+                                [
+                                    37.492732,
+                                    55.923579999999994
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 11,
+                                "time": 1552577749
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492732,
+                                    55.923579999999994
+                                ],
+                                [
+                                    37.492872,
+                                    55.922988
+                                ],
+                                [
+                                    37.492948999999996,
+                                    55.922658
+                                ],
+                                [
+                                    37.493106999999995,
+                                    55.922021
+                                ],
+                                [
+                                    37.49317,
+                                    55.921808999999996
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 21,
+                                "time": 1552577760
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.49317,
+                                    55.921808999999996
+                                ],
+                                [
+                                    37.493217,
+                                    55.921651
+                                ],
+                                [
+                                    37.493235999999996,
+                                    55.921586999999995
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 2,
+                                "time": 1552577781
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493235999999996,
+                                    55.921586999999995
+                                ],
+                                [
+                                    37.493235999999996,
+                                    55.921586999999995
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 0,
+                                "time": 1552577783
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276853",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|774"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493100999999996,
+                                    55.923255
+                                ],
+                                [
+                                    37.493100999999996,
+                                    55.923255
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 10,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493100999999996,
+                                    55.923255
+                                ],
+                                [
+                                    37.4931,
+                                    55.923258999999995
+                                ],
+                                [
+                                    37.493049,
+                                    55.923477
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 2,
+                                "time": 1552577733
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493049,
+                                    55.923477
+                                ],
+                                [
+                                    37.49304,
+                                    55.923514
+                                ],
+                                [
+                                    37.492939,
+                                    55.924184
+                                ],
+                                [
+                                    37.492906,
+                                    55.9244
+                                ],
+                                [
+                                    37.492884,
+                                    55.924721999999996
+                                ],
+                                [
+                                    37.492868,
+                                    55.925047
+                                ],
+                                [
+                                    37.492863,
+                                    55.925219999999996
+                                ],
+                                [
+                                    37.492858,
+                                    55.925388
+                                ],
+                                [
+                                    37.492864,
+                                    55.92552
+                                ],
+                                [
+                                    37.492872,
+                                    55.925712
+                                ],
+                                [
+                                    37.492878999999995,
+                                    55.925812
+                                ],
+                                [
+                                    37.492881,
+                                    55.925836
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 23,
+                                "time": 1552577735
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492881,
+                                    55.925836
+                                ],
+                                [
+                                    37.492902,
+                                    55.92606
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 2,
+                                "time": 1552577758
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492902,
+                                    55.92606
+                                ],
+                                [
+                                    37.492902,
+                                    55.92606
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 6,
+                                "time": 1552577760
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492902,
+                                    55.92606
+                                ],
+                                [
+                                    37.492902,
+                                    55.926063
+                                ],
+                                [
+                                    37.492908,
+                                    55.926116
+                                ],
+                                [
+                                    37.492929,
+                                    55.926283999999995
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 2,
+                                "time": 1552577766
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492929,
+                                    55.926283999999995
+                                ],
+                                [
+                                    37.492985,
+                                    55.926721
+                                ],
+                                [
+                                    37.493021999999996,
+                                    55.927111999999994
+                                ],
+                                [
+                                    37.493043,
+                                    55.927462999999996
+                                ],
+                                [
+                                    37.493047,
+                                    55.92753
+                                ],
+                                [
+                                    37.493054,
+                                    55.927656999999996
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 15,
+                                "time": 1552577768
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|779"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.482715999999996,
+                                    55.879054
+                                ],
+                                [
+                                    37.482737,
+                                    55.879068999999994
+                                ],
+                                [
+                                    37.482766999999996,
+                                    55.879093999999995
+                                ],
+                                [
+                                    37.482785,
+                                    55.879115
+                                ],
+                                [
+                                    37.482800999999995,
+                                    55.879135999999995
+                                ],
+                                [
+                                    37.482811999999996,
+                                    55.879154
+                                ],
+                                [
+                                    37.482822,
+                                    55.879172
+                                ],
+                                [
+                                    37.482828,
+                                    55.879191
+                                ],
+                                [
+                                    37.482828999999995,
+                                    55.879211999999995
+                                ],
+                                [
+                                    37.48283,
+                                    55.879231
+                                ],
+                                [
+                                    37.482827,
+                                    55.879244
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 40,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.482827,
+                                    55.879244
+                                ],
+                                [
+                                    37.482821,
+                                    55.879270999999996
+                                ],
+                                [
+                                    37.482814,
+                                    55.8793
+                                ],
+                                [
+                                    37.482768,
+                                    55.879709999999996
+                                ],
+                                [
+                                    37.482759,
+                                    55.879802999999995
+                                ],
+                                [
+                                    37.482751,
+                                    55.879901
+                                ],
+                                [
+                                    37.482745,
+                                    55.879936
+                                ],
+                                [
+                                    37.482742,
+                                    55.880443
+                                ],
+                                [
+                                    37.482742,
+                                    55.88048
+                                ],
+                                [
+                                    37.482741,
+                                    55.880610999999995
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 20,
+                                "time": 1552577763
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|788"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494636,
+                                    55.911829
+                                ],
+                                [
+                                    37.494741,
+                                    55.912321999999996
+                                ],
+                                [
+                                    37.494772999999995,
+                                    55.912471
+                                ],
+                                [
+                                    37.494873,
+                                    55.912934
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 55,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494873,
+                                    55.912934
+                                ],
+                                [
+                                    37.494952999999995,
+                                    55.913306
+                                ],
+                                [
+                                    37.494974,
+                                    55.913404
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 5,
+                                "time": 1552577778
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|794"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.490905999999995,
+                                    55.902089999999994
+                                ],
+                                [
+                                    37.491411,
+                                    55.902758999999996
+                                ],
+                                [
+                                    37.491802,
+                                    55.903242999999996
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 7,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.491802,
+                                    55.903242999999996
+                                ],
+                                [
+                                    37.491803999999995,
+                                    55.903245
+                                ],
+                                [
+                                    37.492125,
+                                    55.903636999999996
+                                ],
+                                [
+                                    37.492308,
+                                    55.903878999999996
+                                ],
+                                [
+                                    37.492422999999995,
+                                    55.904046
+                                ],
+                                [
+                                    37.492537999999996,
+                                    55.904230999999996
+                                ],
+                                [
+                                    37.492607,
+                                    55.904359
+                                ],
+                                [
+                                    37.492694,
+                                    55.904509999999995
+                                ],
+                                [
+                                    37.492728,
+                                    55.90459
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 11,
+                                "time": 1552577730
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492728,
+                                    55.90459
+                                ],
+                                [
+                                    37.49277,
+                                    55.904688
+                                ],
+                                [
+                                    37.492788999999995,
+                                    55.904734
+                                ],
+                                [
+                                    37.492818,
+                                    55.904809
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 4,
+                                "time": 1552577741
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492818,
+                                    55.904809
+                                ],
+                                [
+                                    37.492818,
+                                    55.904809
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 6,
+                                "time": 1552577745
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492818,
+                                    55.904809
+                                ],
+                                [
+                                    37.492819,
+                                    55.904812
+                                ],
+                                [
+                                    37.492869,
+                                    55.904941
+                                ],
+                                [
+                                    37.492900999999996,
+                                    55.905027999999994
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 3,
+                                "time": 1552577751
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492900999999996,
+                                    55.905027999999994
+                                ],
+                                [
+                                    37.492953,
+                                    55.90517
+                                ],
+                                [
+                                    37.493097999999996,
+                                    55.905567999999995
+                                ],
+                                [
+                                    37.493244,
+                                    55.905984
+                                ],
+                                [
+                                    37.49355,
+                                    55.906957999999996
+                                ],
+                                [
+                                    37.493632999999996,
+                                    55.907225
+                                ],
+                                [
+                                    37.493645,
+                                    55.907266
+                                ],
+                                [
+                                    37.493747,
+                                    55.907686
+                                ],
+                                [
+                                    37.493761,
+                                    55.907751999999995
+                                ],
+                                [
+                                    37.493763,
+                                    55.907761
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 27,
+                                "time": 1552577754
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493763,
+                                    55.907761
+                                ],
+                                [
+                                    37.493811,
+                                    55.907984
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 2,
+                                "time": 1552577781
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.493811,
+                                    55.907984
+                                ],
+                                [
+                                    37.493811,
+                                    55.907984
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 0,
+                                "time": 1552577783
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|796"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.481974,
+                                    55.879025999999996
+                                ],
+                                [
+                                    37.481985,
+                                    55.879020999999995
+                                ],
+                                [
+                                    37.482039,
+                                    55.879
+                                ],
+                                [
+                                    37.482093,
+                                    55.878985
+                                ],
+                                [
+                                    37.48215,
+                                    55.878974
+                                ],
+                                [
+                                    37.482213,
+                                    55.878965
+                                ],
+                                [
+                                    37.482282,
+                                    55.878958999999995
+                                ],
+                                [
+                                    37.482349,
+                                    55.878957
+                                ],
+                                [
+                                    37.482412,
+                                    55.87896
+                                ],
+                                [
+                                    37.482464,
+                                    55.878965
+                                ],
+                                [
+                                    37.482496,
+                                    55.878969
+                                ],
+                                [
+                                    37.482527999999995,
+                                    55.878975
+                                ],
+                                [
+                                    37.482541999999995,
+                                    55.878978
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 60,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|961"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494402,
+                                    55.910736
+                                ],
+                                [
+                                    37.494423999999995,
+                                    55.910841
+                                ],
+                                [
+                                    37.494437,
+                                    55.910900999999996
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 3,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494437,
+                                    55.910900999999996
+                                ],
+                                [
+                                    37.494485,
+                                    55.911124
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 4,
+                                "time": 1552577726
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494485,
+                                    55.911124
+                                ],
+                                [
+                                    37.494485,
+                                    55.911124
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 10,
+                                "time": 1552577730
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494485,
+                                    55.911124
+                                ],
+                                [
+                                    37.494485,
+                                    55.911124
+                                ],
+                                [
+                                    37.494532,
+                                    55.911347
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 5,
+                                "time": 1552577740
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494532,
+                                    55.911347
+                                ],
+                                [
+                                    37.494707,
+                                    55.912161999999995
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 38,
+                                "time": 1552577745
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|962"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.509671999999995,
+                                    55.940939
+                                ],
+                                [
+                                    37.509757,
+                                    55.940951
+                                ],
+                                [
+                                    37.51005,
+                                    55.940996999999996
+                                ],
+                                [
+                                    37.510269,
+                                    55.941026
+                                ],
+                                [
+                                    37.510712999999996,
+                                    55.941088
+                                ],
+                                [
+                                    37.511300999999996,
+                                    55.941167
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 28,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.511300999999996,
+                                    55.941167
+                                ],
+                                [
+                                    37.511426,
+                                    55.941182999999995
+                                ],
+                                [
+                                    37.511976,
+                                    55.941269
+                                ],
+                                [
+                                    37.512567,
+                                    55.941361
+                                ],
+                                [
+                                    37.513369999999995,
+                                    55.941486999999995
+                                ],
+                                [
+                                    37.513557,
+                                    55.941516
+                                ],
+                                [
+                                    37.513846,
+                                    55.941562
+                                ],
+                                [
+                                    37.513995,
+                                    55.941586
+                                ],
+                                [
+                                    37.514175,
+                                    55.941615
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 28,
+                                "time": 1552577751
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.514175,
+                                    55.941615
+                                ],
+                                [
+                                    37.514561,
+                                    55.941677
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 4,
+                                "time": 1552577779
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.514561,
+                                    55.941677
+                                ],
+                                [
+                                    37.514561,
+                                    55.941677
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 0,
+                                "time": 1552577783
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|1038"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.507672,
+                                    55.944492999999994
+                                ],
+                                [
+                                    37.507684,
+                                    55.944468
+                                ],
+                                [
+                                    37.507715999999995,
+                                    55.944402999999994
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 4,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.507715999999995,
+                                    55.944402999999994
+                                ],
+                                [
+                                    37.507824,
+                                    55.944187
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 9,
+                                "time": 1552577727
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.507824,
+                                    55.944187
+                                ],
+                                [
+                                    37.507824,
+                                    55.944187
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 6,
+                                "time": 1552577736
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.507824,
+                                    55.944187
+                                ],
+                                [
+                                    37.507827999999996,
+                                    55.944179
+                                ],
+                                [
+                                    37.507932,
+                                    55.943971
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 4,
+                                "time": 1552577742
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.507932,
+                                    55.943971
+                                ],
+                                [
+                                    37.508339,
+                                    55.943154
+                                ],
+                                [
+                                    37.508379,
+                                    55.943075
+                                ],
+                                [
+                                    37.508432,
+                                    55.942963999999996
+                                ],
+                                [
+                                    37.508776,
+                                    55.942273
+                                ],
+                                [
+                                    37.508846,
+                                    55.942136
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 37,
+                                "time": 1552577746
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|1040"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.491907,
+                                    55.938407
+                                ],
+                                [
+                                    37.491889,
+                                    55.938584999999996
+                                ],
+                                [
+                                    37.491876999999995,
+                                    55.93891
+                                ],
+                                [
+                                    37.491875,
+                                    55.939242
+                                ],
+                                [
+                                    37.491875,
+                                    55.939389
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 40,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.491875,
+                                    55.939389
+                                ],
+                                [
+                                    37.491873999999996,
+                                    55.939581
+                                ],
+                                [
+                                    37.491870999999996,
+                                    55.939614
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 12,
+                                "time": 1552577763
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.491870999999996,
+                                    55.939614
+                                ],
+                                [
+                                    37.491870999999996,
+                                    55.939614
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 6,
+                                "time": 1552577775
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.491870999999996,
+                                    55.939614
+                                ],
+                                [
+                                    37.491870999999996,
+                                    55.939614
+                                ],
+                                [
+                                    37.491869,
+                                    55.939634
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 2,
+                                "time": 1552577781
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|507"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.506589999999996,
+                                    55.948015999999996
+                                ],
+                                [
+                                    37.506598,
+                                    55.948026999999996
+                                ],
+                                [
+                                    37.506668999999995,
+                                    55.948118
+                                ],
+                                [
+                                    37.506693,
+                                    55.948149
+                                ],
+                                [
+                                    37.506715,
+                                    55.948176
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 14,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.506715,
+                                    55.948176
+                                ],
+                                [
+                                    37.506754,
+                                    55.948226999999996
+                                ],
+                                [
+                                    37.506803999999995,
+                                    55.948293
+                                ],
+                                [
+                                    37.506867,
+                                    55.948366
+                                ],
+                                [
+                                    37.506986,
+                                    55.948465999999996
+                                ],
+                                [
+                                    37.507006,
+                                    55.948476
+                                ],
+                                [
+                                    37.507166,
+                                    55.948550999999995
+                                ],
+                                [
+                                    37.507314,
+                                    55.948629999999994
+                                ],
+                                [
+                                    37.507546999999995,
+                                    55.948774
+                                ],
+                                [
+                                    37.507739,
+                                    55.948899999999995
+                                ],
+                                [
+                                    37.508126,
+                                    55.949177999999996
+                                ],
+                                [
+                                    37.508303999999995,
+                                    55.949279
+                                ],
+                                [
+                                    37.508413999999995,
+                                    55.949343999999996
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 22,
+                                "time": 1552577737
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.508413999999995,
+                                    55.949343999999996
+                                ],
+                                [
+                                    37.508424,
+                                    55.949349999999995
+                                ],
+                                [
+                                    37.508548,
+                                    55.949421
+                                ],
+                                [
+                                    37.509043,
+                                    55.949752
+                                ],
+                                [
+                                    37.509336,
+                                    55.949946
+                                ],
+                                [
+                                    37.509946,
+                                    55.95037
+                                ],
+                                [
+                                    37.510086,
+                                    55.950466999999996
+                                ],
+                                [
+                                    37.510149999999996,
+                                    55.950509
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 16,
+                                "time": 1552577759
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.510149999999996,
+                                    55.950509
+                                ],
+                                [
+                                    37.510411999999995,
+                                    55.95068
+                                ],
+                                [
+                                    37.510557999999996,
+                                    55.950768
+                                ],
+                                [
+                                    37.510695999999996,
+                                    55.950844
+                                ],
+                                [
+                                    37.510884,
+                                    55.950936
+                                ],
+                                [
+                                    37.510993,
+                                    55.950987
+                                ],
+                                [
+                                    37.511052,
+                                    55.951012
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 8,
+                                "time": 1552577775
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276853",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|545"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.513461,
+                                    55.941500999999995
+                                ],
+                                [
+                                    37.513369999999995,
+                                    55.941486999999995
+                                ],
+                                [
+                                    37.512567,
+                                    55.941361
+                                ],
+                                [
+                                    37.511976,
+                                    55.941269
+                                ],
+                                [
+                                    37.511426,
+                                    55.941182999999995
+                                ],
+                                [
+                                    37.511081,
+                                    55.941137
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 60,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276853",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|550"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.510262999999995,
+                                    55.941024999999996
+                                ],
+                                [
+                                    37.510269,
+                                    55.941026
+                                ],
+                                [
+                                    37.510712999999996,
+                                    55.941088
+                                ],
+                                [
+                                    37.511300999999996,
+                                    55.941167
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 26,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.511300999999996,
+                                    55.941167
+                                ],
+                                [
+                                    37.511426,
+                                    55.941182999999995
+                                ],
+                                [
+                                    37.511976,
+                                    55.941269
+                                ],
+                                [
+                                    37.512567,
+                                    55.941361
+                                ],
+                                [
+                                    37.513369999999995,
+                                    55.941486999999995
+                                ],
+                                [
+                                    37.513557,
+                                    55.941516
+                                ],
+                                [
+                                    37.513846,
+                                    55.941562
+                                ],
+                                [
+                                    37.513995,
+                                    55.941586
+                                ],
+                                [
+                                    37.514175,
+                                    55.941615
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 33,
+                                "time": 1552577749
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.514175,
+                                    55.941615
+                                ],
+                                [
+                                    37.514303999999996,
+                                    55.941635999999995
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 1,
+                                "time": 1552577782
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|766"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.508206,
+                                    55.943421
+                                ],
+                                [
+                                    37.507692,
+                                    55.944452
+                                ],
+                                [
+                                    37.507684,
+                                    55.944468
+                                ],
+                                [
+                                    37.507633999999996,
+                                    55.944568
+                                ],
+                                [
+                                    37.507591,
+                                    55.944652
+                                ],
+                                [
+                                    37.507483,
+                                    55.944866
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 60,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276853",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|770"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.519915,
+                                    55.937780999999994
+                                ],
+                                [
+                                    37.519915999999995,
+                                    55.937782
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 86400,
+                                "time": 1552577574
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|775"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.494814999999996,
+                                    55.948648999999996
+                                ],
+                                [
+                                    37.494510999999996,
+                                    55.948668999999995
+                                ],
+                                [
+                                    37.493677,
+                                    55.948727
+                                ],
+                                [
+                                    37.492993,
+                                    55.948769
+                                ],
+                                [
+                                    37.492356,
+                                    55.948817
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 38,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.492356,
+                                    55.948817
+                                ],
+                                [
+                                    37.492225,
+                                    55.948826
+                                ],
+                                [
+                                    37.492076999999995,
+                                    55.948837999999995
+                                ],
+                                [
+                                    37.491959,
+                                    55.948847
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 7,
+                                "time": 1552577761
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.491959,
+                                    55.948847
+                                ],
+                                [
+                                    37.491959,
+                                    55.948847
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 6,
+                                "time": 1552577768
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.491959,
+                                    55.948847
+                                ],
+                                [
+                                    37.491949999999996,
+                                    55.948848
+                                ],
+                                [
+                                    37.491761,
+                                    55.948859
+                                ],
+                                [
+                                    37.4916,
+                                    55.948867
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 9,
+                                "time": 1552577774
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276853",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|777"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.509913999999995,
+                                    55.940976
+                                ],
+                                [
+                                    37.51005,
+                                    55.940996999999996
+                                ],
+                                [
+                                    37.510269,
+                                    55.941026
+                                ],
+                                [
+                                    37.510712999999996,
+                                    55.941088
+                                ],
+                                [
+                                    37.511300999999996,
+                                    55.941167
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 30,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.511300999999996,
+                                    55.941167
+                                ],
+                                [
+                                    37.511426,
+                                    55.941182999999995
+                                ],
+                                [
+                                    37.511976,
+                                    55.941269
+                                ],
+                                [
+                                    37.512567,
+                                    55.941361
+                                ],
+                                [
+                                    37.513369999999995,
+                                    55.941486999999995
+                                ],
+                                [
+                                    37.513557,
+                                    55.941516
+                                ],
+                                [
+                                    37.513846,
+                                    55.941562
+                                ],
+                                [
+                                    37.513995,
+                                    55.941586
+                                ],
+                                [
+                                    37.513996,
+                                    55.941586
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 30,
+                                "time": 1552577753
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|778"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.508967999999996,
+                                    55.949701999999995
+                                ],
+                                [
+                                    37.509043,
+                                    55.949752
+                                ],
+                                [
+                                    37.509336,
+                                    55.949946
+                                ],
+                                [
+                                    37.509946,
+                                    55.95037
+                                ],
+                                [
+                                    37.510086,
+                                    55.950466999999996
+                                ],
+                                [
+                                    37.510149999999996,
+                                    55.950509
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 11,
+                                "time": 1552577723
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.510149999999996,
+                                    55.950509
+                                ],
+                                [
+                                    37.510411999999995,
+                                    55.95068
+                                ],
+                                [
+                                    37.510557999999996,
+                                    55.950768
+                                ],
+                                [
+                                    37.510695999999996,
+                                    55.950844
+                                ],
+                                [
+                                    37.510884,
+                                    55.950936
+                                ],
+                                [
+                                    37.510993,
+                                    55.950987
+                                ],
+                                [
+                                    37.511072999999996,
+                                    55.951021999999995
+                                ],
+                                [
+                                    37.511165999999996,
+                                    55.951069999999994
+                                ],
+                                [
+                                    37.511216999999995,
+                                    55.951104
+                                ],
+                                [
+                                    37.511255999999996,
+                                    55.951139
+                                ],
+                                [
+                                    37.51128,
+                                    55.951176
+                                ],
+                                [
+                                    37.511292,
+                                    55.951206
+                                ],
+                                [
+                                    37.511299,
+                                    55.95124
+                                ],
+                                [
+                                    37.511295,
+                                    55.951268
+                                ],
+                                [
+                                    37.511288,
+                                    55.951294
+                                ],
+                                [
+                                    37.511275,
+                                    55.951319999999996
+                                ],
+                                [
+                                    37.511257,
+                                    55.95135
+                                ],
+                                [
+                                    37.511226,
+                                    55.951381
+                                ],
+                                [
+                                    37.511185999999995,
+                                    55.951406999999996
+                                ],
+                                [
+                                    37.511137,
+                                    55.951426999999995
+                                ],
+                                [
+                                    37.511089999999996,
+                                    55.951440999999996
+                                ],
+                                [
+                                    37.511026,
+                                    55.951451999999996
+                                ],
+                                [
+                                    37.510951999999996,
+                                    55.951456
+                                ],
+                                [
+                                    37.510878999999996,
+                                    55.951451999999996
+                                ],
+                                [
+                                    37.510813999999996,
+                                    55.951443999999995
+                                ],
+                                [
+                                    37.510762,
+                                    55.951431
+                                ],
+                                [
+                                    37.510712999999996,
+                                    55.951412
+                                ],
+                                [
+                                    37.510658,
+                                    55.951378999999996
+                                ],
+                                [
+                                    37.510644,
+                                    55.951369
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 17,
+                                "time": 1552577734
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.510644,
+                                    55.951369
+                                ],
+                                [
+                                    37.510607,
+                                    55.951342
+                                ],
+                                [
+                                    37.510553,
+                                    55.951291
+                                ],
+                                [
+                                    37.51049,
+                                    55.951225
+                                ],
+                                [
+                                    37.510425,
+                                    55.951164999999996
+                                ],
+                                [
+                                    37.510343,
+                                    55.951097
+                                ],
+                                [
+                                    37.509848999999996,
+                                    55.950745
+                                ],
+                                [
+                                    37.509357,
+                                    55.950399
+                                ],
+                                [
+                                    37.509246,
+                                    55.950320999999995
+                                ],
+                                [
+                                    37.509022,
+                                    55.950154
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 17,
+                                "time": 1552577751
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    },
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.509022,
+                                    55.950154
+                                ],
+                                [
+                                    37.508852,
+                                    55.950027
+                                ],
+                                [
+                                    37.508649,
+                                    55.949872
+                                ],
+                                [
+                                    37.508465,
+                                    55.949709
+                                ],
+                                [
+                                    37.508277,
+                                    55.949526999999996
+                                ],
+                                [
+                                    37.508202,
+                                    55.949448999999994
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 15,
+                                "time": 1552577768
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276853",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|789"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.519892999999996,
+                                    55.937827999999996
+                                ],
+                                [
+                                    37.519894,
+                                    55.937829
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 86400,
+                                "time": 1552577631
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|790"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.50458,
+                                    55.943981
+                                ],
+                                [
+                                    37.504581,
+                                    55.943982
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 86400,
+                                "time": 1552577569
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276855",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|792"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.518235,
+                                    55.937470999999995
+                                ],
+                                [
+                                    37.518236,
+                                    55.937472
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 86400,
+                                "time": 1552577636
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276853",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|793"
+                    }
+                },
+                "type": "FeatureCollection"
+            },
+            {
+                "features": [
+                    {
+                        "geometry": {
+                            "coordinates": [
+                                [
+                                    37.491698,
+                                    55.938199999999995
+                                ],
+                                [
+                                    37.491699,
+                                    55.938201
+                                ]
+                            ],
+                            "type": "LineString"
+                        },
+                        "properties": {
+                            "TrajectorySegmentMetaData": {
+                                "duration": 86400,
+                                "time": 1552577626
+                            },
+                            "type": "Feature"
+                        },
+                        "type": "Feature"
+                    }
+                ],
+                "properties": {
+                    "VehicleMetaData": {
+                        "Transport": {
+                            "Types": [
+                                "bus"
+                            ],
+                            "id": "2037276853",
+                            "lineId": "2037268550",
+                            "name": "368",
+                            "type": "bus"
+                        },
+                        "id": "mosobl%5Fdta|795"
+                    }
+                },
+                "type": "FeatureCollection"
+            }
+        ]
+    },
+    0
+]
