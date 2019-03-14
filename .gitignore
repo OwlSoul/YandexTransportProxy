@@ -6,4 +6,4 @@ Dockerfile.save
 .Dockerfile.swp
 launch/page-*.html
 code_quality.csv
-
+output*

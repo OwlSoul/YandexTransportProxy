@@ -1,0 +1,143 @@
+#!/usr/bin/env python3
+
+"""
+Yandex Transport Monitor proxy service, automates getting data from Yandex.Transport using Selenium
+"""
+
+import selenium
+from selenium import webdriver
+import time
+import re
+import sys
+import io
+import json
+from bs4 import BeautifulSoup
+
+
+class Application:
+
+    RESULT_OK = 0
+    RESULT_WEBDRIVER_NOT_RUNNING = 1
+    RESULT_NO_LAST_QUERY = 2
+    RESULT_NETWORK_PARSE_ERROR = 3
+    RESULT_JSON_PARSE_ERROR = 4
+
+    def __init__(self):
+        self.driver = None
+
+        # Count of network queries executed so far, the idea is to restart the browser if it's too big.
+        self.network_queries_count = 0
+
+        # ChromeDriver location. They changed it a lot, by the way.
+        self.chrome_driver_location = "/usr/bin/chromedriver"
+
+    def startWebdriver(self):
+        options = webdriver.ChromeOptions()
+        options.add_argument("--incognito")
+        self.driver = webdriver.Chrome(self.chrome_driver_location, chrome_options=options)
+
+    def stopWebdriver(self):
+        self.driver.quit()
+
+    def _getYandexJson(self, url, api_method):
+        """
+        Universal method to get Yandex JSON results.
+        :param url: initial url, get it by clicking on the route or stop
+        :param api_method: basically a string to find, like "maps/api/masstransit/getStopInfo"
+        :return: json data, error code
+        """
+        if self.driver is None:
+            return None, self.RESULT_WEBDRIVER_NOT_RUNNING
+        self.driver.get(url)
+
+        # Script to get Network data from Developer tools, huge thanks to this link:
+        # https://stackoverflow.com/questions/20401264/how-to-access-network-panel-on-google-chrome-developer-tools-with-selenium
+        script = "var performance = window.performance || window.mozPerformance || window.msPerformance || " \
+                 "window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;"
+        data = self.driver.execute_script(script)
+
+        # They output network data in "kinda-JSON" with single quites instead of double ones.
+        network_json = str(data).replace("'",'"')
+
+        # Loading Network Data to JSON
+        try:
+            network_data = json.loads(network_json)
+        except Exception as e:
+            print(e)
+            return self.RESULT_NETWORK_PARSE_ERROR, None
+
+        # Getting the last executed getStopInfo query
+        last_query = None
+        url_reached = False
+        for entry in network_data:
+            if not url_reached:
+                if entry['name'] == url:
+                    url_reached = True
+                    continue
+            else:
+                res = re.match(".*" + api_method + ".*", str(entry['name']))
+                if res is not None:
+                    last_query = entry['name']
+
+        # Getting last getStopInfo query results from cache by executing it again in the browser
+        if last_query != None:
+            self.driver.get(last_query)
+        else:
+            return None, self.RESULT_NO_LAST_QUERY
+
+        # Writing getStopInfo results to memory
+        output_stream = io.StringIO()
+        output_stream.write(self.driver.page_source)
+        output_stream.seek(0)
+
+        # Getting getStopInfo results to JSON
+        soup = BeautifulSoup(output_stream, 'lxml')
+        body = soup.find('body')
+        try:
+            result_json = json.loads(body.string)
+        except Exception as e:
+            print(e)
+            return self.RESULT_JSON_PARSE_ERROR, None
+
+        return result_json, self.RESULT_OK
+
+    def getStopInfo(self, url):
+        return self._getYandexJson(url, api_method="maps/api/masstransit/getStopInfo")
+
+    def getVehiclesInfo(self, url):
+        return self._getYandexJson(url, api_method="maps/api/masstransit/getVehiclesInfo")
+
+    def run(self):
+        self.startWebdriver()
+
+        """
+        # Getting stop info
+        
+        res = self.getStopInfo(url="https://yandex.ru/maps/213/moscow/?"
+                                   "ll=37.579537,C55.821644&"
+                                   "masstransit[stopId]=stop__9639753&"
+                                   "mode=stop&"
+                                   "z=16")
+        # Printing the output
+        print(json.dumps(res, sort_keys=True, indent=4, separators=(',', ': ')))
+        """
+
+        # Getting vehicles info!
+
+        res = self.getVehiclesInfo(url="https://yandex.ru/maps/213/moscow/?"
+                                       "ll=37.589633%2C55.835559&"
+                                       "masstransit[routeId]=213_56_trolleybus_mosgortrans&"
+                                       "masstransit[stopId]=stop__9639753&"
+                                       "masstransit[threadId]=213A_56_trolleybus_mosgortrans&"
+                                       "mode=stop&"
+                                       "z=14")
+        # Printing the output
+        print(json.dumps(res, sort_keys=True, indent=4, separators=(',', ': ')))
+
+        self.stopWebdriver()
+
+
+if __name__ == '__main__':
+    app = Application()
+    app.run()
+    sys.exit(0)
