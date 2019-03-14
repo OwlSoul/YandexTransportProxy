@@ -48,7 +48,7 @@ class YandexTransportCore:
 
     # ----                               MASTER FUNCTION TO GET YANDEX API DATA                                   ---- #
 
-    def _getYandexJson(self, url, api_method):
+    def _getYandexJSON(self, url, api_method):
         """
         Universal method to get Yandex JSON results.
         :param url: initial url, get it by clicking on the route or stop
@@ -121,7 +121,7 @@ class YandexTransportCore:
         :param url: url of the stop (the URL you get when you click on the stop in the browser)
         :return: huge json data, error code
         """
-        return self._getYandexJson(url, api_method="maps/api/masstransit/getStopInfo")
+        return self._getYandexJSON(url, api_method="maps/api/masstransit/getStopInfo")
 
     def getVehiclesInfo(self, url):
         """
@@ -129,7 +129,7 @@ class YandexTransportCore:
         :param url: url of the stop (the URL you get when you click on the stop in the browser)
         :return: huge json data, error code
         """
-        return self._getYandexJson(url, api_method="maps/api/masstransit/getVehiclesInfo")
+        return self._getYandexJSON(url, api_method="maps/api/masstransit/getVehiclesInfo")
 
 
 if __name__ == '__main__':

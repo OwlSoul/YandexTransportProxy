@@ -3,7 +3,7 @@
 # Experemental: Automated build quality tests.
 
 # Linter command
-LINTER_COMMAND="pylint ytm_wd ytm_pageparser.py transport_proxy YandexTransportCore.py"
+LINTER_COMMAND="pylint ytm_wd ytm_pageparser.py transport_proxy YandexTransportCore.py Logger.py"
 CODE_QUALITY_FILE="plots/code_quality.csv"
 DOCKER_SIZE_FILE="plots/docker_image_size.csv"
 

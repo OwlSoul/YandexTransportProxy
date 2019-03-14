@@ -7,15 +7,100 @@ Yandex Transport Monitor proxy service, automates getting data from Yandex.Trans
 import time
 import sys
 import json
+import signal
+import socket
+import datetime
+import threading
+from collections import deque
+from collections import defaultdict
+from Logger import Logger
 from YandexTransportCore import YandexTransportCore
 
+class ListenerThread(threading.Thread):
+    def __init__(self, conn, addr, app):
+        super().__init__()
+        self.conn = conn
+        self.addr = addr
+
+    def run(self):
+        app.logger.info("Connection established : " + str(self.addr))
+
+        while app.is_running:
+            self.conn.settimeout(5)
+            try:
+                data = self.conn.recvfrom(4096)
+            except socket.timeout:
+                continue
+
+            if data != (b'', None):
+                string = data[0].decode("utf-8")
+                lines = string.splitlines()
+                for line in lines:
+                    app.logger.debug("Received : " + str(line))
+            else:
+                app.logger.debug("Connection terminated : " + str(self.addr))
+                break
+
+        self.conn.shutdown(socket.SHUT_RDWR)
+        app.logger.debug("Thread for connection ( " + str(self.addr) + " ) terminated")
+        del app.listeners[self.addr]
 
 class Application:
     """
     Main application class
     """
     def __init__(self):
-        pass
+        self.is_running = True
+        # Listen address
+        self.host = '127.0.0.1'
+        self.port = 25555
+
+        self.listeners = defaultdict()
+
+        self.logger = Logger(Logger.DEBUG)
+
+        # Server will run in single thread, the deque is to store incoming queries.
+        self.query_deque = deque()
+
+    def sigint_handler(self, _signal, _time):
+        """
+        SIGINT signal handler
+        :param _signal: signal
+        :param _time: time
+        :return: nothing
+        """
+        self.logger.info("SIGINT received! Terminating the program...")
+        self.is_running = False
+        self.logger.info("Waiting for threads to terminate...")
+        copy_listeners = self.listeners.copy()
+        for key, listener in copy_listeners.items():
+            listener.join()
+
+    def listen(self):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        sock.settimeout(5)
+        try:
+            sock.bind((self.host, self.port))
+        except socket.error:
+            return 1
+
+        self.logger.info("Listening for incoming connections")
+        sock.listen(1)
+
+        while self.is_running:
+            try:
+                conn, addr = sock.accept()
+            except socket.timeout:
+                continue
+
+            listener_thread = ListenerThread(conn, addr, self)
+            self.listeners[addr] = listener_thread
+            listener_thread.start()
+
+        sock.shutdown(socket.SHUT_RDWR)
+
+        return 0
 
     def run(self):
         """
@@ -23,10 +108,15 @@ class Application:
         :return: exit code
         """
 
+        self.logger.info("YTPS - Yandex Transport Proxy Server - starting up...")
+
+        signal.signal(signal.SIGINT, self.sigint_handler)
+
         core = YandexTransportCore()
         core.startWebdriver()
 
         # Getting stop info example
+        """
         res = core.getStopInfo(url="https://yandex.ru/maps/213/moscow/?"
                                    "ll=37.579537,C55.821644&"
                                    "masstransit[stopId]=stop__9639753&"
@@ -46,8 +136,12 @@ class Application:
                                        "z=14")
         # Printing the output
         print(json.dumps(res, sort_keys=True, indent=4, separators=(',', ': ')))
+        """
+        self.listen()
 
         core.stopWebdriver()
+
+        self.logger.info("YTPS - Yandex Transport Proxy Server - terminated!")
 
 # -------------------------------------------------------------------------------------------------------------------- #
 if __name__ == '__main__':
