@@ -1,0 +1,9 @@
+getCurrentQueue - will return current Query Queue of the server. Does not add itself to the Query Queue.
+
+getStopInfo?... - add getStopInfo to the Query Queue, paste Yandex URL after "?"
+                  will return {"response": "OK", "queue_position":"size of the queue"} if successful.
+
+getVehiclesInfo?... - add getStopInfo to the Query Queue, paste Yandex URL after "?"   
+                      will return {"response": "OK", "queue_position":"size of the queue"} if successful.
+
+

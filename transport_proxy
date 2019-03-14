@@ -16,6 +16,8 @@ from collections import defaultdict
 from Logger import Logger
 from YandexTransportCore import YandexTransportCore
 
+# -------------------------------------------------------------------------------------------------------------------- #
+
 class ListenerThread(threading.Thread):
     def __init__(self, conn, addr, app):
         super().__init__()
@@ -36,7 +38,31 @@ class ListenerThread(threading.Thread):
                 string = data[0].decode("utf-8")
                 lines = string.splitlines()
                 for line in lines:
-                    app.logger.debug("Received : " + str(line))
+                    query = line.strip()
+                    app.logger.debug("Received : " + str(query))
+
+                    if query == "getCurrentQueue":
+                        current_queue = app.getCurrentQueue()
+                        self.conn.send(bytes(current_queue + '\n', 'utf-8'))
+
+                    elif query.startswith("getStopInfo?"):
+                        app.query_queue.append(line)
+                        queue_position = len(app.query_queue) - 1
+                        response = {"response": "OK", "queue_position": queue_position}
+                        response_json = json.dumps(response)
+                        self.conn.send(bytes(response_json + '\n', 'utf-8'))
+
+                    elif query.startswith("getVehiclesInfo?"):
+                        app.query_queue.append(line)
+                        queue_position = len(app.query_queue) - 1
+                        response = {"response": "OK", "queue_position": queue_position}
+                        response_json = json.dumps(response)
+                        self.conn.send(bytes(response_json + '\n', 'utf-8'))
+
+                    else:
+                        response = {"response": "ERROR", "message": "Unknown query"}
+                        response_json = json.dumps(response)
+                        self.conn.send(bytes(response_json + "\n", 'utf-8'))
             else:
                 app.logger.debug("Connection terminated : " + str(self.addr))
                 break
@@ -44,6 +70,7 @@ class ListenerThread(threading.Thread):
         self.conn.shutdown(socket.SHUT_RDWR)
         app.logger.debug("Thread for connection ( " + str(self.addr) + " ) terminated")
         del app.listeners[self.addr]
+# -------------------------------------------------------------------------------------------------------------------- #
 
 class Application:
     """
@@ -60,7 +87,7 @@ class Application:
         self.logger = Logger(Logger.DEBUG)
 
         # Server will run in single thread, the deque is to store incoming queries.
-        self.query_deque = deque()
+        self.query_queue = deque()
 
     def sigint_handler(self, _signal, _time):
         """
@@ -101,6 +128,25 @@ class Application:
         sock.shutdown(socket.SHUT_RDWR)
 
         return 0
+
+    def getCurrentConnections(self):
+        data = []
+        for key, value in self.listeners.items():
+            entry = {"ip_address" : key[0], "port" : key[1]}
+            data.append(entry)
+        json_data = json.dumps(data)
+
+        return json_data
+
+    def getCurrentQueue(self):
+        data = []
+        for line in self.query_queue:
+            entry = {"query" : line}
+            data.append(entry)
+
+        json_data = json.dumps(data)
+
+        return json_data
 
     def run(self):
         """
