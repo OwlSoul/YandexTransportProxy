@@ -10,6 +10,7 @@ import json
 import signal
 import socket
 import datetime
+import re
 import threading
 from collections import deque
 from collections import defaultdict
@@ -42,35 +43,87 @@ class ListenerThread(threading.Thread):
                     app.logger.debug("Received : " + str(query))
 
                     if query == "getCurrentQueue":
-                        current_queue = app.getCurrentQueue()
-                        self.conn.send(bytes(current_queue + '\n', 'utf-8'))
+                        app.processGetCurrentQueue(self.conn)
 
                     elif query.startswith("getStopInfo?"):
-                        app.query_queue.append(line)
-                        queue_position = len(app.query_queue) - 1
-                        response = {"response": "OK", "queue_position": queue_position}
-                        response_json = json.dumps(response)
-                        self.conn.send(bytes(response_json + '\n', 'utf-8'))
+                        app.processGetStopInfo(query, self.addr, self.conn)
 
                     elif query.startswith("getVehiclesInfo?"):
-                        app.query_queue.append(line)
-                        queue_position = len(app.query_queue) - 1
-                        response = {"response": "OK", "queue_position": queue_position}
-                        response_json = json.dumps(response)
-                        self.conn.send(bytes(response_json + '\n', 'utf-8'))
+                        app.processGetStopInfo(query, self.addr, self.conn)
+
+                    elif query.startswith("getRouteInfo?"):
+                        app.processGetRouteInfo(query, self.addr, self.conn)
+
+                    elif query.startswith("getAllInfo?"):
+                        app.processGetRouteInfo(query, self.addr, self.conn)
+
+                    elif query.startswith("echo?"):
+                        app.processEcho(query, self.addr, self.conn)
 
                     else:
-                        response = {"response": "ERROR", "message": "Unknown query"}
-                        response_json = json.dumps(response)
-                        self.conn.send(bytes(response_json + "\n", 'utf-8'))
+                        app.processUnknownQuery(self.conn)
             else:
-                app.logger.debug("Connection terminated : " + str(self.addr))
+                app.logger.info("Connection terminated : " + str(self.addr))
                 break
 
         self.conn.shutdown(socket.SHUT_RDWR)
         app.logger.debug("Thread for connection ( " + str(self.addr) + " ) terminated")
         del app.listeners[self.addr]
 # -------------------------------------------------------------------------------------------------------------------- #
+
+
+class ExecutorThread(threading.Thread):
+    def __init__(self, app):
+        super().__init__()
+
+        # Time to wait between queries
+        self.wait_time = 5
+
+    def executeEcho(self, id, query, addr, conn):
+        res = re.match("echo\?(.*)", query)
+        if res is not None:
+            result = {'id': id,
+                      'data': res.group(1)}
+            result_json = json.dumps(result)
+            try:
+                app.logger.debug("Sending response to " + str(addr))
+                conn.send(bytes(str(result_json)+'\n', 'utf-8'))
+            except Exception as e:
+                app.logger.error("Failed to send data to " + str(addr))
+
+    def executeQuery(self, query):
+        if query[0] < 0:
+            return
+
+        id = query[0]
+        query_string = query[1]
+        addr = query[2]
+        conn = query[3]
+
+        if query_string.startswith('echo?'):
+            self.executeEcho(id, query_string, addr, conn)
+
+    def run(self):
+        app.logger.debug("Executor thread started")
+        while app.is_running:
+            # Default "discard" query
+            query = (-1, '', '', None)
+            app.queue_lock.acquire()
+            query_len = len(app.query_queue)
+            if query_len > 0:
+                query = app.query_queue.popleft()
+            app.queue_lock.release()
+
+            self.executeQuery(query)
+
+            for i in range(0, self.wait_time):
+                if app.is_running:
+                    time.sleep(1)
+                else:
+                    break
+        app.logger.debug("Executor thread stopped")
+# -------------------------------------------------------------------------------------------------------------------- #
+
 
 class Application:
     """
@@ -82,9 +135,14 @@ class Application:
         self.host = '127.0.0.1'
         self.port = 25555
 
+        self.query_id = 0
+
         self.listeners = defaultdict()
 
         self.logger = Logger(Logger.DEBUG)
+
+        # Queue lock
+        self.queue_lock = threading.Lock()
 
         # Server will run in single thread, the deque is to store incoming queries.
         self.query_queue = deque()
@@ -102,6 +160,8 @@ class Application:
         copy_listeners = self.listeners.copy()
         for key, listener in copy_listeners.items():
             listener.join()
+        if self.executor_thread is not None:
+            self.executor_thread.join()
 
     def listen(self):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -112,7 +172,8 @@ class Application:
         except socket.error:
             return 1
 
-        self.logger.info("Listening for incoming connections")
+        self.logger.info("Listening for incoming connections.")
+        self.logger.info("Host: " + str(self.host) + " , Port: " + str(self.port))
         sock.listen(1)
 
         while self.is_running:
@@ -140,13 +201,54 @@ class Application:
 
     def getCurrentQueue(self):
         data = []
+
+        self.queue_lock.acquire()
         for line in self.query_queue:
-            entry = {"query" : line}
+            entry = {"id": line[0], "query": line[1]}
             data.append(entry)
+        self.queue_lock.release()
 
         json_data = json.dumps(data)
 
         return json_data
+
+    def processGetInfo(self, query, addr, conn):
+
+        self.queue_lock.acquire()
+        app.query_queue.append((self.query_id, query, addr, conn))
+        queue_position = len(app.query_queue) - 1
+        self.queue_lock.release()
+
+        response = {"id": self.query_id,
+                    "response": "OK",
+                    "queue_position": queue_position}
+        response_json = json.dumps(response)
+        conn.send(bytes(response_json + '\n', 'utf-8'))
+        self.query_id += 1
+
+    def processGetStopInfo(self, query, addr, conn):
+        self.processGetInfo(query, addr, conn)
+
+    def processGetVehiclesInfo(self, query, addr, conn):
+        self.processGetInfo(query, addr, conn)
+
+    def processGetRouteInfo(self, query, addr, conn):
+        self.processGetInfo(query, addr, conn)
+
+    def processGetAllInfo(self, query, addr, conn):
+        self.processGetInfo(query, addr, conn)
+
+    def processEcho(self, query, addr, conn):
+        self.processGetInfo(query, addr, conn)
+
+    def processGetCurrentQueue(self, conn):
+        current_queue = app.getCurrentQueue()
+        conn.send(bytes(current_queue + '\n', 'utf-8'))
+
+    def processUnknownQuery(self, conn):
+        response = {"response": "ERROR", "message": "Unknown query"}
+        response_json = json.dumps(response)
+        conn.send(bytes(response_json + "\n", 'utf-8'))
 
     def run(self):
         """
@@ -157,6 +259,10 @@ class Application:
         self.logger.info("YTPS - Yandex Transport Proxy Server - starting up...")
 
         signal.signal(signal.SIGINT, self.sigint_handler)
+
+        # Starting query executor thread
+        self.executor_thread = ExecutorThread(self)
+        self.executor_thread.start()
 
         core = YandexTransportCore()
         core.startWebdriver()

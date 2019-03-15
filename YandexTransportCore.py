@@ -131,6 +131,14 @@ class YandexTransportCore:
         """
         return self._getYandexJSON(url, api_method="maps/api/masstransit/getVehiclesInfo")
 
+    def getRouteInfo(self, url):
+        """
+        Getting Yandex masstransit getRouteInfo JSON results
+        :param url:
+        :return:
+        """
+        return self._getYandexJSON(url, api_method="maps/api/masstransit/getRouteInfo")
+
 
 if __name__ == '__main__':
     print("Hi! This module is not supposed to run on its own.")

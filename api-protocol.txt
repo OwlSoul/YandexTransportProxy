@@ -1,9 +1,26 @@
-getCurrentQueue - will return current Query Queue of the server. Does not add itself to the Query Queue.
+YTPS - Yandex Transport Proxy Server protocol draft.
 
-getStopInfo?... - add getStopInfo to the Query Queue, paste Yandex URL after "?"
-                  will return {"response": "OK", "queue_position":"size of the queue"} if successful.
+getCurrentQueue     - will return current Query Queue of the server. Does not add itself to the Query Queue.
+
+getStopInfo?...     - add getStopInfo to the Query Queue, paste Yandex URL after "?"
+                      will return {"response": "OK", "queue_position":"size of the queue"} if successful.
 
 getVehiclesInfo?... - add getStopInfo to the Query Queue, paste Yandex URL after "?"   
                       will return {"response": "OK", "queue_position":"size of the queue"} if successful.
 
+watchVehiclesInfo?  - start watching for vehicles info, passing out any subsequent getVehiclesInfo responses it
+                      will receive from Yandex. Will block ANY other "get...Info" query until cancelled.
+                      One server - one "watch" instance. Use more Docker containers to watch more routes, watch
+                      must be in active browser window to work properly.
 
+cancelWatch         - cancel watch, resume normal operations.
+
+getRouteInfo?       - add getRouteInfo to Query Queue, paster Yandex URL after "?"
+                      will return {"response": "OK", "queue_position":"size of the queue"} if successful
+
+getAllInfo?         - special command, also requires Yandex URL after ?, will return all "get...Info" responses
+                      it will find, like getRouteInfo and getVehicle info are returned by clicking on the transit stop,
+                      using the same URL.
+
+echo?               - test command, will add itself to Query Queue and execute in order with get...Info queries.
+                      Will return string after ?
