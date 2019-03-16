@@ -60,6 +60,12 @@ class ListenerThread(threading.Thread):
                     elif query.startswith("echo?"):
                         app.processEcho(query, self.addr, self.conn)
 
+                    elif query.startswith("watchVehiclesInfo?"):
+                        app.processWatchVehiclesInfo(query, self.addr, self.conn)
+
+                    elif query == "cancelWatch":
+                        app.processCancelWatch(query, self.addr, self.conn)
+
                     else:
                         app.processUnknownQuery(self.conn)
             else:
@@ -78,13 +84,61 @@ class ExecutorThread(threading.Thread):
 
         # Time to wait between queries
         self.wait_time = 5
+        # Time to wait between watch updates
+        self.watch_wait_time = 5
 
-    def send_message(self, message, addr, conn):
+    def send_message(self, message, addr, conn, log_tag=''):
+        if len(log_tag) > 0:
+            log_tag_text = " (" + log_tag + ")"
+        else:
+            log_tag_text = ""
         try:
-            app.logger.debug("Sending response to " + str(addr))
-            conn.send(bytes(str(message) + '\n', 'utf-8'))
+            app.logger.debug("Sending response to " + str(addr) + log_tag_text)
+            conn.send(bytes(str(message) + '\n' + '\0', 'utf-8'))
         except Exception as e:
             app.logger.error("Failed to send data to " + str(addr))
+
+    def _executeGetInfo(self, method, id, query, addr, conn):
+        res = re.match(method + "\?(.*)", query)
+        if res is not None:
+            query_url = res.group(1)
+
+            if method == 'getStopInfo':
+                data, error = app.core.getStopInfo(url=query_url)
+            elif method == 'getRouteInfo':
+                data, error = app.core.getRouteInfo(url=query_url)
+            elif method == 'getVehiclesInfo':
+                data, error = app.core.getVehiclesInfo(url=query_url)
+            elif method == 'watchVehiclesInfo':
+                data, error = app.core.getVehiclesInfo(url=query_url)
+            elif method == 'getAllInfo':
+                data, error = app.core.getAllInfo(url=query_url)
+            else:
+                return
+
+            payload = []
+            if error == YandexTransportCore.RESULT_OK:
+                for entry in data:
+                    if 'data' in entry:
+                        result = {'id': id,
+                                  'method': entry['method'],
+                                  'error': 'OK',
+                                  'expect_more_data': True,
+                                  'data': entry['data']}
+                        payload.append(result)
+                    else:
+                        result = {'id': id,
+                                  'method': entry['method'],
+                                  'error': 'No data',
+                                  'expect_more_data': True,
+                                  }
+                        payload.append(result)
+
+            if len(payload) > 0:
+                payload[-1]['expect_more_data'] = False
+
+            for entry in payload:
+                self.send_message(json.dumps(entry), addr, conn, entry['method'])
 
     def executeEcho(self, id, query, addr, conn):
         res = re.match("echo\?(.*)", query)
@@ -97,23 +151,73 @@ class ExecutorThread(threading.Thread):
             # data:   actual data
             result = {'id': id,
                       'method': 'echo',
+                      'error': 'OK',
                       'expect_more_data': False,
                       'data': res.group(1)}
             result_json = json.dumps(result)
-            self.send_message(result_json, addr, conn)
+            self.send_message(result_json, addr, conn, 'echo')
+
+    def executeGetStopInfo(self, id, query, addr, conn):
+        app.logger.debug("Executing " + "getStopInfo" + " query:"
+                         " ID=" + str(id) +
+                         " Query=" + str(query))
+        self._executeGetInfo('getStopInfo', id, query, addr, conn)
+
+    def executeGetRouteInfo(self, id, query, addr, conn):
+        app.logger.debug("Executing " + "getRouteInfo" + " query:"
+                         " ID=" + str(id) +
+                         " Query=" + str(query))
+        self._executeGetInfo('getRouteInfo', id, query, addr, conn)
+
+    def executeGetVehiclesInfo(self, id, query, addr, conn):
+        app.logger.debug("Executing " + "getVehiclesInfo" + " query:"
+                         " ID=" + str(id) +
+                         " Query=" + str(query))
+        self._executeGetInfo('getVehiclesInfo', id, query, addr, conn)
+
+    def executeGetAllInfo(self, id, query, addr, conn):
+        app.logger.debug("Executing " + "getAllInfo" + " query:" +
+                         " ID=" + str(id) +
+                         " Query=" + str(query))
+        self._executeGetInfo('getAllInfo', id, query, addr, conn)
+
+    def executeWatchVehiclesInfo(self, id, query, addr, conn):
+        app.logger.debug("Executing " + "watchVehiclesInfo" + " query:" +
+                         " ID=" + str(id) +
+                         " Query=" + str(query))
+        self._executeGetInfo('watchVehiclesInfo', id, query, addr, conn)
+
+        while app.watch_lock:
+            for i in range(0, self.watch_wait_time):
+                time.sleep(1)
+
+            app.core.network_json = app.core.getChromiumNetworkingData()
 
 
     def executeQuery(self, query):
         if query[0] < 0:
             return
 
-        id = query[0]
-        query_string = query[1]
-        addr = query[2]
-        conn = query[3]
+        id, query_string, addr, conn = query[0], query[1], query[2], query[3]
 
         if query_string.startswith('echo?'):
             self.executeEcho(id, query_string, addr, conn)
+            return
+        if query_string.startswith('getStopInfo?'):
+            self.executeGetStopInfo(id, query_string, addr, conn)
+            return
+        if query_string.startswith('getRouteInfo?'):
+            self.executeGetRouteInfo(id, query_string, addr, conn)
+            return
+        if query_string.startswith('getVehiclesInfo?'):
+            self.executeGetVehiclesInfo(id, query_string, addr, conn)
+            return
+        if query_string.startswith('getAllInfo?'):
+            self.executeGetAllInfo(id, query_string, addr, conn)
+            return
+        if query_string.startswith('watchVehiclesInfo?'):
+            self.executeWatchVehiclesInfo(id, query_string, addr, conn)
+            return
 
     def run(self):
         app.logger.debug("Executor thread started, wait time between queries is "+str(self.wait_time)+" secs.")
@@ -123,10 +227,15 @@ class ExecutorThread(threading.Thread):
             app.queue_lock.acquire()
             query_len = len(app.query_queue)
             if query_len > 0:
-                query = app.query_queue.popleft()
+                query = app.query_queue[0]
             app.queue_lock.release()
 
             self.executeQuery(query)
+
+            app.queue_lock.acquire()
+            if query_len > 0:
+                app.query_queue.popleft()
+            app.queue_lock.release()
 
             for i in range(0, self.wait_time):
                 if app.is_running:
@@ -142,19 +251,28 @@ class Application:
     Main application class
     """
     def __init__(self):
+        "If set to false, the server will begin to terminate itself"
         self.is_running = True
+
         # Listen address
         self.host = '127.0.0.1'
+        # Listen port
         self.port = 25555
 
-        self.query_id = 0
-
+        # List of clients currently connected to the server
         self.listeners = defaultdict()
 
+        # Logger
         self.logger = Logger(Logger.DEBUG)
 
         # Queue lock
         self.queue_lock = threading.Lock()
+
+        # Will turn on with "Watch" command, and prevent any further queries to be added to Queue
+        self.watch_lock = False
+
+        # Last Query ID, will increment with each query added to the Queue
+        self.query_id = 0
 
         # Server will run in single thread, the deque is to store incoming queries.
         self.query_queue = deque()
@@ -167,6 +285,7 @@ class Application:
         :return: nothing
         """
         self.logger.info("SIGINT received! Terminating the program...")
+        self.watch_lock = False
         self.is_running = False
         self.logger.info("Waiting for threads to terminate...")
         copy_listeners = self.listeners.copy()
@@ -193,6 +312,7 @@ class Application:
                 conn, addr = sock.accept()
             except socket.timeout:
                 continue
+
 
             listener_thread = ListenerThread(conn, addr, self)
             self.listeners[addr] = listener_thread
@@ -224,19 +344,33 @@ class Application:
 
         return json_data
 
-    def processGetInfo(self, query, addr, conn):
+    def handleWatchLock(self, conn):
+        if app.watch_lock:
+            response = {"id": self.query_id,
+                        "response": "ERROR",
+                        "message": "Watch task is planned, no queries accepted until cancelled!",
+            }
+            response_json = json.dumps(response)
+            conn.send(bytes(response_json + '\n' + '\0', 'utf-8'))
 
-        self.queue_lock.acquire()
-        app.query_queue.append((self.query_id, query, addr, conn))
-        queue_position = len(app.query_queue) - 1
-        self.queue_lock.release()
+    def processGetInfo(self, query, addr, conn, set_watch_lock=False):
+        if app.watch_lock:
+            self.handleWatchLock(conn)
+        else:
+            if set_watch_lock:
+                self.watch_lock = True
 
-        response = {"id": self.query_id,
-                    "response": "OK",
-                    "queue_position": queue_position}
-        response_json = json.dumps(response)
-        conn.send(bytes(response_json + '\n', 'utf-8'))
-        self.query_id += 1
+            self.queue_lock.acquire()
+            app.query_queue.append((self.query_id, query, addr, conn))
+            queue_position = len(app.query_queue) - 1
+            self.queue_lock.release()
+
+            response = {"id": self.query_id,
+                        "response": "OK",
+                        "queue_position": queue_position}
+            response_json = json.dumps(response)
+            conn.send(bytes(response_json + '\n' + '\0', 'utf-8'))
+            self.query_id += 1
 
     def processGetStopInfo(self, query, addr, conn):
         self.processGetInfo(query, addr, conn)
@@ -250,17 +384,34 @@ class Application:
     def processGetAllInfo(self, query, addr, conn):
         self.processGetInfo(query, addr, conn)
 
+    def processWatchVehiclesInfo(self, query, addr, conn):
+        app.logger.info("Watch event (watchVehiclesInfo) requested!")
+        app.logger.warning("All subsequent queries are blocked until watch query is cancelled!")
+        # Add watch event to Query Queue
+        self.processGetInfo(query, addr, conn, set_watch_lock=True)
+
+    def processCancelWatch(self, query, addr, conn):
+        app.logger.info("Watch task cancelled, resuming normal operations")
+        app.watch_lock = False
+        response = {"response": "OK", "message": "Watch task cancelled."}
+        response_json = json.dumps(response)
+        conn.send(bytes(response_json + '\n' + '\0', 'utf-8'))
+
     def processEcho(self, query, addr, conn):
-        self.processGetInfo(query, addr, conn)
+        # If blocked by Watch Lock
+        if app.watch_lock:
+            self.handleWatchLock(conn)
+        else:
+            self.processGetInfo(query, addr, conn)
 
     def processGetCurrentQueue(self, conn):
         current_queue = app.getCurrentQueue()
-        conn.send(bytes(current_queue + '\n', 'utf-8'))
+        conn.send(bytes(current_queue + '\n' + '\0', 'utf-8'))
 
     def processUnknownQuery(self, conn):
         response = {"response": "ERROR", "message": "Unknown query"}
         response_json = json.dumps(response)
-        conn.send(bytes(response_json + "\n", 'utf-8'))
+        conn.send(bytes(response_json + '\n' + '\0', 'utf-8'))
 
     def run(self):
         """
@@ -276,8 +427,8 @@ class Application:
         self.executor_thread = ExecutorThread(self)
         self.executor_thread.start()
 
-        core = YandexTransportCore()
-        core.startWebdriver()
+        self.core = YandexTransportCore()
+        self.core.startWebdriver()
 
         # Getting stop info example
         """
@@ -303,7 +454,7 @@ class Application:
         """
         self.listen()
 
-        core.stopWebdriver()
+        self.core.stopWebdriver()
 
         self.logger.info("YTPS - Yandex Transport Proxy Server - terminated!")
 

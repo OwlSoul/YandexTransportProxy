@@ -46,6 +46,33 @@ class YandexTransportCore:
         """
         self.driver.quit()
 
+    @staticmethod
+    def yandexAPItoLocalAPI(method):
+        """
+        Converts Yandex API to local API,
+        :param method: method, like "maps/api/masstransit/getVehiclesInfo"
+        :return: local API, like to "getVehiclesInfo"
+        """
+        if method == "maps/api/masstransit/getStopInfo":
+            return 'getStopInfo'
+        if method == "maps/api/masstransit/getRouteInfo":
+            return 'getRouteInfo'
+        if method == "maps/api/masstransit/getVehiclesInfo":
+            return 'getVehiclesInfo'
+        return method
+
+    def getChromiumNetworkingData(self):
+        # Script to get Network data from Developer tools, huge thanks to this link:
+        # https://stackoverflow.com/questions/20401264/how-to-access-network-panel-on-google-chrome-developer-tools-with-selenium
+        script = "var performance = window.performance || window.mozPerformance || window.msPerformance || " \
+                 "window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;"
+        data = self.driver.execute_script(script)
+
+        # They output network data in "kinda-JSON" with single quites instead of double ones.
+        result_json = str(data).replace("'", '"')
+
+        return result_json
+
     # ----                               MASTER FUNCTION TO GET YANDEX API DATA                                   ---- #
 
     def _getYandexJSON(self, url, api_method):
@@ -62,18 +89,11 @@ class YandexTransportCore:
             return result_list, self.RESULT_WEBDRIVER_NOT_RUNNING
         self.driver.get(url)
 
-        # Script to get Network data from Developer tools, huge thanks to this link:
-        # https://stackoverflow.com/questions/20401264/how-to-access-network-panel-on-google-chrome-developer-tools-with-selenium
-        script = "var performance = window.performance || window.mozPerformance || window.msPerformance || " \
-                 "window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;"
-        data = self.driver.execute_script(script)
-
-        # They output network data in "kinda-JSON" with single quites instead of double ones.
-        network_json = str(data).replace("'", '"')
+        self.network_json = self.getChromiumNetworkingData()
 
         # Loading Network Data to JSON
         try:
-            network_data = json.loads(network_json, encoding='utf-8')
+            network_data = json.loads(self.network_json, encoding='utf-8')
         except Exception as e:
             print(e)
             return result_list, self.RESULT_NETWORK_PARSE_ERROR
@@ -115,16 +135,16 @@ class YandexTransportCore:
                     try:
                         returned_json = json.loads(body_string, encoding='utf-8')
                         data = {"url": query['url'],
-                                "method": query['method'],
+                                "method": self.yandexAPItoLocalAPI(query['method']),
                                 "error": "OK",
                                 "data": returned_json}
                     except Exception as e:
                         data = {"url": query['url'],
-                                "method": query['method'],
+                                "method": self.yandexAPItoLocalAPI(query['method']),
                                 "error": "Failed to parse JSON"}
                 else:
                     data={"url": query['url'],
-                          "method": query['method'],
+                          "method": self.yandexAPItoLocalAPI(query['method']),
                           "error": "Failed to parse body of the response"}
 
                 result_list.append(data)
