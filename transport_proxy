@@ -79,17 +79,29 @@ class ExecutorThread(threading.Thread):
         # Time to wait between queries
         self.wait_time = 5
 
+    def send_message(self, message, addr, conn):
+        try:
+            app.logger.debug("Sending response to " + str(addr))
+            conn.send(bytes(str(message) + '\n', 'utf-8'))
+        except Exception as e:
+            app.logger.error("Failed to send data to " + str(addr))
+
     def executeEcho(self, id, query, addr, conn):
         res = re.match("echo\?(.*)", query)
         if res is not None:
+            # Send back echo query,
+            # id: initial query ID
+            # method: 'echo'
+            # expect_more_data: False if no
+            #                   True if yes
+            # data:   actual data
             result = {'id': id,
+                      'method': 'echo',
+                      'expect_more_data': False,
                       'data': res.group(1)}
             result_json = json.dumps(result)
-            try:
-                app.logger.debug("Sending response to " + str(addr))
-                conn.send(bytes(str(result_json)+'\n', 'utf-8'))
-            except Exception as e:
-                app.logger.error("Failed to send data to " + str(addr))
+            self.send_message(result_json, addr, conn)
+
 
     def executeQuery(self, query):
         if query[0] < 0:
@@ -104,7 +116,7 @@ class ExecutorThread(threading.Thread):
             self.executeEcho(id, query_string, addr, conn)
 
     def run(self):
-        app.logger.debug("Executor thread started")
+        app.logger.debug("Executor thread started, wait time between queries is "+str(self.wait_time)+" secs.")
         while app.is_running:
             # Default "discard" query
             query = (-1, '', '', None)
