@@ -7,3 +7,5 @@ Dockerfile.save
 launch/page-*.html
 code_quality.csv
 output*
+outdata
+output.*
