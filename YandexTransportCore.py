@@ -37,7 +37,7 @@ class YandexTransportCore:
         options = webdriver.ChromeOptions()
         options.add_argument("--headless")
         options.add_argument("--incognito")
-        self.driver = webdriver.Chrome(self.chrome_driver_location, chrome_options=options)
+        self.driver = webdriver.Chrome(self.chrome_driver_location, options=options)
 
     def stopWebdriver(self):
         """
