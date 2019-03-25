@@ -24,7 +24,13 @@ stop_urls = [{'name': 'Сходненская улица', 'url': 'https://yande
              {'name': 'Метро Бауманская', 'url': 'https://yandex.ru/maps/213/moscow/?ll=37.678664%2C55.772171&masstransit%5BstopId%5D=stop__9643291&mode=stop&z=19'},
              {'name': 'Метро Войковская', 'url': 'https://yandex.ru/maps/213/moscow/?ll=37.498648%2C55.818952&masstransit%5BstopId%5D=stop__9649585&mode=stop&z=17'}]
 
+# NOTE: It's a good idea to wait random time between queries so to be very sure Yandex will not ban this.
+#       Stress tests to check Yandex patience limits with no delays are considered only, from dedicated IP address.
 def wait_random_time():
+    '''
+    Wait random time between queries.
+    :return:
+    '''
     time.sleep(random.randint(15, 45))
 
 # ---------------------------------------------      warm-up        -------------------------------------------------- #

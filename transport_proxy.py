@@ -129,20 +129,37 @@ class ExecutorThread(threading.Thread):
                 if 'data' in entry:
                     result = {'id': query['id'],
                               'method': entry['method'],
-                              'error': 'OK',
+                              'error': app.RESULT_OK,
+                              'message': 'OK',
                               'expect_more_data': True,
                               'data': entry['data']}
                     payload.append(result)
                 else:
                     result = {'id': query['id'],
                               'method': entry['method'],
-                              'error': 'No data',
+                              'error': app.RESULT_NO_DATA,
+                              'message': 'No data',
                               'expect_more_data': True,
                               }
                     payload.append(result)
+        elif error == YandexTransportCore.RESULT_GET_ERROR:
+            result = {'id': query['id'],
+                      'method': query['type'],
+                      'error': app.RESULT_GET_ERROR,
+                      'message': 'Error getting requested URL',
+                      'expect_more_data': False}
+            payload.append(result)
 
         if len(payload) > 0:
             payload[-1]['expect_more_data'] = False
+        else:
+            result = {'id': query['id'],
+                      'method': query['type'],
+                      'error': app.RESULT_NO_YANDEX_DATA,
+                      'message': 'No Yandex Masstransit API data received for method ' + query['type'] + \
+                                 ' from URL "' + query['body'] + '"',
+                      'expect_more_data': False}
+            payload.append(result)
 
         for entry in payload:
             self.send_message(json.dumps(entry), query['addr'], query['conn'], log_tag=entry['method'])
@@ -155,7 +172,8 @@ class ExecutorThread(threading.Thread):
         """
         result = {'id': query['id'],
                   'method': query['type'],
-                  'error': 'OK',
+                  'error': app.RESULT_OK,
+                  'message': 'OK',
                   'expect_more_data': False,
                   'data': query['body']}
         result_json = json.dumps(result)
@@ -207,7 +225,7 @@ class ExecutorThread(threading.Thread):
     def executeQuery(self, query):
         """
         Execute query from the Query Queue
-        :param query: query inner structure
+        :param query: query inner structure {'id', 'type', 'body'}
         :return: None
         """
         if query['type'] == 'getEcho':
@@ -277,6 +295,12 @@ class Application:
     """
     Main application class
     """
+    # Error codes
+    RESULT_OK = 0
+    RESULT_NO_DATA = 1
+    RESULT_GET_ERROR = 2
+    RESULT_NO_YANDEX_DATA = 3
+
     def __init__(self):
         setproctitle.setproctitle('transport_proxy')
         "If set to false, the server will begin to terminate itself"
