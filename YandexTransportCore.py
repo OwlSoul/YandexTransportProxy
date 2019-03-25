@@ -5,6 +5,13 @@ This is the core module of Yandex Transport Hack API.
 It uses Selenium with ChromeDriver and gets Yandex Transport API JSON responses.
 """
 
+# NOTE: This project uses camelCase for function names. While PEP8 recommends using snake_case for these,
+#       the project in fact implements the "quasi-API" for Yandex Masstransit, where names are in camelCase,
+#       for example, getStopInfo. Correct naming for this function according to PEP8 would be get_stop_info.
+#       Thus, the desision to use camelCase was made. In fact, there are a bunch of python projects which use
+#       camelCase, like Robot Operating System.
+#       I also personally find camelCase more pretier than the snake_case.
+
 import re
 import io
 import json

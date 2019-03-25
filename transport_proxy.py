@@ -1,8 +1,24 @@
 #!/usr/bin/env python3
 
 """
-Yandex Transport Monitor proxy service, automates getting data from Yandex.Transport using Selenium
+Yandex Transport Monitor proxy service, automates getting data from Yandex.Transport using Selenium Webdriver and
+Chromium browser.
 """
+
+# NOTE: This project uses camelCase for function names. While PEP8 recommends using snake_case for these,
+#       the project in fact implements the "quasi-API" for Yandex Masstransit, where names are in camelCase,
+#       for example, getStopInfo. Correct naming for this function according to PEP8 would be get_stop_info.
+#       Thus, the desision to use camelCase was made. In fact, there are a bunch of python projects which use
+#       camelCase, like Robot Operating System.
+#       I also personally find camelCase more pretier than the snake_case.
+
+__author__ = "Yury D."
+__credits__ = ["Yury D.", "Pavel Lutskov", "Yury Alexeev"]
+__license__ = "MIT"
+__version__ = "2.0.0-beta"
+__maintainer__ = "Yury D."
+__email__ = "SoulGate@yandex.ru"
+__status__ = "Beta"
 
 import time
 import sys
