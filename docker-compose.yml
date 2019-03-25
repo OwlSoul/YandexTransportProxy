@@ -1,0 +1,15 @@
+version: "2"
+
+networks:
+  transport-proxy:
+    external: false
+
+services:
+  server:
+    image: ytproxy:latest
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - transport-proxy
+    ports:
+      - "25555:25555"

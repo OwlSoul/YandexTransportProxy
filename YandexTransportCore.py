@@ -34,10 +34,13 @@ class YandexTransportCore:
         Start Chromium webdriver
         :return: nothing
         """
-        options = webdriver.ChromeOptions()
-        options.add_argument("--headless")
-        options.add_argument("--incognito")
-        self.driver = webdriver.Chrome(self.chrome_driver_location, options=options)
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--incognito")
+        # These two are basically needed for Chromium to run inside docker container.
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        self.driver = webdriver.Chrome(self.chrome_driver_location, options=chrome_options)
 
     def stopWebdriver(self):
         """

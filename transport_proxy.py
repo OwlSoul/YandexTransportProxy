@@ -52,6 +52,9 @@ class ListenerThread(threading.Thread):
                     elif query.startswith('getVehiclesInfo?'):
                         app.processGetVehiclesInfo(query, self.addr, self.conn)
 
+                    elif query.startswith('getVehiclesInfoWithRegion?'):
+                        app.processGetVehiclesInfoWithRegion(query, self.addr, self.conn)
+
                     elif query.startswith('getRouteInfo?'):
                         app.processGetRouteInfo(query, self.addr, self.conn)
 
@@ -106,6 +109,8 @@ class ExecutorThread(threading.Thread):
                 data, error = app.core.getRouteInfo(url=query['body'])
             elif query['type'] == 'getVehiclesInfo':
                 data, error = app.core.getVehiclesInfo(url=query['body'])
+            elif query['type'] == 'getVehiclesInfoWithRegion':
+                data, error = app.core.getVehiclesInfoWithRegion(url=query['body'])
             elif query['type'] == 'watchVehiclesInfo':
                 data, error = app.core.getVehiclesInfo(url=query['body'])
             elif query['type'] == 'getAllInfo':
@@ -169,6 +174,12 @@ class ExecutorThread(threading.Thread):
                          " URL=" + str(query['body']))
         self._executeGetInfo(query)
 
+    def executeGetVehiclesInfoWithRegion(self, query):
+        app.logger.debug("Executing " + "getVehiclesInfoWithRegion" + " query:"
+                         " ID=" + str(query['id']) +
+                         " URL=" + str(query['body']))
+        self._executeGetInfo(query)
+
     def executeGetAllInfo(self, query):
         app.logger.debug("Executing " + "getAllInfo" + " query:" +
                          " ID=" + str(query['id']) +
@@ -205,6 +216,9 @@ class ExecutorThread(threading.Thread):
             return
         if query['type'] == 'getVehiclesInfo':
             self.executeGetVehiclesInfo(query)
+            return
+        if query['type'] == 'getVehiclesInfoWithRegion':
+            self.executeGetVehiclesInfoWithRegion(query)
             return
         if query['type'] == 'getAllInfo':
             self.executeGetAllInfo(query)
@@ -264,7 +278,7 @@ class Application:
         self.is_running = True
 
         # Listen address
-        self.host = '127.0.0.1'
+        self.host = '0.0.0.0'
         # Listen port
         self.port = 25555
 
@@ -307,6 +321,7 @@ class Application:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         sock.settimeout(5)
+        self.logger.debug("Binding socket...")
         try:
             sock.bind((self.host, self.port))
         except socket.error:
@@ -416,6 +431,9 @@ class Application:
     def processGetVehiclesInfo(self, query, addr, conn):
         self.processGetInfo(query, addr, conn)
 
+    def processGetVehiclesInfoWithRegion(self, query, addr, conn):
+        self.processGetInfo(query, addr, conn)
+
     def processGetRouteInfo(self, query, addr, conn):
         self.processGetInfo(query, addr, conn)
 
@@ -473,7 +491,9 @@ class Application:
         self.executor_thread.start()
 
         self.core = YandexTransportCore()
+        self.logger.info("Starting ChromeDriver...")
         self.core.startWebdriver()
+        self.logger.info("ChromeDriver started successfully!")
 
         # Getting stop info example
         """
