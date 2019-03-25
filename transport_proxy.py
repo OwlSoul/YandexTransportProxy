@@ -103,44 +103,49 @@ class ExecutorThread(threading.Thread):
             app.logger.error("Failed to send data to " + str(addr))
 
     def _executeGetInfo(self, query):
-            if query['type'] == 'getStopInfo':
-                data, error = app.core.getStopInfo(url=query['body'])
-            elif query['type'] == 'getRouteInfo':
-                data, error = app.core.getRouteInfo(url=query['body'])
-            elif query['type'] == 'getVehiclesInfo':
-                data, error = app.core.getVehiclesInfo(url=query['body'])
-            elif query['type'] == 'getVehiclesInfoWithRegion':
-                data, error = app.core.getVehiclesInfoWithRegion(url=query['body'])
-            elif query['type'] == 'watchVehiclesInfo':
-                data, error = app.core.getVehiclesInfo(url=query['body'])
-            elif query['type'] == 'getAllInfo':
-                data, error = app.core.getAllInfo(url=query['body'])
-            else:
-                return
+        """
+        Execute general get... query.
+        :param query: internal 'query' dictionary
+        :return: result as JSON
+        """
+        if query['type'] == 'getStopInfo':
+            data, error = app.core.getStopInfo(url=query['body'])
+        elif query['type'] == 'getRouteInfo':
+            data, error = app.core.getRouteInfo(url=query['body'])
+        elif query['type'] == 'getVehiclesInfo':
+            data, error = app.core.getVehiclesInfo(url=query['body'])
+        elif query['type'] == 'getVehiclesInfoWithRegion':
+            data, error = app.core.getVehiclesInfoWithRegion(url=query['body'])
+        elif query['type'] == 'watchVehiclesInfo':
+            data, error = app.core.getVehiclesInfo(url=query['body'])
+        elif query['type'] == 'getAllInfo':
+            data, error = app.core.getAllInfo(url=query['body'])
+        else:
+            return
 
-            payload = []
-            if error == YandexTransportCore.RESULT_OK:
-                for entry in data:
-                    if 'data' in entry:
-                        result = {'id': query['id'],
-                                  'method': entry['method'],
-                                  'error': 'OK',
-                                  'expect_more_data': True,
-                                  'data': entry['data']}
-                        payload.append(result)
-                    else:
-                        result = {'id': query['id'],
-                                  'method': entry['method'],
-                                  'error': 'No data',
-                                  'expect_more_data': True,
-                                  }
-                        payload.append(result)
+        payload = []
+        if error == YandexTransportCore.RESULT_OK:
+            for entry in data:
+                if 'data' in entry:
+                    result = {'id': query['id'],
+                              'method': entry['method'],
+                              'error': 'OK',
+                              'expect_more_data': True,
+                              'data': entry['data']}
+                    payload.append(result)
+                else:
+                    result = {'id': query['id'],
+                              'method': entry['method'],
+                              'error': 'No data',
+                              'expect_more_data': True,
+                              }
+                    payload.append(result)
 
-            if len(payload) > 0:
-                payload[-1]['expect_more_data'] = False
+        if len(payload) > 0:
+            payload[-1]['expect_more_data'] = False
 
-            for entry in payload:
-                self.send_message(json.dumps(entry), query['addr'], query['conn'], log_tag=entry['method'])
+        for entry in payload:
+            self.send_message(json.dumps(entry), query['addr'], query['conn'], log_tag=entry['method'])
 
     def executeGetEcho(self, query):
         """

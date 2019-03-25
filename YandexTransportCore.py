@@ -8,9 +8,9 @@ It uses Selenium with ChromeDriver and gets Yandex Transport API JSON responses.
 import re
 import io
 import json
+import selenium
 from selenium import webdriver
 from bs4 import BeautifulSoup
-
 
 class YandexTransportCore:
     # Error codes
@@ -19,6 +19,7 @@ class YandexTransportCore:
     RESULT_NO_LAST_QUERY = 2
     RESULT_NETWORK_PARSE_ERROR = 3
     RESULT_JSON_PARSE_ERROR = 4
+    RESULT_GET_ERROR = 5
 
     def __init__(self):
         self.driver = None
@@ -92,7 +93,11 @@ class YandexTransportCore:
 
         if self.driver is None:
             return result_list, self.RESULT_WEBDRIVER_NOT_RUNNING
-        self.driver.get(url)
+        try:
+            self.driver.get(url)
+        except selenium.common.exceptions.WebDriverException as e:
+            print(e)
+            return None, self.RESULT_GET_ERROR
 
         self.network_json = self.getChromiumNetworkingData()
 
@@ -125,7 +130,13 @@ class YandexTransportCore:
         # Getting last API query results from cache by executing it again in the browser
         if len(last_query) > 0:
             for query in last_query:
-                self.driver.get(query['url'])
+                # Getting the webpage based on URL
+                try:
+                    self.driver.get(query['url'])
+                except selenium.common.exceptions.WebDriverException as e:
+                    print("Your favourite error message: THIS SHOULD NOT HAPPEN!")
+                    print(e)
+                    return None, self.RESULT_GET_ERROR
 
                 # Writing getStopInfo results to memory
                 output_stream = io.StringIO()

@@ -89,3 +89,24 @@ def test_getChromiumNetworkingData():
     # Wait random amount of time
     assert found_input_url
     wait_random_time()
+
+# ------------------------------------------------- _getYandexJSON --------------------------------------------------- #
+def test_getYandexJSON():
+    """
+    Test "_getYandexJSON" function, should not break no matter what is supplied.
+    :return:
+    """
+    core = YandexTransportCore()
+    core.startWebdriver()
+
+    # Fist test, None url, existing method
+    url = None
+    method = "maps/api/masstransit/getRouteInfo"
+    result, error = core._getYandexJSON(url, method)
+    assert (result is None) and (error == YandexTransportCore.RESULT_GET_ERROR)
+
+    # Fist test, url is gibberish, existing method
+    url = 'abrabgarilsitlsdxyb4396t6'
+    method = "maps/api/masstransit/getRouteInfo"
+    result, error = core._getYandexJSON(url, method)
+    assert (result is None) and (error == YandexTransportCore.RESULT_GET_ERROR)
