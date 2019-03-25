@@ -56,6 +56,8 @@ def test_yandexAPIToLocalAPI():
     assert YandexTransportCore.yandexAPItoLocalAPI('maps/api/masstransit/getStopInfo') == 'getStopInfo'
     assert YandexTransportCore.yandexAPItoLocalAPI('maps/api/masstransit/getRouteInfo') == 'getRouteInfo'
     assert YandexTransportCore.yandexAPItoLocalAPI('maps/api/masstransit/getVehiclesInfo') == 'getVehiclesInfo'
+    assert YandexTransportCore.yandexAPItoLocalAPI('maps/api/masstransit/getVehiclesInfoWithRegion') == \
+           'getVehiclesInfoWithRegion'
     # Unknown API method, should return the input
     assert YandexTransportCore.yandexAPItoLocalAPI('maps/api/masstransit/getNonexistent') == \
                                                    'maps/api/masstransit/getNonexistent'
