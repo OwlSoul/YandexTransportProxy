@@ -68,7 +68,7 @@ def test_getChromiumNetworkingData():
     Basically this will test "Stack Overflow" script to get Networking Data from Chromium, it is expected for this
     test to fail if something will change in Chromium later regarding this functionality.
 
-    The test picks random URL from stop_urls, performs "GET" operation, then checks if actual data was returned and will
+    The test picks random URL from stop_urlsst, performs "GET" operation, then checks if actual data was returned and will
     try to wind the URL query.
     """
     core = YandexTransportCore()
