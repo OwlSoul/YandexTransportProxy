@@ -12,6 +12,11 @@ Chromium browser.
 #       camelCase, like Robot Operating System.
 #       I also personally find camelCase more pretier than the snake_case.
 
+# Project follows PascalCase for module naming, but snake_case for final executable.
+# Maybe a better idea is to use executable an sh script instead.
+# pylint: disable=C0103
+# pylint: enable=C0103
+
 __author__ = "Yury D."
 __credits__ = ["Yury D.", "Pavel Lutskov", "Yury Alexeev"]
 __license__ = "MIT"
@@ -25,27 +30,29 @@ import sys
 import json
 import signal
 import socket
-import datetime
 import re
 import threading
-import setproctitle
 from collections import deque
 from collections import defaultdict
-from Logger import Logger
-from YandexTransportCore import YandexTransportCore
+import setproctitle
+from YandexTransportCore import YandexTransportCore, Logger
 
 # -------------------------------------------------------------------------------------------------------------------- #
 
 class ListenerThread(threading.Thread):
+    """
+    Listener thread class, will listen to incoming queries.
+    """
     def __init__(self, conn, addr, app):
         super().__init__()
+        self.app = app
         self.conn = conn
         self.addr = addr
 
     def run(self):
-        app.logger.info("Connection established : " + str(self.addr))
+        self.app.log.info("Connection established : " + str(self.addr))
 
-        while app.is_running:
+        while self.app.is_running:
             self.conn.settimeout(5)
             try:
                 data = self.conn.recvfrom(4096)
@@ -57,50 +64,48 @@ class ListenerThread(threading.Thread):
                 lines = string.splitlines()
                 for line in lines:
                     query = line.strip()
-                    app.logger.debug("Received : " + str(query))
+                    self.app.log.debug("Received : " + str(query))
 
                     if query == 'getCurrentQueue':
-                        app.processGetCurrentQueue(self.conn)
+                        self.app.processGetCurrentQueue(self.conn)
 
                     elif query.startswith('getStopInfo?'):
-                        app.processGetStopInfo(query, self.addr, self.conn)
+                        self.app.processGetStopInfo(query, self.addr, self.conn)
 
                     elif query.startswith('getVehiclesInfo?'):
-                        app.processGetVehiclesInfo(query, self.addr, self.conn)
+                        self.app.processGetVehiclesInfo(query, self.addr, self.conn)
 
                     elif query.startswith('getVehiclesInfoWithRegion?'):
-                        app.processGetVehiclesInfoWithRegion(query, self.addr, self.conn)
+                        self.app.processGetVehiclesInfoWithRegion(query, self.addr, self.conn)
 
                     elif query.startswith('getRouteInfo?'):
-                        app.processGetRouteInfo(query, self.addr, self.conn)
+                        self.app.processGetRouteInfo(query, self.addr, self.conn)
 
                     elif query.startswith('getAllInfo?'):
-                        app.processGetAllInfo(query, self.addr, self.conn)
+                        self.app.processGetAllInfo(query, self.addr, self.conn)
 
                     elif query.startswith('getEcho?'):
-                        app.processEcho(query, self.addr, self.conn)
-
-                    elif query.startswith('watchVehiclesInfo?'):
-                        app.processWatchVehiclesInfo(query, self.addr, self.conn)
-
-                    elif query == "cancelWatch":
-                        app.processCancelWatch(query, self.addr, self.conn)
+                        self.app.processEcho(query, self.addr, self.conn)
 
                     else:
-                        app.processUnknownQuery(self.conn)
+                        self.app.processUnknownQuery(self.conn)
             else:
-                app.logger.info("Connection terminated : " + str(self.addr))
+                self.app.log.info("Connection terminated : " + str(self.addr))
                 break
 
         self.conn.shutdown(socket.SHUT_RDWR)
-        app.logger.debug("Thread for connection ( " + str(self.addr) + " ) terminated")
-        del app.listeners[self.addr]
+        self.app.log.debug("Thread for connection ( " + str(self.addr) + " ) terminated")
+        del self.app.listeners[self.addr]
 # -------------------------------------------------------------------------------------------------------------------- #
 
 
 class ExecutorThread(threading.Thread):
+    """
+    Executor thread, single thread to pick and execute queries from Query Queue.
+    """
     def __init__(self, app):
         super().__init__()
+        self.app = app
 
         # Flag to check if exeturoe thread is running.
         # In case it fails - program should terminate / Executor Thread should restart.
@@ -111,35 +116,42 @@ class ExecutorThread(threading.Thread):
         # Time to wait between watch updates
         self.watch_wait_time = 5
 
-    def send_message(self, message, addr, conn, log_tag=''):
-        if len(log_tag) > 0:
+    def sendMessage(self, message, addr, conn, log_tag=None):
+        """
+        Send a message to the server
+        :param message: message to send
+        :param addr: address (from socket bind/accept)
+        :param conn: connection
+        :param log_tag: tag which will append to log message
+        :return: nothing
+        """
+        if log_tag is not None:
             log_tag_text = " (" + log_tag + ")"
         else:
             log_tag_text = ""
         try:
-            app.logger.debug("Sending response to " + str(addr) + log_tag_text)
+            self.app.log.debug("Sending response to " + str(addr) + log_tag_text)
             conn.send(bytes(str(message) + '\n' + '\0', 'utf-8'))
-        except Exception as e:
-            app.logger.error("Failed to send data to " + str(addr))
+        except socket.error as e:
+            self.app.log.error("Failed to send data to " + str(addr))
+            self.app.log.error("Exception ocurred:" + str(e))
 
-    def _executeGetInfo(self, query):
+    def executeGetInfo(self, query):
         """
         Execute general get... query.
         :param query: internal 'query' dictionary
         :return: result as JSON
         """
         if query['type'] == 'getStopInfo':
-            data, error = app.core.getStopInfo(url=query['body'])
+            data, error = self.app.core.getStopInfo(url=query['body'])
         elif query['type'] == 'getRouteInfo':
-            data, error = app.core.getRouteInfo(url=query['body'])
+            data, error = self.app.core.getRouteInfo(url=query['body'])
         elif query['type'] == 'getVehiclesInfo':
-            data, error = app.core.getVehiclesInfo(url=query['body'])
+            data, error = self.app.core.getVehiclesInfo(url=query['body'])
         elif query['type'] == 'getVehiclesInfoWithRegion':
-            data, error = app.core.getVehiclesInfoWithRegion(url=query['body'])
-        elif query['type'] == 'watchVehiclesInfo':
-            data, error = app.core.getVehiclesInfo(url=query['body'])
+            data, error = self.app.core.getVehiclesInfoWithRegion(url=query['body'])
         elif query['type'] == 'getAllInfo':
-            data, error = app.core.getAllInfo(url=query['body'])
+            data, error = self.app.core.getAllInfo(url=query['body'])
         else:
             return
 
@@ -149,7 +161,7 @@ class ExecutorThread(threading.Thread):
                 if 'data' in entry:
                     result = {'id': query['id'],
                               'method': entry['method'],
-                              'error': app.RESULT_OK,
+                              'error': self.app.RESULT_OK,
                               'message': 'OK',
                               'expect_more_data': True,
                               'data': entry['data']}
@@ -157,7 +169,7 @@ class ExecutorThread(threading.Thread):
                 else:
                     result = {'id': query['id'],
                               'method': entry['method'],
-                              'error': app.RESULT_NO_DATA,
+                              'error': self.app.RESULT_NO_DATA,
                               'message': 'No data',
                               'expect_more_data': True,
                               }
@@ -165,24 +177,24 @@ class ExecutorThread(threading.Thread):
         elif error == YandexTransportCore.RESULT_GET_ERROR:
             result = {'id': query['id'],
                       'method': query['type'],
-                      'error': app.RESULT_GET_ERROR,
+                      'error': self.app.RESULT_GET_ERROR,
                       'message': 'Error getting requested URL',
                       'expect_more_data': False}
             payload.append(result)
 
-        if len(payload) > 0:
+        if payload:                                   # Same as "if len(payload) > 0:"
             payload[-1]['expect_more_data'] = False
         else:
             result = {'id': query['id'],
                       'method': query['type'],
-                      'error': app.RESULT_NO_YANDEX_DATA,
+                      'error': self.app.RESULT_NO_YANDEX_DATA,
                       'message': 'No Yandex Masstransit API data received for method ' + query['type'] + \
                                  ' from URL "' + query['body'] + '"',
                       'expect_more_data': False}
             payload.append(result)
 
         for entry in payload:
-            self.send_message(json.dumps(entry), query['addr'], query['conn'], log_tag=entry['method'])
+            self.sendMessage(json.dumps(entry), query['addr'], query['conn'], log_tag=entry['method'])
 
     def executeGetEcho(self, query):
         """
@@ -192,55 +204,67 @@ class ExecutorThread(threading.Thread):
         """
         result = {'id': query['id'],
                   'method': query['type'],
-                  'error': app.RESULT_OK,
+                  'error': self.app.RESULT_OK,
                   'message': 'OK',
                   'expect_more_data': False,
                   'data': query['body']}
         result_json = json.dumps(result)
-        self.send_message(result_json, query['addr'], query['conn'], log_tag='getEcho')
+        self.sendMessage(result_json, query['addr'], query['conn'], log_tag='getEcho')
 
     def executeGetStopInfo(self, query):
-        app.logger.debug("Executing " + "getStopInfo" + " query:"
-                         " ID=" + str(query['id']) +
-                         " Body=" + str(query['body']))
-        self._executeGetInfo(query)
+        """
+        Execute getStopInfo query
+        :param query: internal query structure
+        :return: nothing
+        """
+        self.app.log.debug("Executing " + "getStopInfo" + " query:"
+                              " ID=" + str(query['id']) +
+                              " Body=" + str(query['body']))
+        self.executeGetInfo(query)
 
     def executeGetRouteInfo(self, query):
-        app.logger.debug("Executing " + "getRouteInfo" + " query:"
-                         " ID=" + str(query['id']) +
-                         " URL=" + str(query['body']))
-        self._executeGetInfo(query)
+        """
+        Execute getRouteInfo query
+        :param query: internal query structure
+        :return: nothing
+        """
+        self.app.log.debug("Executing " + "getRouteInfo" + " query:"
+                              " ID=" + str(query['id']) +
+                              " URL=" + str(query['body']))
+        self.executeGetInfo(query)
 
     def executeGetVehiclesInfo(self, query):
-        app.logger.debug("Executing " + "getVehiclesInfo" + " query:"
-                         " ID=" + str(query['id']) +
-                         " URL=" + str(query['body']))
-        self._executeGetInfo(query)
+        """
+        Execute getVehiclesInfo query
+        :param query: internal query structure
+        :return: nothing
+        """
+        self.app.log.debug("Executing " + "getVehiclesInfo" + " query:"
+                              " ID=" + str(query['id']) +
+                              " URL=" + str(query['body']))
+        self.executeGetInfo(query)
 
     def executeGetVehiclesInfoWithRegion(self, query):
-        app.logger.debug("Executing " + "getVehiclesInfoWithRegion" + " query:"
-                         " ID=" + str(query['id']) +
-                         " URL=" + str(query['body']))
-        self._executeGetInfo(query)
+        """
+        Execute getVehiclesInfoWithRegion query
+        :param query: internal query structure
+        :return: nothing
+        """
+        self.app.log.debug("Executing " + "getVehiclesInfoWithRegion" + " query:"
+                              " ID=" + str(query['id']) +
+                              " URL=" + str(query['body']))
+        self.executeGetInfo(query)
 
     def executeGetAllInfo(self, query):
-        app.logger.debug("Executing " + "getAllInfo" + " query:" +
-                         " ID=" + str(query['id']) +
-                         " URL=" + str(query['body']))
-        self._executeGetInfo(query)
-
-    def executeWatchVehiclesInfo(self, query):
-        app.logger.debug("Executing " + "watchVehiclesInfo" + " query:" +
-                         " ID=" + str(query['id']) +
-                         " URL=" + str(query['body']))
-        self._executeGetInfo(query)
-
-        while app.watch_lock:
-            for i in range(0, self.watch_wait_time):
-                time.sleep(1)
-
-            app.core.network_json = app.core.getChromiumNetworkingData()
-
+        """
+        Execute getAllInfo query
+        :param query: internal query structure
+        :return: nothing
+        """
+        self.app.log.debug("Executing " + "getAllInfo" + " query:" +
+                              " ID=" + str(query['id']) +
+                              " URL=" + str(query['body']))
+        self.executeGetInfo(query)
 
     def executeQuery(self, query):
         """
@@ -266,9 +290,6 @@ class ExecutorThread(threading.Thread):
         if query['type'] == 'getAllInfo':
             self.executeGetAllInfo(query)
             return
-        if query['type'] == 'watchVehiclesInfo':
-            self.executeWatchVehiclesInfo(query)
-            return
 
     def performQueryExtractionAndExecution(self):
         """
@@ -279,35 +300,35 @@ class ExecutorThread(threading.Thread):
         query = None
 
         # Get the query from Query Queue
-        app.queue_lock.acquire()
-        query_len = len(app.query_queue)
+        self.app.queue_lock.acquire()
+        query_len = len(self.app.query_queue)
         if query_len > 0:
-            query = app.query_queue[0]
-        app.queue_lock.release()
+            query = self.app.query_queue[0]
+        self.app.queue_lock.release()
 
         # Executing the query
         if query is not None:
             self.executeQuery(query)
 
         # Removing executed query from the Query Queue
-        app.queue_lock.acquire()
+        self.app.queue_lock.acquire()
         if query_len > 0:
-            app.query_queue.popleft()
-        app.queue_lock.release()
+            self.app.query_queue.popleft()
+        self.app.queue_lock.release()
 
     def run(self):
-        app.logger.debug("Executor thread started, wait time between queries is "+str(self.wait_time)+" secs.")
-        while app.is_running:
+        self.app.log.debug("Executor thread started, wait time between queries is "+str(self.wait_time)+" secs.")
+        while self.app.is_running:
             # Extracting and executing extraction and execution of query from Query Queue
             self.performQueryExtractionAndExecution()
 
             # Waiting for some time before next query is extracted and executed
-            for i in range(0, self.wait_time):
-                if app.is_running:
+            for _ in range(0, self.wait_time):
+                if self.app.is_running:
                     time.sleep(1)
                 else:
                     break
-        app.logger.debug("Executor thread stopped.")
+        self.app.log.debug("Executor thread stopped.")
 # -------------------------------------------------------------------------------------------------------------------- #
 
 
@@ -323,19 +344,22 @@ class Application:
 
     def __init__(self):
         setproctitle.setproctitle('transport_proxy')
-        "If set to false, the server will begin to terminate itself"
-        self.is_running = True
+
+        self.is_running = True  # If set to false, the server will begin to terminate itself
 
         # Listen address
         self.host = '0.0.0.0'
         # Listen port
         self.port = 25555
 
+        # Executor thread
+        self.executor_thread = None
+
         # List of clients currently connected to the server
         self.listeners = defaultdict()
 
         # Logger
-        self.logger = Logger(Logger.DEBUG)
+        self.log = Logger(Logger.DEBUG)
 
         # Queue lock
         self.queue_lock = threading.Lock()
@@ -349,41 +373,47 @@ class Application:
         # Server will run in single thread, the deque is to store incoming queries.
         self.query_queue = deque()
 
-    def sigint_handler(self, _signal, _time):
+    def sigintHandler(self, _signal, _time):
         """
         SIGINT signal handler
         :param _signal: signal
         :param _time: time
         :return: nothing
         """
-        self.logger.info("SIGINT received! Terminating the program...")
+        self.log.info("SIGINT received! Terminating the program...")
         self.watch_lock = False
         self.is_running = False
-        self.logger.info("Waiting for threads to terminate...")
+        self.log.info("Waiting for threads to terminate...")
         copy_listeners = self.listeners.copy()
+        # pylint: disable = W0612
         for key, listener in copy_listeners.items():
             listener.join()
+        # pylint: enable = W0612
         if self.executor_thread is not None:
             self.executor_thread.join()
 
     def listen(self):
+        """
+        Start listening to incoming connections. Each new accepted connection will create a new ListenerThread.
+        :return: nothing
+        """
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         sock.settimeout(5)
-        self.logger.debug("Binding socket...")
+        self.log.debug("Binding socket...")
         try:
             sock.bind((self.host, self.port))
         except socket.error:
             return 1
 
-        self.logger.info("Listening for incoming connections.")
-        self.logger.info("Host: " + str(self.host) + " , Port: " + str(self.port))
+        self.log.info("Listening for incoming connections.")
+        self.log.info("Host: " + str(self.host) + " , Port: " + str(self.port))
         sock.listen(1)
 
         while self.is_running:
             # Checking if Executor Thread is dead.
             if not self.executor_thread.isAlive():
-                self.logger.error("Executor thread is dead. Terminating the program.")
+                self.log.error("Executor thread is dead. Terminating the program.")
                 self.is_running = False
                 break
 
@@ -402,15 +432,32 @@ class Application:
         return 0
 
     def getCurrentConnections(self):
+        """
+        Get current connections
+        :return: JSON containing list of current connections
+                 {"ip_address": "string", "port": "integer"}
+                   ip_address - IP address of the client
+                   port       - port of the client
+        """
         data = []
+        # pylint: disable = W0612
         for key, value in self.listeners.items():
             entry = {"ip_address" : key[0], "port" : key[1]}
             data.append(entry)
+        # pylint: enable = W0612
         json_data = json.dumps(data)
 
         return json_data
 
     def getCurrentQueue(self):
+        """
+        Get current Query Queue.
+        :return: JSON containing list of elements in Query Queue
+                 {"type": "string", "id": "string", "query": "string"}
+                   type  - type of query (getStopInfo, getVehiclesInfo etc.)
+                   id    - ID of query, string value, passed from the client.
+                   query - actual query string
+        """
         data = []
 
         self.queue_lock.acquire()
@@ -424,28 +471,35 @@ class Application:
         return json_data
 
     def handleWatchLock(self, conn):
-        if app.watch_lock:
+        """
+        Send a message back to the client if new query arrived while WatchLock is engaged.
+        Was supposed to use with watch... methods, abandoned for now until and if watch... methods
+        are re-implemented again.
+        :param conn: connection
+        :return: nothing
+        """
+        if self.watch_lock:
             response = {"id": self.query_id,
                         "response": "ERROR",
                         "message": "Watch task is planned, no queries accepted until cancelled!",
-            }
+                       }
             response_json = json.dumps(response)
             conn.send(bytes(response_json + '\n' + '\0', 'utf-8'))
 
-    def split_query(self, query):
+    @staticmethod
+    def splitQuery(query):
         """
         Get ID from getXXXInfo?id=?YYYY?... requests
         :param query: the query
         :return: query_type, the id value from the query, body of the query
         """
-        result = re.match("(.*?)\?id=(.*?)\?(.*)", query)
+        result = re.match(r'(.*?)\?id=(.*?)\?(.*)', query)
         query_type = ''
         query_id = ''
-        query_body=''
+        query_body = ''
         if result is not None:
-                query_type, query_id, query_body = result.group(1), result.group(2), result.group(3)
+            query_type, query_id, query_body = result.group(1), result.group(2), result.group(3)
         return query_type, query_id, query_body
-
 
     def processGetInfo(self, query, addr, conn, set_watch_lock=False):
         """
@@ -456,22 +510,22 @@ class Application:
         :param set_watch_lock:
         :return:
         """
-        if app.watch_lock:
+        if self.watch_lock:
             self.handleWatchLock(conn)
         else:
             if set_watch_lock:
                 self.watch_lock = True
 
-            query_type, query_id, query_body = self.split_query(query)
+            query_type, query_id, query_body = self.splitQuery(query)
 
             self.queue_lock.acquire()
-            app.query_queue.append({'type': query_type,
-                                    'id': query_id,
-                                    'body': query_body,
-                                    'addr': addr,
-                                    'conn': conn}
+            self.query_queue.append({'type': query_type,
+                                     'id': query_id,
+                                     'body': query_body,
+                                     'addr': addr,
+                                     'conn': conn}
                                    )
-            queue_position = len(app.query_queue) - 1
+            queue_position = len(self.query_queue) - 1
             self.queue_lock.release()
 
             response = {'id': query_id,
@@ -481,52 +535,42 @@ class Application:
             conn.send(bytes(response_json + '\n' + '\0', 'utf-8'))
 
     def processGetStopInfo(self, query, addr, conn):
+        """Process getStopInfo query """
         self.processGetInfo(query, addr, conn)
 
     def processGetVehiclesInfo(self, query, addr, conn):
+        """Process geVehiclesInfo query """
         self.processGetInfo(query, addr, conn)
 
     def processGetVehiclesInfoWithRegion(self, query, addr, conn):
+        """Process getVehiclesInfoWithRegion query """
         self.processGetInfo(query, addr, conn)
 
     def processGetRouteInfo(self, query, addr, conn):
+        """Process getRouteInfo query """
         self.processGetInfo(query, addr, conn)
 
     def processGetAllInfo(self, query, addr, conn):
+        """Process getAllInfo query """
         self.processGetInfo(query, addr, conn)
 
-    def processWatchVehiclesInfo(self, query, addr, conn):
-        app.logger.info("Watch event (watchVehiclesInfo) requested!")
-        app.logger.warning("All subsequent queries are blocked until watch query is cancelled!")
-        # Add watch event to Query Queue
-        self.processGetInfo(query, addr, conn, set_watch_lock=True)
-
-    def processCancelWatch(self, query, addr, conn):
-        app.logger.info("Watch task cancelled, resuming normal operations")
-        app.watch_lock = False
-        response = {"response": "OK", "message": "Watch task cancelled."}
-        response_json = json.dumps(response)
-        conn.send(bytes(response_json + '\n' + '\0', 'utf-8'))
-
     def processEcho(self, query, addr, conn):
+        """Process getEcho query"""
         # If blocked by Watch Lock
-        if app.watch_lock:
+        if self.watch_lock:
             self.handleWatchLock(conn)
         else:
             self.processGetInfo(query, addr, conn)
 
     def processGetCurrentQueue(self, conn):
-        """
-        Processing of "getCurrentQueue" request.
-        :param conn: connection to send info back
-        :return: None
-        """
-        current_queue = app.getCurrentQueue()
+        """Process getCurrentQueue"""
+        current_queue = self.getCurrentQueue()
         queue_json = json.loads(current_queue)
         response_json = json.dumps(queue_json)
         conn.send(bytes(response_json + '\n' + '\0', 'utf-8'))
 
     def processUnknownQuery(self, conn):
+        """Process unknown query"""
         response = {"response": "ERROR", "message": "Unknown query"}
         response_json = json.dumps(response)
         conn.send(bytes(response_json + '\n' + '\0', 'utf-8'))
@@ -537,49 +581,29 @@ class Application:
         :return: exit code
         """
 
-        self.logger.info("YTPS - Yandex Transport Proxy Server - starting up...")
+        self.log.info("YTPS - Yandex Transport Proxy Server - starting up...")
 
-        signal.signal(signal.SIGINT, self.sigint_handler)
+        signal.signal(signal.SIGINT, self.sigintHandler)
 
         # Starting query executor thread
         self.executor_thread = ExecutorThread(self)
         self.executor_thread.start()
 
-        self.core = YandexTransportCore()
-        self.logger.info("Starting ChromeDriver...")
-        self.core.startWebdriver()
-        self.logger.info("ChromeDriver started successfully!")
+        # Calling Yandex Transport API Core
+        core = YandexTransportCore()
+        self.log.info("Starting ChromeDriver...")
+        core.startWebdriver()
+        self.log.info("ChromeDriver started successfully!")
 
-        # Getting stop info example
-        """
-        res = core.getStopInfo(url="https://yandex.ru/maps/213/moscow/?"
-                                   "ll=37.579537,C55.821644&"
-                                   "masstransit[stopId]=stop__9639753&"
-                                   "mode=stop&"
-                                   "z=16")
-        # Printing the output
-        print(json.dumps(res, sort_keys=True, indent=4, separators=(',', ': ')))
-        time.sleep(5)
-
-        # Getting vehicles info example
-        res = core.getVehiclesInfo(url="https://yandex.ru/maps/213/moscow/?"
-                                       "ll=37.589633%2C55.835559&"
-                                       "masstransit[routeId]=213_56_trolleybus_mosgortrans&"
-                                       "masstransit[stopId]=stop__9639753&"
-                                       "masstransit[threadId]=213A_56_trolleybus_mosgortrans&"
-                                       "mode=stop&"
-                                       "z=14")
-        # Printing the output
-        print(json.dumps(res, sort_keys=True, indent=4, separators=(',', ': ')))
-        """
+        # Start the process of listening and accepting incoming connections.
         self.listen()
 
-        self.core.stopWebdriver()
+        core.stopWebdriver()
 
-        self.logger.info("YTPS - Yandex Transport Proxy Server - terminated!")
+        self.log.info("YTPS - Yandex Transport Proxy Server - terminated!")
 
 # -------------------------------------------------------------------------------------------------------------------- #
 if __name__ == '__main__':
-    app = Application()
-    app.run()
+    application = Application()
+    application.run()
     sys.exit(0)

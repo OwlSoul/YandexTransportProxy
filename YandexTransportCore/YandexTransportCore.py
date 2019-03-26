@@ -21,6 +21,9 @@ from bs4 import BeautifulSoup
 
 
 class YandexTransportCore:
+    """
+    YandexTransportCore class, implements core functions of access to Yandex Transport/Masstransit API
+    """
     # Error codes
     RESULT_OK = 0
     RESULT_WEBDRIVER_NOT_RUNNING = 1
@@ -76,6 +79,10 @@ class YandexTransportCore:
         return method
 
     def getChromiumNetworkingData(self):
+        """
+        Gets "Network" data from Developer tools of Chromium Browser
+        :return: JSON containing data from "Network" tab
+        """
         # Script to get Network data from Developer tools, huge thanks to this link:
         # https://stackoverflow.com/questions/20401264/how-to-access-network-panel-on-google-chrome-developer-tools-with-selenium
         script = "var performance = window.performance || window.mozPerformance || window.msPerformance || " \
@@ -89,7 +96,7 @@ class YandexTransportCore:
 
     # ----                               MASTER FUNCTION TO GET YANDEX API DATA                                   ---- #
 
-    def _getYandexJSON(self, url, api_method):
+    def getYandexJSON(self, url, api_method):
         """
         Universal method to get Yandex JSON results.
         :param url: initial url, get it by clicking on the route or stop
@@ -107,12 +114,12 @@ class YandexTransportCore:
             print(e)
             return None, self.RESULT_GET_ERROR
 
-        self.network_json = self.getChromiumNetworkingData()
+        network_json = self.getChromiumNetworkingData()
 
         # Loading Network Data to JSON
         try:
-            network_data = json.loads(self.network_json, encoding='utf-8')
-        except Exception as e:
+            network_data = json.loads(network_json, encoding='utf-8')
+        except ValueError as e:
             print(e)
             return result_list, self.RESULT_NETWORK_PARSE_ERROR
 
@@ -133,7 +140,7 @@ class YandexTransportCore:
                         last_query.append({"url": entry['name'], "method": method})
 
         # Getting last API query results from cache by executing it again in the browser
-        if len(last_query) > 0:
+        if last_query:                    # Same meaning as in "if len(last_query) > 0:"
             for query in last_query:
                 # Getting the webpage based on URL
                 try:
@@ -159,14 +166,14 @@ class YandexTransportCore:
                                 "method": self.yandexAPItoLocalAPI(query['method']),
                                 "error": "OK",
                                 "data": returned_json}
-                    except Exception as e:
+                    except ValueError as e:
                         data = {"url": query['url'],
                                 "method": self.yandexAPItoLocalAPI(query['method']),
                                 "error": "Failed to parse JSON"}
                 else:
-                    data={"url": query['url'],
-                          "method": self.yandexAPItoLocalAPI(query['method']),
-                          "error": "Failed to parse body of the response"}
+                    data = {"url": query['url'],
+                            "method": self.yandexAPItoLocalAPI(query['method']),
+                            "error": "Failed to parse body of the response"}
 
                 result_list.append(data)
 
@@ -183,7 +190,7 @@ class YandexTransportCore:
         :param url: url of the stop (the URL you get when you click on the stop in the browser)
         :return: array of huge json data, error code
         """
-        return self._getYandexJSON(url, api_method=("maps/api/masstransit/getStopInfo",))
+        return self.getYandexJSON(url, api_method=("maps/api/masstransit/getStopInfo",))
 
     def getVehiclesInfo(self, url):
         """
@@ -191,7 +198,7 @@ class YandexTransportCore:
         :param url: url of the stop (the URL you get when you click on the stop in the browser)
         :return: array of huge json data, error code
         """
-        return self._getYandexJSON(url, api_method=("maps/api/masstransit/getVehiclesInfo",))
+        return self.getYandexJSON(url, api_method=("maps/api/masstransit/getVehiclesInfo",))
 
     def getVehiclesInfoWithRegion(self, url):
         """
@@ -199,7 +206,7 @@ class YandexTransportCore:
         :param url: url of the stop (the URL you get when you click on the stop in the browser)
         :return: array of huge json data, error code
         """
-        return self._getYandexJSON(url, api_method=("maps/api/masstransit/getVehiclesInfoWithRegion",))
+        return self.getYandexJSON(url, api_method=("maps/api/masstransit/getVehiclesInfoWithRegion",))
 
     def getRouteInfo(self, url):
         """
@@ -207,7 +214,7 @@ class YandexTransportCore:
         :param url: url of the stop (the URL you get when you click on the stop in the browser)
         :return: array of huge json data, error code
         """
-        return self._getYandexJSON(url, api_method=("maps/api/masstransit/getRouteInfo",))
+        return self.getYandexJSON(url, api_method=("maps/api/masstransit/getRouteInfo",))
 
     def getAllInfo(self, url):
         """
@@ -215,10 +222,10 @@ class YandexTransportCore:
         :param url:
         :return:
         """
-        return self._getYandexJSON(url, api_method=("maps/api/masstransit/getRouteInfo",
-                                                    "maps/api/masstransit/getStopInfo",
-                                                    "maps/api/masstransit/getVehiclesInfo",
-                                                    "maps/api/masstransit/getVehiclesInfoWithRegion"))
+        return self.getYandexJSON(url, api_method=("maps/api/masstransit/getRouteInfo",
+                                                   "maps/api/masstransit/getStopInfo",
+                                                   "maps/api/masstransit/getVehiclesInfo",
+                                                   "maps/api/masstransit/getVehiclesInfoWithRegion"))
 
 
 if __name__ == '__main__':
