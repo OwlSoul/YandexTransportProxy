@@ -64,8 +64,7 @@ RUN useradd transport_proxy --home /home/transport_proxy --shell /bin/bash
 RUN mkdir -p /home/transport_proxy
 
 # Copying the project
-ADD YandexTransportCore.py /home/transport_proxy
-ADD Logger.py /home/transport_proxy
+ADD YandexTransportCore /home/transport_proxy
 ADD transport_proxy.py /home/transport_proxy
 
 # Setting permissions
