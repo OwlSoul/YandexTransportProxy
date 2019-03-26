@@ -102,6 +102,10 @@ class ExecutorThread(threading.Thread):
     def __init__(self, app):
         super().__init__()
 
+        # Flag to check if exeturoe thread is running.
+        # In case it fails - program should terminate / Executor Thread should restart.
+        # Let's stick with "terminate" scenario for now
+
         # Time to wait between queries
         self.wait_time = 5
         # Time to wait between watch updates
@@ -377,6 +381,12 @@ class Application:
         sock.listen(1)
 
         while self.is_running:
+            # Checking if Executor Thread is dead.
+            if not self.executor_thread.isAlive():
+                self.logger.error("Executor thread is dead. Terminating the program.")
+                self.is_running = False
+                break
+
             try:
                 conn, addr = sock.accept()
             except socket.timeout:

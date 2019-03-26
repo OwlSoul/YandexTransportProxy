@@ -19,6 +19,7 @@ import selenium
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
+
 class YandexTransportCore:
     # Error codes
     RESULT_OK = 0
@@ -130,9 +131,6 @@ class YandexTransportCore:
                     res = re.match(".*" + method + ".*", str(entry['name']))
                     if res is not None:
                         last_query.append({"url": entry['name'], "method": method})
-
-        #for query in last_query:
-        #    print(query)
 
         # Getting last API query results from cache by executing it again in the browser
         if len(last_query) > 0:
