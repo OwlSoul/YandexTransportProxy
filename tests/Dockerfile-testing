@@ -82,4 +82,4 @@ WORKDIR /home/transport_proxy
 # Setting up entry point for this container, it's designed to run as an executable.
 # ENTRYPOINT HERE
 USER transport_proxy:transport_proxy
-CMD /bin/bash -c "/home/transport_proxy/execute_tests.sh"
+CMD /home/transport_proxy/execute_tests.sh
