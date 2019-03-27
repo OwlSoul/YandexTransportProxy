@@ -15,4 +15,4 @@ def test_initial():
     """
     Most basic test to ensure pytest DEFINITELY works
     """
-    assert True == True
+    assert True == False
