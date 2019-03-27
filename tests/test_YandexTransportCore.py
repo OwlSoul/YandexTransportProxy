@@ -78,6 +78,8 @@ def test_getChromiumNetworkingData():
 
     The test picks random URL from stop_urlsst, performs "GET" operation, then checks if actual data was returned and will
     try to wind the URL query.
+
+    # Getting constant "Chrome Not Reacheable" error here if run in Docker container.
     """
     core = YandexTransportCore()
     core.startWebdriver()
@@ -105,13 +107,13 @@ def test_getYandexJSON():
     core = YandexTransportCore()
     core.startWebdriver()
 
-    # Fist test, None url, existing method
+    # URL is None, existing method
     url = None
     method = "maps/api/masstransit/getRouteInfo"
     result, error = core.getYandexJSON(url, method)
     assert (result is None) and (error == YandexTransportCore.RESULT_GET_ERROR)
 
-    # Fist test, url is gibberish, existing method
+    # URL is gibberish, existing method
     url = 'abrabgarilsitlsdxyb4396t6'
     method = "maps/api/masstransit/getRouteInfo"
     result, error = core.getYandexJSON(url, method)

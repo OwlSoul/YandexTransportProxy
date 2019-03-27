@@ -44,6 +44,10 @@ RUN pip3 install psycopg2-binary \
                  beautifulsoup4 \
                  lxml
 
+# Install pytest, separately, so previous step will be cached
+RUN pip3 install pytest \
+                 pytest-progress
+
 # Dealing with goddamn locales
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     locale-gen
@@ -64,8 +68,12 @@ RUN useradd transport_proxy --home /home/transport_proxy --shell /bin/bash
 RUN mkdir -p /home/transport_proxy
 
 # Copying the project
-ADD YandexTransportCore/*.py /home/transport_proxy/YandexTransportCore/
+ADD YandexTransportCore/ /home/transport_proxy/YandexTransportCore
 ADD transport_proxy.py /home/transport_proxy
+
+# Copying tests
+ADD tests/test* /home/transport_proxy/tests/
+ADD execute_tests.sh /home/transport_proxy
 
 # Setting permissions
 RUN chown -R transport_proxy:transport_proxy /home/transport_proxy

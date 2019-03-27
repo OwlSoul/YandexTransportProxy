@@ -352,6 +352,9 @@ class Application:
         # Listen port
         self.port = 25555
 
+        # Yandex Transport API Core
+        self.core = None
+
         # Executor thread
         self.executor_thread = None
 
@@ -590,15 +593,15 @@ class Application:
         self.executor_thread.start()
 
         # Calling Yandex Transport API Core
-        core = YandexTransportCore()
+        self.core = YandexTransportCore()
         self.log.info("Starting ChromeDriver...")
-        core.startWebdriver()
+        self.core.startWebdriver()
         self.log.info("ChromeDriver started successfully!")
 
         # Start the process of listening and accepting incoming connections.
         self.listen()
 
-        core.stopWebdriver()
+        self.core.stopWebdriver()
 
         self.log.info("YTPS - Yandex Transport Proxy Server - terminated!")
 

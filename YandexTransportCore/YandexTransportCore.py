@@ -51,7 +51,10 @@ class YandexTransportCore:
         chrome_options.add_argument("--incognito")
         # These two are basically needed for Chromium to run inside docker container.
         chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--disable-dev-shm-usage')
+        # Next line causes selenium error WebDriverException: Message: chrome not reachable" inside Docker container.
+        # Transport Proxy seems to work without it, --no-sandbox only is enough.
+        # Left here as s reminder
+        # chrome_options.add_argument('--disable-dev-shm-usage')
         self.driver = webdriver.Chrome(self.chrome_driver_location, options=chrome_options)
 
     def stopWebdriver(self):
