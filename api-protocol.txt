@@ -22,6 +22,8 @@ getVehiclesInfoWithRegion?id=...?... - new Yandex method to get vehicles info.
 getRouteInfo?id=...?...              - add getRouteInfo to Query Queue, paster Yandex URL after "?"
                                        will return {"response": "OK", "queue_position":"size of the queue"} if successful
 
+getLayerRegions?id=...?...           - no idea what this thing does.
+
 getAllInfo?id=...?                   - special command, also requires Yandex URL after ?, will return all "get...Info"
                                        responses it will find, like getRouteInfo and getVehicle info are returned by
                                        clicking on the transit stop, using the same URL.

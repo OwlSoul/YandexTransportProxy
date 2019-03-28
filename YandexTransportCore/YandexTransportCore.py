@@ -79,6 +79,9 @@ class YandexTransportCore:
             return 'getVehiclesInfo'
         if method == "maps/api/masstransit/getVehiclesInfoWithRegion":
             return 'getVehiclesInfoWithRegion'
+        if method == "maps/api/masstransit/getLayerRegions":
+            return 'getLayerRegions'
+
         return method
 
     def getChromiumNetworkingData(self):
@@ -219,6 +222,14 @@ class YandexTransportCore:
         """
         return self.getYandexJSON(url, api_method=("maps/api/masstransit/getRouteInfo",))
 
+    def getLayerRegions(self, url):
+        """
+        No idea what this thing does
+        :param url: url of the stop (the URL you get when you click on the stop in the browser)
+        :return: array of huge json data, error code
+        """
+        return self.getYandexJSON(url, api_method=("maps/api/masstransit/getLayerRegions",))
+
     def getAllInfo(self, url):
         """
         Getting basically all Yandex Masstransit API JSON results related to requested URL
@@ -228,7 +239,9 @@ class YandexTransportCore:
         return self.getYandexJSON(url, api_method=("maps/api/masstransit/getRouteInfo",
                                                    "maps/api/masstransit/getStopInfo",
                                                    "maps/api/masstransit/getVehiclesInfo",
-                                                   "maps/api/masstransit/getVehiclesInfoWithRegion"))
+                                                   "maps/api/masstransit/getVehiclesInfoWithRegion",
+                                                   "maps/api/masstransit/getLayerRegions")
+                                  )
 
 
 if __name__ == '__main__':

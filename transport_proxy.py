@@ -81,6 +81,9 @@ class ListenerThread(threading.Thread):
                     elif query.startswith('getRouteInfo?'):
                         self.app.processGetRouteInfo(query, self.addr, self.conn)
 
+                    elif query.startswith('getLayerRegions?'):
+                        self.app.processGetRouteInfo(query, self.addr, self.conn)
+
                     elif query.startswith('getAllInfo?'):
                         self.app.processGetAllInfo(query, self.addr, self.conn)
 
@@ -150,6 +153,8 @@ class ExecutorThread(threading.Thread):
             data, error = self.app.core.getVehiclesInfo(url=query['body'])
         elif query['type'] == 'getVehiclesInfoWithRegion':
             data, error = self.app.core.getVehiclesInfoWithRegion(url=query['body'])
+        elif query['type'] == 'getLayerRegions':
+            data, error = self.app.core.getLayerRegions(url=query['body'])
         elif query['type'] == 'getAllInfo':
             data, error = self.app.core.getAllInfo(url=query['body'])
         else:
@@ -255,6 +260,17 @@ class ExecutorThread(threading.Thread):
                               " URL=" + str(query['body']))
         self.executeGetInfo(query)
 
+    def executeGetLayerRegions(self, query):
+        """
+        Execute getLayerRegions query
+        :param query: internal query structure
+        :return: nothing
+        """
+        self.app.log.debug("Executing " + "getLayerRegions" + " query:"
+                              " ID=" + str(query['id']) +
+                              " URL=" + str(query['body']))
+        self.executeGetInfo(query)
+
     def executeGetAllInfo(self, query):
         """
         Execute getAllInfo query
@@ -286,6 +302,9 @@ class ExecutorThread(threading.Thread):
             return
         if query['type'] == 'getVehiclesInfoWithRegion':
             self.executeGetVehiclesInfoWithRegion(query)
+            return
+        if query['type'] == 'getLayerRegions':
+            self.executeGetLayerRegions(query)
             return
         if query['type'] == 'getAllInfo':
             self.executeGetAllInfo(query)
@@ -551,6 +570,10 @@ class Application:
 
     def processGetRouteInfo(self, query, addr, conn):
         """Process getRouteInfo query """
+        self.processGetInfo(query, addr, conn)
+
+    def processGetLayerRegions(self, query, addr, conn):
+        """Process getLayerRegions query """
         self.processGetInfo(query, addr, conn)
 
     def processGetAllInfo(self, query, addr, conn):
