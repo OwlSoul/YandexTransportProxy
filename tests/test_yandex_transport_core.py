@@ -41,8 +41,8 @@ def test_initial():
     """
     assert True == True
 
-# ---------------------------------------------   startWebdriver    -------------------------------------------------- #
-def test_startWebdriver_invalid_webdriver_location():
+# ---------------------------------------------   start_webdriver    -------------------------------------------------- #
+def test_start_webdriver_invalid_webdriver_location():
     """
     Start ChromeDriver with invalid webdriver location supplied.
     Should raise selenium.common.exceptions.WebDriverException
@@ -51,27 +51,27 @@ def test_startWebdriver_invalid_webdriver_location():
     core = YandexTransportCore()
     core.chrome_driver_location = '/opt/usr/bin/this-dir-does-not-exist'
     with pytest.raises(selenium.common.exceptions.WebDriverException):
-        result = core.startWebdriver()
+        result = core.start_webdriver()
 
 
 # ------------------------------------------   yandexAPIToLocalAPI    ------------------------------------------------ #
-def test_yandexAPIToLocalAPI():
+def test_yandex_api_to_local_api():
     """
     Test Yandex API to Local API conversions.
     """
-    assert YandexTransportCore.yandexAPItoLocalAPI('maps/api/masstransit/getStopInfo') == 'getStopInfo'
-    assert YandexTransportCore.yandexAPItoLocalAPI('maps/api/masstransit/getRouteInfo') == 'getRouteInfo'
-    assert YandexTransportCore.yandexAPItoLocalAPI('maps/api/masstransit/getVehiclesInfo') == 'getVehiclesInfo'
-    assert YandexTransportCore.yandexAPItoLocalAPI('maps/api/masstransit/getVehiclesInfoWithRegion') == \
+    assert YandexTransportCore.yandex_api_to_local_api('maps/api/masstransit/getStopInfo') == 'getStopInfo'
+    assert YandexTransportCore.yandex_api_to_local_api('maps/api/masstransit/getRouteInfo') == 'getRouteInfo'
+    assert YandexTransportCore.yandex_api_to_local_api('maps/api/masstransit/getVehiclesInfo') == 'getVehiclesInfo'
+    assert YandexTransportCore.yandex_api_to_local_api('maps/api/masstransit/getVehiclesInfoWithRegion') == \
            'getVehiclesInfoWithRegion'
-    assert YandexTransportCore.yandexAPItoLocalAPI('maps/api/masstransit/getLayerRegions') == 'getLayerRegions'
+    assert YandexTransportCore.yandex_api_to_local_api('maps/api/masstransit/getLayerRegions') == 'getLayerRegions'
     # Unknown API method, should return the input
-    assert YandexTransportCore.yandexAPItoLocalAPI('maps/api/masstransit/getNonexistent') == \
-                                                   'maps/api/masstransit/getNonexistent'
+    assert YandexTransportCore.yandex_api_to_local_api('maps/api/masstransit/getNonExistent') == \
+                                                   'maps/api/masstransit/getNonExistent'
 
 
-# ------------------------------------------   getChromiumNetworkingData    ------------------------------------------ #
-def test_getChromiumNetworkingData():
+# ------------------------------------------   get_chromium_networking_data    ------------------------------------------ #
+def test_get_chromium_networking_data():
     """
     Test getting Chromium Networking Data.
     Basically this will test "Stack Overflow" script to get Networking Data from Chromium, it is expected for this
@@ -83,12 +83,12 @@ def test_getChromiumNetworkingData():
     # Getting constant "Chrome Not Reacheable" error here if run in Docker container.
     """
     core = YandexTransportCore()
-    core.startWebdriver()
+    core.start_webdriver()
     url = stop_urls[random.randint(0, len(stop_urls) - 1)]
     print("Stop name:", url['url'])
     core.driver.get(url['url'])
     # Getting Chromium Network Data
-    data = json.loads(core.getChromiumNetworkingData())
+    data = json.loads(core.get_chromium_networking_data())
     found_input_url = False
     for entry in data:
         if entry['name'] == url['url']:
@@ -99,23 +99,23 @@ def test_getChromiumNetworkingData():
     assert found_input_url
     wait_random_time()
 
-# ------------------------------------------------- getYandexJSON --------------------------------------------------- #
-def test_getYandexJSON():
+# ------------------------------------------------- _get_yandex_json --------------------------------------------------- #
+def test_get_yandex_json():
     """
-    Test "getYandexJSON" function, should not break no matter what is supplied.
+    Test "_get_yandex_json" function, should not break no matter what is supplied.
     :return:
     """
     core = YandexTransportCore()
-    core.startWebdriver()
+    core.start_webdriver()
 
     # URL is None, existing method
     url = None
     method = "maps/api/masstransit/getRouteInfo"
-    result, error = core.getYandexJSON(url, method)
+    result, error = core._get_yandex_json(url, method)
     assert (result is None) and (error == YandexTransportCore.RESULT_GET_ERROR)
 
     # URL is gibberish, existing method
     url = 'abrabgarilsitlsdxyb4396t6'
     method = "maps/api/masstransit/getRouteInfo"
-    result, error = core.getYandexJSON(url, method)
+    result, error = core._get_yandex_json(url, method)
     assert (result is None) and (error == YandexTransportCore.RESULT_GET_ERROR)

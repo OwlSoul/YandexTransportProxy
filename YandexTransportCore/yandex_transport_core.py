@@ -7,10 +7,10 @@ It uses Selenium with ChromeDriver and gets Yandex Transport API JSON responses.
 
 # NOTE: This project uses camelCase for function names. While PEP8 recommends using snake_case for these,
 #       the project in fact implements the "quasi-API" for Yandex Masstransit, where names are in camelCase,
-#       for example, getStopInfo. Correct naming for this function according to PEP8 would be get_stop_info.
+#       for example, get_stop_info. Correct naming for this function according to PEP8 would be get_stop_info.
 #       Thus, the desision to use camelCase was made. In fact, there are a bunch of python projects which use
 #       camelCase, like Robot Operating System.
-#       I also personally find camelCase more pretier than the snake_case.
+#       I also personally find camelCase more prettier than the snake_case.
 
 import re
 import io
@@ -41,7 +41,7 @@ class YandexTransportCore:
         # ChromeDriver location. They changed it a lot, by the way.
         self.chrome_driver_location = "/usr/bin/chromedriver"
 
-    def startWebdriver(self):
+    def start_webdriver(self):
         """
         Start Chromium webdriver
         :return: nothing
@@ -57,26 +57,26 @@ class YandexTransportCore:
         # chrome_options.add_argument('--disable-dev-shm-usage')
         self.driver = webdriver.Chrome(self.chrome_driver_location, options=chrome_options)
 
-    def stopWebdriver(self):
+    def stop_webdriver(self):
         """
         Stop Chromium Webdriver
         :return: nothing
         """
         self.driver.quit()
 
-    def restartWebdriver(self):
+    def restart_webdriver(self):
         """
         Restart Chromium Webdriver. Good idea to do this sometimes, like Garbage Collection.
         :return: nothing
         """
-        self.stopWebdriver()
-        self.startWebdriver()
+        self.stop_webdriver()
+        self.start_webdriver()
 
     @staticmethod
-    def yandexAPItoLocalAPI(method):
+    def yandex_api_to_local_api(method):
         """
         Converts Yandex API to local API,
-        :param method: method, like "maps/api/masstransit/getVehiclesInfo"
+        :param method: method, like "maps/api/masstransit/getVehciclesInfo"
         :return: local API, like to "getVehiclesInfo"
         """
         if method == "maps/api/masstransit/getStopInfo":
@@ -92,7 +92,7 @@ class YandexTransportCore:
 
         return method
 
-    def getChromiumNetworkingData(self):
+    def get_chromium_networking_data(self):
         """
         Gets "Network" data from Developer tools of Chromium Browser
         :return: JSON containing data from "Network" tab
@@ -110,12 +110,12 @@ class YandexTransportCore:
 
     # ----                               MASTER FUNCTION TO GET YANDEX API DATA                                   ---- #
 
-    def getYandexJSON(self, url, api_method):
+    def _get_yandex_json(self, url, api_method):
         """
         Universal method to get Yandex JSON results.
         :param url: initial url, get it by clicking on the route or stop
         :param api_method: tuple of strings to find,
-               like ("maps/api/masstransit/getRouteInfo","maps/api/masstransit/getVehiclesInfo")
+               like ("maps/api/masstransit/get_route_info","maps/api/masstransit/get_vehicles_info")
         :return: array of huge json data, error code
         """
         result_list = []
@@ -128,7 +128,7 @@ class YandexTransportCore:
             print(e)
             return None, self.RESULT_GET_ERROR
 
-        network_json = self.getChromiumNetworkingData()
+        network_json = self.get_chromium_networking_data()
 
         # Loading Network Data to JSON
         try:
@@ -164,12 +164,12 @@ class YandexTransportCore:
                     print(e)
                     return None, self.RESULT_GET_ERROR
 
-                # Writing getStopInfo results to memory
+                # Writing get_stop_info results to memory
                 output_stream = io.StringIO()
                 output_stream.write(self.driver.page_source)
                 output_stream.seek(0)
 
-                # Getting getStopInfo results to JSON
+                # Getting get_stop_info results to JSON
                 soup = BeautifulSoup(output_stream, 'lxml', from_encoding='utf-8')
                 body = soup.find('body')
                 if body is not None:
@@ -177,16 +177,16 @@ class YandexTransportCore:
                     try:
                         returned_json = json.loads(body_string, encoding='utf-8')
                         data = {"url": query['url'],
-                                "method": self.yandexAPItoLocalAPI(query['method']),
+                                "method": self.yandex_api_to_local_api(query['method']),
                                 "error": "OK",
                                 "data": returned_json}
                     except ValueError as e:
                         data = {"url": query['url'],
-                                "method": self.yandexAPItoLocalAPI(query['method']),
+                                "method": self.yandex_api_to_local_api(query['method']),
                                 "error": "Failed to parse JSON"}
                 else:
                     data = {"url": query['url'],
-                            "method": self.yandexAPItoLocalAPI(query['method']),
+                            "method": self.yandex_api_to_local_api(query['method']),
                             "error": "Failed to parse body of the response"}
 
                 result_list.append(data)
@@ -198,58 +198,58 @@ class YandexTransportCore:
 
     # ----                                   SHORTCUTS TO USED APIs                                               ---- #
 
-    def getStopInfo(self, url):
+    def get_stop_info(self, url):
         """
-        Getting Yandex masstransit getStopInfo JSON results
+        Getting Yandex masstransit get_stop_info JSON results
         :param url: url of the stop (the URL you get when you click on the stop in the browser)
         :return: array of huge json data, error code
         """
-        return self.getYandexJSON(url, api_method=("maps/api/masstransit/getStopInfo",))
+        return self._get_yandex_json(url, api_method=("maps/api/masstransit/getStopInfo",))
 
-    def getVehiclesInfo(self, url):
+    def get_vehicles_info(self, url):
         """
-        Getting Yandex masstransit getVehiclesInfo JSON results
+        Getting Yandex masstransit get_vehicles_info JSON results
         :param url: url of the stop (the URL you get when you click on the stop in the browser)
         :return: array of huge json data, error code
         """
-        return self.getYandexJSON(url, api_method=("maps/api/masstransit/getVehiclesInfo",))
+        return self._get_yandex_json(url, api_method=("maps/api/masstransit/getVehiclesInfo",))
 
-    def getVehiclesInfoWithRegion(self, url):
+    def get_vehicles_info_with_region(self, url):
         """
-        Getting Yandex masstransit getVehiclesInfo JSON results
+        Getting Yandex masstransit get_vehicles_info JSON results
         :param url: url of the stop (the URL you get when you click on the stop in the browser)
         :return: array of huge json data, error code
         """
-        return self.getYandexJSON(url, api_method=("maps/api/masstransit/getVehiclesInfoWithRegion",))
+        return self._get_yandex_json(url, api_method=("maps/api/masstransit/getVehiclesInfoWithRegion",))
 
-    def getRouteInfo(self, url):
+    def get_route_info(self, url):
         """
-        Getting Yandex masstransit getRouteInfo JSON results
+        Getting Yandex masstransit get_route_info JSON results
         :param url: url of the stop (the URL you get when you click on the stop in the browser)
         :return: array of huge json data, error code
         """
-        return self.getYandexJSON(url, api_method=("maps/api/masstransit/getRouteInfo",))
+        return self._get_yandex_json(url, api_method=("maps/api/masstransit/getRouteInfo",))
 
-    def getLayerRegions(self, url):
+    def get_layer_regions(self, url):
         """
         No idea what this thing does
         :param url: url of the stop (the URL you get when you click on the stop in the browser)
         :return: array of huge json data, error code
         """
-        return self.getYandexJSON(url, api_method=("maps/api/masstransit/getLayerRegions",))
+        return self._get_yandex_json(url, api_method=("maps/api/masstransit/getLayerRegions",))
 
-    def getAllInfo(self, url):
+    def get_all_info(self, url):
         """
         Getting basically all Yandex Masstransit API JSON results related to requested URL
         :param url:
         :return:
         """
-        return self.getYandexJSON(url, api_method=("maps/api/masstransit/getRouteInfo",
-                                                   "maps/api/masstransit/getStopInfo",
-                                                   "maps/api/masstransit/getVehiclesInfo",
-                                                   "maps/api/masstransit/getVehiclesInfoWithRegion",
-                                                   "maps/api/masstransit/getLayerRegions")
-                                  )
+        return self._get_yandex_json(url, api_method=("maps/api/masstransit/getRouteInfo",
+                                                      "maps/api/masstransit/getStopInfo",
+                                                      "maps/api/masstransit/getVehiclesInfo",
+                                                      "maps/api/masstransit/getVehiclesInfoWithRegion",
+                                                      "maps/api/masstransit/getLayerRegions")
+                                     )
 
 
 if __name__ == '__main__':
