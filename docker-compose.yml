@@ -6,7 +6,7 @@ networks:
 
 services:
   server:
-    image: ytproxy:latest
+    image: owlsoul/ytproxy:latest
     environment:
       - PYTHONUNBUFFERED=1
     networks:
