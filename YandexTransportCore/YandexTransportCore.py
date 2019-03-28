@@ -59,10 +59,18 @@ class YandexTransportCore:
 
     def stopWebdriver(self):
         """
-        Stop Chromium webdriver
+        Stop Chromium Webdriver
         :return: nothing
         """
         self.driver.quit()
+
+    def restartWebdriver(self):
+        """
+        Restart Chromium Webdriver. Good idea to do this sometimes, like Garbage Collection.
+        :return: nothing
+        """
+        self.stopWebdriver()
+        self.startWebdriver()
 
     @staticmethod
     def yandexAPItoLocalAPI(method):
