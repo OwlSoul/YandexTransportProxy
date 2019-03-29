@@ -12,11 +12,6 @@ Chromium browser.
 #       camelCase, like Robot Operating System.
 #       I also personally find camelCase more pretier than the snake_case.
 
-# Project follows PascalCase for module naming, but snake_case for final executable.
-# Maybe a better idea is to use executable an sh script instead.
-# pylint: disable=C0103
-# pylint: enable=C0103
-
 __author__ = "Yury D."
 __credits__ = ["Yury D.", "Pavel Lutskov", "Yury Alexeev"]
 __license__ = "MIT"
@@ -235,8 +230,8 @@ class ExecutorThread(threading.Thread):
         :return: nothing
         """
         self.app.log.debug("Executing " + "getRouteInfo" + " query:"
-                              " ID=" + str(query['id']) +
-                              " URL=" + str(query['body']))
+                           " ID=" + str(query['id']) +
+                           " URL=" + str(query['body']))
         self.execute_get_info(query)
 
     def execute_get_vehicles_info(self, query):
@@ -246,8 +241,8 @@ class ExecutorThread(threading.Thread):
         :return: nothing
         """
         self.app.log.debug("Executing " + "getVehiclesInfo" + " query:"
-                              " ID=" + str(query['id']) +
-                              " URL=" + str(query['body']))
+                           " ID=" + str(query['id']) +
+                           " URL=" + str(query['body']))
         self.execute_get_info(query)
 
     def execute_get_vehicles_info_with_region(self, query):
@@ -257,8 +252,8 @@ class ExecutorThread(threading.Thread):
         :return: nothing
         """
         self.app.log.debug("Executing " + "getVehiclesInfoWithRegion" + " query:"
-                              " ID=" + str(query['id']) +
-                              " URL=" + str(query['body']))
+                           " ID=" + str(query['id']) +
+                           " URL=" + str(query['body']))
         self.execute_get_info(query)
 
     def execute_get_layer_regions(self, query):
@@ -268,8 +263,8 @@ class ExecutorThread(threading.Thread):
         :return: nothing
         """
         self.app.log.debug("Executing " + "getLayersRegion" + " query:"
-                              " ID=" + str(query['id']) +
-                              " URL=" + str(query['body']))
+                           " ID=" + str(query['id']) +
+                           " URL=" + str(query['body']))
         self.execute_get_info(query)
 
     def execute_get_all_info(self, query):
@@ -279,8 +274,8 @@ class ExecutorThread(threading.Thread):
         :return: nothing
         """
         self.app.log.debug("Executing " + "getAllInfo" + " query:" +
-                              " ID=" + str(query['id']) +
-                              " URL=" + str(query['body']))
+                           " ID=" + str(query['id']) +
+                           " URL=" + str(query['body']))
         self.execute_get_info(query)
 
     def execute_query(self, query):
@@ -630,6 +625,7 @@ class Application:
         self.log.info("YTPS - Yandex Transport Proxy Server - terminated!")
 
 # -------------------------------------------------------------------------------------------------------------------- #
+#pylint: disable = C0103
 if __name__ == '__main__':
     application = Application()
     application.run()
