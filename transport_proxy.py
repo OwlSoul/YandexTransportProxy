@@ -30,7 +30,7 @@ import threading
 from collections import deque
 from collections import defaultdict
 import setproctitle
-from YandexTransportCore import YandexTransportCore, Logger
+from yandex_transport_core import YandexTransportCore, Logger
 
 # -------------------------------------------------------------------------------------------------------------------- #
 
