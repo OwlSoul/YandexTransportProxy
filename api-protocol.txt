@@ -1,38 +1,38 @@
 YTPS - Yandex Transport Proxy Server protocol.
 
-Version = 1.0.1
+Version = 1.0.2
 
-get_current_queue                       - will return current Query Queue of the server.
-                                         Does not add itself to the Query Queue.
+get_current_queue                        - will return current Query Queue of the server.
+                                           Does not add itself to the Query Queue.
 
-getEcho?id=...?                       - test command, will add itself to Query Queue and execute in order with
-                                         get...Info queries. Will return string after ?
+getEcho?id=...?                          - test command, will add itself to Query Queue and execute in order with
+                                           get...Info queries. Will return string after ?
 
-get_stop_info?id=...?...               - add get_stop_info to the Query Queue, paste Yandex URL after "?"
-                                        will return {"response": "OK", "queue_position":"size of the queue"}
-                                        if successful.
+get_stop_info?id=...?...                 - add get_stop_info to the Query Queue, paste Yandex URL after "?"
+                                           will return {"response": "OK", "queue_position":"size of the queue"}
+                                           if successful.
 
-get_vehicles_info?id=...?...           - add get_stop_info to the Query Queue, paste Yandex URL after "?"
-                                        will return {"response": "OK", "queue_position":"size of the queue"}
-                                        if successful.
-                                        Note: Seems to be deprecated starting 25-03-2019
+get_vehicles_info?id=...?...             - add get_stop_info to the Query Queue, paste Yandex URL after "?"
+                                           will return {"response": "OK", "queue_position":"size of the queue"}
+                                           if successful.
+                                           Note: Seems to be deprecated starting 25-03-2019
 
 get_vehicles_info_with_region?id=...?... - new Yandex method to get vehicles info.
 
-get_route_info?id=...?...              - add get_route_info to Query Queue, paster Yandex URL after "?"
-                                       will return {"response": "OK", "queue_position":"size of the queue"} if successful
+get_route_info?id=...?...                - add get_route_info to Query Queue, paster Yandex URL after "?"
+                                            will return {"response": "OK", "queue_position":"size of the queue"} if successful
 
-get_layer_regions?id=...?...           - no idea what this thing does.
+get_layer_regions?id=...?...             - no idea what this thing does.
 
-get_all_info?id=...?                   - special command, also requires Yandex URL after ?, will return all "get...Info"
-                                       responses it will find, like get_route_info and getVehicle info are returned by
-                                       clicking on the transit stop, using the same URL.
+get_all_info?id=...?                     - special command, also requires Yandex URL after ?, will return all "get...Info"
+                                           responses it will find, like get_route_info and getVehicle info are returned by
+                                           clicking on the transit stop, using the same URL.
 
 # ----------------------------------- Not implemented, under consideration ------------------------------------------- #
-watchVehiclesInfo?id=...?            - start watching for vehicles info, passing out any subsequent get_vehicles_info
-                                       responses it will receive from Yandex. Will block ANY other "get...Info" query \
-                                       until cancelled.
-                                       One server - one "watch" instance. Use more Docker containers to watch more routes,
-                                       watch must be in active browser window to work properly.
+watchVehiclesInfo?id=...?                - start watching for vehicles info, passing out any subsequent get_vehicles_info
+                                           responses it will receive from Yandex. Will block ANY other "get...Info" query \
+                                           until cancelled.
+                                           One server - one "watch" instance. Use more Docker containers to watch more routes,
+                                           watch must be in active browser window to work properly.
 
-cancelWatch                          - cancel watch, resume normal operations.
+cancelWatch                              - cancel watch, resume normal operations.
