@@ -12,7 +12,7 @@ import random
 import selenium
 import time
 import json
-from YandexTransportCore import YandexTransportCore
+from yandex_transport_core import YandexTransportCore
 
 # STOP URL's
 # Probably replace this to "ConstructURL" in the future to increase randomness.

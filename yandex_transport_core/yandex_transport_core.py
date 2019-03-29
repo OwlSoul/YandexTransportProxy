@@ -19,7 +19,6 @@ import selenium
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
-
 class YandexTransportCore:
     """
     YandexTransportCore class, implements core functions of access to Yandex Transport/Masstransit API

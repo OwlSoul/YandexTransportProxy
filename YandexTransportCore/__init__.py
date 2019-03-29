@@ -1,2 +1,0 @@
-from YandexTransportCore.yandex_transport_core import YandexTransportCore
-from YandexTransportCore.logger import Logger

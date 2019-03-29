@@ -18,7 +18,7 @@ __license__ = "MIT"
 __version__ = "2.0.0-beta"
 __maintainer__ = "Yury D."
 __email__ = "SoulGate@yandex.ru"
-__status__ = "Beta"
+__status__ = "Alpha"
 
 import time
 import sys
