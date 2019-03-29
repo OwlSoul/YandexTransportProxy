@@ -15,7 +15,7 @@ Chromium browser.
 __author__ = "Yury D."
 __credits__ = ["Yury D.", "Pavel Lutskov", "Yury Alexeev"]
 __license__ = "MIT"
-__version__ = "0.0.10-alpha"
+__version__ = "0.0.11-alpha"
 __maintainer__ = "Yury D."
 __email__ = "SoulGate@yandex.ru"
 __status__ = "Alpha"
