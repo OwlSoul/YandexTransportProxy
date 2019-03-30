@@ -61,7 +61,6 @@ RUN apt-get clean
 # Creating the user
 RUN mkdir -p /home/transport_proxy
 RUN useradd transport_proxy --home /home/transport_proxy --shell /bin/bash
-RUN mkdir -p /home/transport_proxy
 
 # Copying the project
 ADD yandex_transport_core/*.py /home/transport_proxy/yandex_transport_core/

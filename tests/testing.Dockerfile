@@ -1,4 +1,4 @@
-# Dockerfile for Yandex Transport Monitor
+# Dockerfile for Yandex Transport Monitor Tests
 # Architectures: armhf (Orange PI, Raspberry PI)
 #                x86-64
 
@@ -46,7 +46,9 @@ RUN pip3 install psycopg2-binary \
 
 # Install pytest, separately, so previous step will be cached
 RUN pip3 install pytest \
-                 pytest-progress
+                 pytest-progress \
+                 pytest-rerunfailures \
+                 pytest-timeout
 
 # Dealing with goddamn locales
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
@@ -65,7 +67,6 @@ RUN apt-get clean
 # Creating the user
 RUN mkdir -p /home/transport_proxy
 RUN useradd transport_proxy --home /home/transport_proxy --shell /bin/bash
-RUN mkdir -p /home/transport_proxy
 
 # Copying the project
 ADD yandex_transport_core/ /home/transport_proxy/yandex_transport_core
