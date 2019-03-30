@@ -124,7 +124,7 @@ class YandexTransportCore:
         try:
             self.driver.get(url)
         except selenium.common.exceptions.WebDriverException as e:
-            print(e)
+            print("Selenium exception (_get_yandex_json):", e)
             return None, self.RESULT_GET_ERROR
 
         network_json = self.get_chromium_networking_data()
@@ -133,7 +133,7 @@ class YandexTransportCore:
         try:
             network_data = json.loads(network_json, encoding='utf-8')
         except ValueError as e:
-            print(e)
+            print("JSON Exception (_get_yandex_json):", e)
             return result_list, self.RESULT_NETWORK_PARSE_ERROR
 
         url_reached = False
@@ -160,7 +160,7 @@ class YandexTransportCore:
                     self.driver.get(query['url'])
                 except selenium.common.exceptions.WebDriverException as e:
                     print("Your favourite error message: THIS SHOULD NOT HAPPEN!")
-                    print(e)
+                    print("Selenium exception (_get_yandex_json):", e)
                     return None, self.RESULT_GET_ERROR
 
                 # Writing get_stop_info results to memory
