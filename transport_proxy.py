@@ -129,7 +129,9 @@ class ExecutorThread(threading.Thread):
         else:
             log_tag_text = ""
         try:
-            self.app.log.debug("Sending response to " + str(addr) + log_tag_text)
+            self.app.log.debug("Sending response" +
+                               "(" + str(len(str(message)) + 2) + " bytes) " 
+                               "to " + str(addr) + log_tag_text)
             conn.send(bytes(str(message) + '\n' + '\0', 'utf-8'))
         except socket.error as e:
             self.app.log.error("Failed to send data to " + str(addr))
