@@ -11,3 +11,4 @@ outdata
 output.*
 test_results.xml
 debug
+ytproxy-network.log

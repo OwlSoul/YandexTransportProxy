@@ -26,6 +26,7 @@ import json
 import signal
 import socket
 import re
+import itertools
 import threading
 from collections import deque
 from collections import defaultdict
@@ -33,6 +34,19 @@ import setproctitle
 from yandex_transport_core import YandexTransportCore, Logger
 
 # -------------------------------------------------------------------------------------------------------------------- #
+
+
+def chunks(arr, n):
+    """
+    Helper function to slice array into smaller size chunks.
+    Is used in "send_message".
+    :param arr: an array
+    :param n: size of a chunk
+    :return: array of n-sized chunks
+    """
+    for i in range(0, len(arr), n):
+        # Create an index range for l of n items:
+        yield arr[i:i+n]
 
 
 class ListenerThread(threading.Thread):
@@ -129,10 +143,29 @@ class ExecutorThread(threading.Thread):
         else:
             log_tag_text = ""
         try:
-            self.app.log.debug("Sending response" +
-                               "(" + str(len(str(message)) + 2) + " bytes) " 
+            send_msg = bytes(str(message) + '\n' + '\0', 'utf-8')
+
+            self.app.log.debug("Writing to " + self.app.network_log_file + " "
+                               "(" + str(len(send_msg)) + " bytes) ")
+            if self.app.network_log_enabled:
+                f = open(self.app.network_log_file, 'ab')
+                f.write(bytes(str(len(send_msg))+'\n', 'utf-8'))
+                f.write(send_msg)
+                f.write(bytes('\n\n', 'utf-8'))
+                f.close()
+
+            self.app.log.debug("Sending response " +
+                               "(" + str(len(send_msg)) + " bytes) "
                                "to " + str(addr) + log_tag_text)
-            conn.send(bytes(str(message) + '\n' + '\0', 'utf-8'))
+
+            # It seems data needs to be sent in chunks, JSON objects with size of several kilobytes
+            # effectively break "sending in one piece" strategy.
+            buffer_size = 4096
+            for chunk in chunks(send_msg, buffer_size):
+                bytes_send = conn.send(chunk)
+                if bytes_send != len(chunk):
+                    self.app.log.error("Sent " + str(bytes_send) + "out of " + str(len(chunk)) + "bytes!")
+
         except socket.error as e:
             self.app.log.error("Failed to send data to " + str(addr))
             self.app.log.error("Exception ocurred:" + str(e))
@@ -381,6 +414,10 @@ class Application:
         # Logger
         self.log = Logger(Logger.DEBUG)
 
+        # Debug: Write EVERYTHING this thing sends via network to a file.
+        self.network_log_enabled = True
+        self.network_log_file = 'ytproxy-network.log'
+
         # Queue lock
         self.queue_lock = threading.Lock()
 
@@ -624,6 +661,14 @@ class Application:
 
         self.core.stop_webdriver()
 
+        # Stopping the server executor and listener threads.
+        self.is_running = False
+
+        for key, listener in self.listeners.items():
+            listener.join()
+
+        if self.executor_thread is not None:
+            self.executor_thread.join()
         self.log.info("YTPS - Yandex Transport Proxy Server - terminated!")
 
 # -------------------------------------------------------------------------------------------------------------------- #
