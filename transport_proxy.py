@@ -168,7 +168,7 @@ class ExecutorThread(threading.Thread):
 
         except socket.error as e:
             self.app.log.error("Failed to send data to " + str(addr))
-            self.app.log.error("Exception ocurred:" + str(e))
+            self.app.log.error("Exception (send_message):" + str(e))
 
     def execute_get_info(self, query):
         """
