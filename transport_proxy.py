@@ -435,6 +435,16 @@ class Application:
         # Server will run in single thread, the deque is to store incoming queries.
         self.query_queue = deque()
 
+    def sigterm_handler(self, _signal, _time):
+        """
+        SIGTERM handler, will simply pass to SIGINT handler.
+        :param _signal:
+        :param _time:
+        :return:
+        """
+        self.log.info("SIGTERM received! Terminating the program...")
+        self.sigterm_handler(_signal, _time)
+
     def sigint_handler(self, _signal, _time):
         """
         SIGINT signal handler
@@ -706,6 +716,7 @@ class Application:
 
         # Signal handler
         signal.signal(signal.SIGINT, self.sigint_handler)
+        signal.signal(signal.SIGTERM, self.sigterm_handler)
 
         # Starting query executor thread
         self.executor_thread = ExecutorThread(self)
