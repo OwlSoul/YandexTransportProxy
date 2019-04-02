@@ -2,11 +2,12 @@
 
 A proxy server to work in conjunction with [YandexTransportWebdriverAPI-Python](https://github.com/OwlSoul/YandexTransportWebdriverAPI-Python).
 
-![Yandex Transport Proxy Logo](https://raw.githubusercontent.com/OwlSoul/Images/master/YandexTransportProxy/yandex_transport_logo.jpg)
-
 *This project is for "Yandex.Maps" and "Yandex.Transport" services, so it's expected that majority of potential users are from Russian Federation, thus the README is written in russian language.*
 
 Прокси сервер для работы в паре с [YandexTransportWebdriverAPI-Python](https://github.com/OwlSoul/YandexTransportWebdriverAPI-Python).
+
+![Yandex Transport Proxy Logo](https://raw.githubusercontent.com/OwlSoul/Images/master/YandexTransportProxy/yandex_transport_logo.jpg)
+
 
 ## Что это за зверь и чего он делает?
 На данный момент Яндекс не дает свободный доступ к API Яндекс.Транспорт (Masstransit API) - не следует путать с API Яндекс.Расписание. Этот прокси-сервер представляет из себя хитрую конструкцию для относительного исправления этого недостатка. 
