@@ -17,8 +17,8 @@ __credits__ = ["Yury D.", "Pavel Lutskov", "Yury Alexeev"]
 __license__ = "MIT"
 __version__ = "0.0.13-alpha"
 __maintainer__ = "Yury D."
-__email__ = "SoulGate@yandex.ru"
-__status__ = "Alpha"
+__email__ = "TheOwlSoul@gmail.com"
+__status__ = "Beta"
 
 import time
 import sys
@@ -699,6 +699,10 @@ class Application:
 
         # Starting the main program
         self.log.info("YTPS - Yandex Transport Proxy Server - starting up...")
+        self.log.info("Listen host : " + str(self.host))
+        self.log.info("Listen port : " + str(self.port))
+        self.log.info("Delay       : " + str(self.query_delay))
+        self.log.info("Verbosity   : " + str(self.log.verbose))
 
         # Signal handler
         signal.signal(signal.SIGINT, self.sigint_handler)

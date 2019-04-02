@@ -1,4 +1,4 @@
-version: "2"
+version: "3.0"
 
 networks:
   transport-proxy:
@@ -7,9 +7,12 @@ networks:
 services:
   server:
     image: owlsoul/ytproxy:latest
+    restart: unless-stopped
+    container_name: "ytproxy"
     environment:
       - PYTHONUNBUFFERED=1
     networks:
       - transport-proxy
     ports:
       - "25555:25555"
+    command: ./transport_proxy.py --delay 10 --verbose 4
