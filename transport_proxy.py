@@ -26,7 +26,6 @@ import json
 import signal
 import socket
 import re
-import itertools
 import threading
 from collections import deque
 from collections import defaultdict
@@ -664,7 +663,7 @@ class Application:
         # Stopping the server executor and listener threads.
         self.is_running = False
 
-        for key, listener in self.listeners.items():
+        for _, listener in self.listeners.items():
             listener.join()
 
         if self.executor_thread is not None:

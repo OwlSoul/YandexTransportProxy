@@ -425,11 +425,13 @@ function-naming-style=snake_case
 good-names=i,
            j,
            k,
+           f,
            ex,
            Run,
 	   app,
            c,
            e,
+	   n,
            _
 
 # Include a hint for the correct naming format with invalid-name.
