@@ -4,7 +4,7 @@ Errors
 __pycache__
 Dockerfile.save
 .Dockerfile.swp
-launch/page-*.html
+launch
 code_quality.csv
 output*
 outdata
@@ -12,3 +12,4 @@ output.*
 test_results.xml
 debug
 ytproxy-network.log
+plots
