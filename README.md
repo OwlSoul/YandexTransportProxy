@@ -62,7 +62,7 @@ A proxy server to work in conjunction with [YandexTransportWebdriverAPI-Python](
 
 ```docker build -t "owlsoul/ytproxy:dev" .```
 
-### Вариант 3. Old School, без использования контейнеров.
+### Вариант 3. Old School, без использования контейнеров
 Не рекомендуется, проект использует Chromium, и если тот в системе основной браузер - может быть неприятно и неудобно. Инструкция только для Linux Ubuntu.
 
 Ставим необходимые пакеты:
