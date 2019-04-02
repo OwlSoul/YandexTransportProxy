@@ -2,9 +2,9 @@
 
 A proxy server to work in conjunction with [YandexTransportWebdriverAPI-Python](https://github.com/OwlSoul/YandexTransportWebdriverAPI-Python).
 
-*This project is for "Yandex.Maps" and "Yandex.Transport" services, so it's expected that majority of potential users are from Russian Federation, thus the README is written in russian language.*
-
 Прокси сервер для работы в паре с [YandexTransportWebdriverAPI-Python](https://github.com/OwlSoul/YandexTransportWebdriverAPI-Python).
+
+*This project is for "Yandex.Maps" and "Yandex.Transport" services, so it's expected that majority of potential users are from Russian Federation, thus the README is written in russian language.*
 
 ![Yandex Transport Proxy Logo](https://raw.githubusercontent.com/OwlSoul/Images/master/YandexTransportProxy/yandex_transport_logo.jpg)
 
@@ -164,3 +164,6 @@ The code is distributed under MIT licence, AS IS, author do not bear any respons
 __Project author:__ [Yury D.](https://github.com/OwlSoul) (TheOwlSoul@gmail.com) \
 __PEP-8 Evangelist, Good Cop:__ [Pavel Lutskov](https://github.com/ltskv) \
 __PEP-8 Evangelist, Bad Cop:__ [Yury Alexeev](https://github.com/Kuma-San0217)
+
+----
+
