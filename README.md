@@ -2,17 +2,17 @@
 
 A proxy server to work in conjunction with [YandexTransportWebdriverAPI-Python](https://github.com/OwlSoul/YandexTransportWebdriverAPI-Python).
 
-*This project is for "Yandex.Maps" and "Yandex.Transport" services, so it's expected that majority of potential users are from Russian Federation, thus the README is written in russian language.*
-
 Прокси сервер для работы в паре с [YandexTransportWebdriverAPI-Python](https://github.com/OwlSoul/YandexTransportWebdriverAPI-Python).
+
+*This project is for "Yandex.Maps" and "Yandex.Transport" services, so it's expected that majority of potential users are from Russian Federation, thus the README is written in russian language.*
 
 ![Yandex Transport Proxy Logo](https://raw.githubusercontent.com/OwlSoul/Images/master/YandexTransportProxy/yandex_transport_logo.jpg)
 
 
 ## Что это за зверь и чего он делает?
-На данный момент Яндекс не дает свободный доступ к API Яндекс.Транспорт (Masstransit API) - не следует путать с API Яндекс.Расписание. Этот прокси-сервер представляет из себя хитрую конструкцию для относительного исправления этого недостатка. 
+На данный момент Яндекс не дает свободный доступ к API Яндекс.Транспорт/Masstransit API (не следует путать с API Яндекс.Расписание, там доступ как раз есть). Этот прокси-сервер представляет из себя хитрую конструкцию для относительного исправления этого недостатка. 
 
-Получить данные вроде "покажи координаты всего общественного транспорта в таком-то районе" или "выдай мне данные о координатах транспорта по всему городу в данный момент" с помощью этой штуковины просто так нельзя. Зато с ее помощью можно автоматизировать получение данных  по конкретной остановке, или по конкретному маршруту, и получить их именно в том формате в котором Яндекс их пересылает - здоровенные такие JSON-структуры (до 150килобайт и больше). 
+Получить данные вроде "покажи координаты всего общественного транспорта в таком-то районе" или "выдай мне данные о координатах транспорта по всему городу в данный момент" с помощью этой штуковины просто так нельзя. Зато с ее помощью можно автоматизировать получение данных  по конкретной остановке, или по конкретному маршруту, и получить их именно в том формате в котором Яндекс их пересылает - здоровенные такие JSON-структуры (до 150 килобайт и больше). 
 
 Полученные данные можно использовать для сбора статистики по конкретному маршруту, создания своего собственного табло для конкретной остановки, и автоматизации каких-либо событий на основе данных о транспорте (редко ходящий, но жизненно важный автобус вышел на маршрут - включаем будильник).
 
@@ -57,7 +57,7 @@ A proxy server to work in conjunction with [YandexTransportWebdriverAPI-Python](
 ```docker pull owlsoul/ytproxy:dev```
 
 ### Вариант 2. Используя Dockerfile
-Нужно сохранить себе этот проект ("git clone" или качать релиз), и в корне выполнить команду:
+Нужно сохранить себе этот проект ("git clone" или [cкачать релиз](https://github.com/OwlSoul/YandexTransportProxy/releases)), и в "корне" выполнить команду:
 
 ```docker build -t "owlsoul/ytproxy:dev" .```
 
@@ -147,12 +147,12 @@ docker-compose up -d
 
 ## Остановка прокси-сервера
 
-Прокси-сервер прекращает свою жизнедеятельность при получении сигнала SIGINT.
+Прокси-сервер прекращает свою жизнедеятельность при получении сигнала SIGINT. В случае с контейнером можно просто остановить контейнер (```docker stop```), вы все равно не услышите как прокси-сервер горит в аду завершающегося контейнера.
 
 ## Поддержка и обратная связь.
 Гарантий что эта штука будет работать долго и счастливо - никаких. Яндекс может в любой момент устроить что-нибудь что сделает работу этого проекта невозможным. Проект находится на постоянной системе мониторинга, и если что-то отваливается или перестает работать - автор об этом оперативно узнает, и поправит, если это возможно.
 
-В любом случае, сообщить о возникшей проблеме всегда можно здесь:
+В любом случае, сообщить о возникшей проблеме всегда можно здесь: \
 https://github.com/OwlSoul/YandexTransportProxy/issues/new
 
 ## Лицензия / License
@@ -164,3 +164,6 @@ The code is distributed under MIT licence, AS IS, author do not bear any respons
 __Project author:__ [Yury D.](https://github.com/OwlSoul) (TheOwlSoul@gmail.com) \
 __PEP-8 Evangelist, Good Cop:__ [Pavel Lutskov](https://github.com/ltskv) \
 __PEP-8 Evangelist, Bad Cop:__ [Yury Alexeev](https://github.com/Kuma-San0217)
+
+----
+
