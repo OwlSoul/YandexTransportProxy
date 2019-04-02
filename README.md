@@ -57,7 +57,7 @@ A proxy server to work in conjunction with [YandexTransportWebdriverAPI-Python](
 ```docker pull owlsoul/ytproxy:dev```
 
 ### Вариант 2. Используя Dockerfile
-Нужно сохранить себе этот проект ("git clone" или [cкачать релиз](https://github.com/OwlSoul/YandexTransportProxy/releases)), и в корне выполнить команду:
+Нужно сохранить себе этот проект ("git clone" или [cкачать релиз](https://github.com/OwlSoul/YandexTransportProxy/releases)), и в "корне" выполнить команду:
 
 ```docker build -t "owlsoul/ytproxy:dev" .```
 
