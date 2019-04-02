@@ -29,6 +29,7 @@ import re
 import threading
 from collections import deque
 from collections import defaultdict
+import argparse
 import setproctitle
 from yandex_transport_core import YandexTransportCore, Logger
 
@@ -124,7 +125,7 @@ class ExecutorThread(threading.Thread):
         # Let's stick with "terminate" scenario for now
 
         # Time to wait between queries
-        self.wait_time = 5
+        self.wait_time = self.app.query_delay
         # Time to wait between watch updates
         self.watch_wait_time = 5
 
@@ -391,6 +392,8 @@ class Application:
     RESULT_GET_ERROR = 2
     RESULT_NO_YANDEX_DATA = 3
 
+    RESULT_SOCKET_BIND_FAILED = 1
+
     def __init__(self):
         setproctitle.setproctitle('transport_proxy')
 
@@ -400,6 +403,9 @@ class Application:
         self.host = '0.0.0.0'
         # Listen port
         self.port = 25555
+
+        # Delay between queries, in secs.
+        self.query_delay = 5
 
         # Yandex Transport API Core
         self.core = None
@@ -411,10 +417,10 @@ class Application:
         self.listeners = defaultdict()
 
         # Logger
-        self.log = Logger(Logger.DEBUG)
+        self.log = Logger(Logger.INFO)
 
         # Debug: Write EVERYTHING this thing sends via network to a file.
-        self.network_log_enabled = True
+        self.network_log_enabled = False
         self.network_log_file = 'ytproxy-network.log'
 
         # Queue lock
@@ -459,8 +465,9 @@ class Application:
         self.log.debug("Binding socket...")
         try:
             sock.bind((self.host, self.port))
-        except socket.error:
-            return 1
+        except socket.error as e:
+            self.log.error("Exception (listen): " + str(e))
+            return self.RESULT_SOCKET_BIND_FAILED
 
         self.log.info("Listening for incoming connections.")
         self.log.info("Host: " + str(self.host) + " , Port: " + str(self.port))
@@ -485,7 +492,7 @@ class Application:
 
         sock.shutdown(socket.SHUT_RDWR)
 
-        return 0
+        return self.RESULT_OK
 
     def get_current_connections(self):
         """
@@ -635,14 +642,65 @@ class Application:
         response_json = json.dumps(response)
         conn.send(bytes(response_json + '\n' + '\0', 'utf-8'))
 
+    def parse_arguments(self):
+        """
+        Parse CLI arguments
+        :return: nothing
+        """
+        parser = argparse.ArgumentParser(description="Yandex Transport Proxy - a proxy-server which will "
+                                                     "capture Yandex Transport/Mastransit API responses.\n"
+                                                     "Requires Chromium browser and Selenium Webdriver.\n"
+                                                     "Use 'YandexTransportWebdriverAPI-Python' "
+                                                     "(https://github.com/OwlSoul/YandexTransportWebdriverAPI-Python)\n"
+                                                     "in conjunction with this server.",
+                                         formatter_class=argparse.RawTextHelpFormatter,
+                                        )
+
+        parser.add_argument("-v", "--version", action="store_true", default=False,
+                            help="show version info")
+        parser.add_argument("--host", default=self.host,
+                            help="host to listen on, default is " + str(self.host))
+        parser.add_argument("--port", default=self.port,
+                            help="port to listen on, default is " + str(self.port))
+        parser.add_argument("--verbose", default=self.log.verbose,
+                            help=
+                            "log verbose level, possible values:\r" +
+                            "   0 : no debug\n" +
+                            "   1 : error messages only\n" +
+                            "   2 : errors and warnings\n" +
+                            "   3 : errors, warnings and info\n" +
+                            "   4 : full debug\n" +
+                            "default is " + str(self.log.verbose))
+        parser.add_argument("--delay", default=self.query_delay,
+                            help="delay between execution of queries, in seconds, default is " +
+                            str(self.query_delay) + " secs.\n"
+                            "Use this to lower the load on Yandex Maps " +
+                            "and avoid possible ban for\n"
+                            "too many queries in short amount of time.")
+
+        args = parser.parse_args()
+        if args.version:
+            print(__version__)
+            sys.exit(0)
+
+        self.host = str(args.host)
+        self.port = int(args.port)
+        self.log.verbose = int(args.verbose)
+        self.query_delay = int(args.delay)
+
     def run(self):
         """
         Run the application
         :return: exit code
         """
 
+        # Parsing the arguments
+        self.parse_arguments()
+
+        # Starting the main program
         self.log.info("YTPS - Yandex Transport Proxy Server - starting up...")
 
+        # Signal handler
         signal.signal(signal.SIGINT, self.sigint_handler)
 
         # Starting query executor thread
@@ -656,7 +714,10 @@ class Application:
         self.log.info("ChromeDriver started successfully!")
 
         # Start the process of listening and accepting incoming connections.
-        self.listen()
+        result = self.listen()
+        if result == self.RESULT_SOCKET_BIND_FAILED:
+            self.log.error("Failed to bind socket.")
+
 
         self.core.stop_webdriver()
 
