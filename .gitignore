@@ -5,7 +5,7 @@ __pycache__
 Dockerfile.save
 .Dockerfile.swp
 launch
-code_quality.csv
+*.csv
 output*
 outdata
 output.*
