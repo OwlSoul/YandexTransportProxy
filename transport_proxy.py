@@ -91,8 +91,11 @@ class ListenerThread(threading.Thread):
                     elif query.startswith('getRouteInfo?'):
                         self.app.process_get_route_info(query, self.addr, self.conn)
 
+                    elif query.startswith('getLine?'):
+                        self.app.process_get_line(query, self.addr, self.conn)
+
                     elif query.startswith('getLayerRegions?'):
-                        self.app.process_get_route_info(query, self.addr, self.conn)
+                        self.app.process_get_layer_regions(query, self.addr, self.conn)
 
                     elif query.startswith('getAllInfo?'):
                         self.app.process_get_all_info(query, self.addr, self.conn)
@@ -180,6 +183,8 @@ class ExecutorThread(threading.Thread):
             data, error = self.app.core.get_stop_info(url=query['body'])
         elif query['type'] == 'getRouteInfo':
             data, error = self.app.core.get_route_info(url=query['body'])
+        elif query['type'] == 'getLine':
+            data, error = self.app.core.get_line(url=query['body'])
         elif query['type'] == 'getVehiclesInfo':
             data, error = self.app.core.get_vehicles_info(url=query['body'])
         elif query['type'] == 'getVehiclesInfoWithRegion':
@@ -269,6 +274,17 @@ class ExecutorThread(threading.Thread):
                            " URL=" + str(query['body']))
         self.execute_get_info(query)
 
+    def execute_get_line(self, query):
+        """
+        Execute get_line query
+        :param query: internal query structure
+        :return: nothing
+        """
+        self.app.log.debug("Executing " + "getLine" + " query:"
+                           " ID=" + str(query['id']) +
+                           " URL=" + str(query['body']))
+        self.execute_get_info(query)
+
     def execute_get_vehicles_info(self, query):
         """
         Execute get_vehicles_info query
@@ -327,6 +343,9 @@ class ExecutorThread(threading.Thread):
             return
         if query['type'] == 'getRouteInfo':
             self.execute_get_route_info(query)
+            return
+        if query['type'] == 'getLine':
+            self.execute_get_line(query)
             return
         if query['type'] == 'getVehiclesInfo':
             self.execute_get_vehicles_info(query)
@@ -621,6 +640,10 @@ class Application:
 
     def process_get_route_info(self, query, addr, conn):
         """Process get_route_info query """
+        self.process_get_info(query, addr, conn)
+
+    def process_get_line(self, query, addr, conn):
+        """Process get_line query """
         self.process_get_info(query, addr, conn)
 
     def process_get_layer_regions(self, query, addr, conn):

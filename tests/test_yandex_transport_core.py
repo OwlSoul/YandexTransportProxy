@@ -61,6 +61,7 @@ def test_yandex_api_to_local_api():
     """
     assert YandexTransportCore.yandex_api_to_local_api('maps/api/masstransit/getStopInfo') == 'getStopInfo'
     assert YandexTransportCore.yandex_api_to_local_api('maps/api/masstransit/getRouteInfo') == 'getRouteInfo'
+    assert YandexTransportCore.yandex_api_to_local_api('maps/api/masstransit/getLine') == 'getLine'
     assert YandexTransportCore.yandex_api_to_local_api('maps/api/masstransit/getVehiclesInfo') == 'getVehiclesInfo'
     assert YandexTransportCore.yandex_api_to_local_api('maps/api/masstransit/getVehiclesInfoWithRegion') == \
            'getVehiclesInfoWithRegion'

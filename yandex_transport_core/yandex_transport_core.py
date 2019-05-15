@@ -82,6 +82,8 @@ class YandexTransportCore:
             return 'getStopInfo'
         if method == "maps/api/masstransit/getRouteInfo":
             return 'getRouteInfo'
+        if method == "maps/api/masstransit/getLine":
+            return 'getLine'
         if method == "maps/api/masstransit/getVehiclesInfo":
             return 'getVehiclesInfo'
         if method == "maps/api/masstransit/getVehiclesInfoWithRegion":
@@ -229,6 +231,14 @@ class YandexTransportCore:
         """
         return self._get_yandex_json(url, api_method=("maps/api/masstransit/getRouteInfo",))
 
+    def get_line(self, url):
+        """
+        Getting Yandex masstransit get_line JSON results
+        :param url: url of the stop (the URL you get when you click on the stop in the browser)
+        :return: array of huge json data, error code
+        """
+        return self._get_yandex_json(url, api_method=("maps/api/masstransit/getLine",))
+
     def get_layer_regions(self, url):
         """
         No idea what this thing does
@@ -244,6 +254,7 @@ class YandexTransportCore:
         :return:
         """
         return self._get_yandex_json(url, api_method=("maps/api/masstransit/getRouteInfo",
+                                                      "maps/api/masstransit/getLine",
                                                       "maps/api/masstransit/getStopInfo",
                                                       "maps/api/masstransit/getVehiclesInfo",
                                                       "maps/api/masstransit/getVehiclesInfoWithRegion",
