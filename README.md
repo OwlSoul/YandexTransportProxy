@@ -2,8 +2,6 @@
 
 **Проект мертв, КОВИД свирепствует, нужды в транспорте нет, я устал гоняться за Яндексом меняющим свою систему по настроению**
 
-**Build status:** ![Build Status](http://owlsoul.biz.tm/YandexTransportProxy/status.php?test=build)
-
 A proxy server to work in conjunction with [YandexTransportWebdriverAPI-Python](https://github.com/OwlSoul/YandexTransportWebdriverAPI-Python).
 
 Прокси сервер для работы в паре с [YandexTransportWebdriverAPI-Python](https://github.com/OwlSoul/YandexTransportWebdriverAPI-Python).
