@@ -53,7 +53,7 @@ A proxy server to work in conjunction with [YandexTransportWebdriverAPI-Python](
 
 Определенная стабильная версия:
 
-```docker pull owlsoul/ytproxy:1.0.0```
+```docker pull owlsoul/ytproxy:1.0.2```
 
 Нестабильная истекающая багами "Dev" версия:
 
