@@ -12,7 +12,9 @@ It uses Selenium with ChromeDriver and gets Yandex Transport API JSON responses.
 #       camelCase, like Robot Operating System.
 #       I also personally find camelCase more prettier than the snake_case.
 
+import ast
 import re
+import time
 import io
 import json
 import selenium
@@ -105,9 +107,12 @@ class YandexTransportCore:
         data = self.driver.execute_script(script)
 
         # They output network data in "kinda-JSON" with single quites instead of double ones.
-        result_json = str(data).replace("'", '"')
+        # We used this thing before, which was unreliable in the end
+        # result_json = str(data).replace("'", '"')
+        # Now we're just using this thing, which is probably VERY dangerous, but we don't care =)
+        parsed_data = eval(str(data))
 
-        return result_json
+        return parsed_data
 
     # ----                               MASTER FUNCTION TO GET YANDEX API DATA                                   ---- #
 
@@ -119,6 +124,10 @@ class YandexTransportCore:
                like ("maps/api/masstransit/get_route_info","maps/api/masstransit/get_vehicles_info")
         :return: array of huge json data, error code
         """
+
+        print("API Method:", api_method)
+        print("URL", url)
+
         result_list = []
 
         if self.driver is None:
@@ -129,14 +138,19 @@ class YandexTransportCore:
             print("Selenium exception (_get_yandex_json):", e)
             return None, self.RESULT_GET_ERROR
 
-        network_json = self.get_chromium_networking_data()
+        # OK, now Yandex is not supplying us with getStopInfo here, how about we wait for a bit (dirty hack)
+        print("Sleeping 30 seconds, dirty hack to get getStopInfo appear")
+        time.sleep(30)        
+
+        network_data = self.get_chromium_networking_data()
+        print(network_data)
 
         # Loading Network Data to JSON
-        try:
-            network_data = json.loads(network_json, encoding='utf-8')
-        except ValueError as e:
-            print("JSON Exception (_get_yandex_json):", e)
-            return result_list, self.RESULT_NETWORK_PARSE_ERROR
+        #try:
+        #    network_data = json.loads(network_json, encoding='utf-8')
+        #except ValueError as e:
+        #    print("JSON Exception (_get_yandex_json):", e)
+        #    return result_list, self.RESULT_NETWORK_PARSE_ERROR
 
         url_reached = False
         last_query = []

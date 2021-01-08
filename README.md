@@ -1,6 +1,6 @@
 # Yandex Transport Proxy
 
-**Проект мертв, КОВИД свирепствует, нужды в транспорте нет, я устал гоняться за Яндексом меняющим свою систему по настроению**
+**UPD 08-01-2021:** Эта штука все еще живая, но теперь получение данных по остановке getStopInfo занимает 30 секунд (здоровый такой костыль чтобы хоть как работало), теперь метод getStopInfo - тот самый который нужен для расписания по остановке - походу дергается не сразу при загрузке страницы, и его прихоится ждать. 
 
 A proxy server to work in conjunction with [YandexTransportWebdriverAPI-Python](https://github.com/OwlSoul/YandexTransportWebdriverAPI-Python).
 
