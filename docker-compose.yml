@@ -7,10 +7,18 @@ networks:
 services:
   server:
     image: owlsoul/ytproxy:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.alpine
     restart: unless-stopped
     container_name: "ytproxy"
     environment:
       - PYTHONUNBUFFERED=1
+    volumes:
+      # set host's timezone
+      - /etc/localtime:/etc/localtime:ro
+      # or set arbitrary timezone
+      #- /usr/share/zoneinfo/Europe/Samara:/etc/localtime:ro
     networks:
       - transport-proxy
     ports:
