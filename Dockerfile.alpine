@@ -1,0 +1,23 @@
+FROM alpine:edge
+
+RUN apk --update --no-cache add \
+    chromium \
+    chromium-chromedriver \
+    python3 \
+    py3-psycopg2 \
+    py3-setproctitle \
+    py3-beautifulsoup4 \
+    py3-lxml \
+    py3-pip
+
+RUN pip3 install \
+    selenium
+
+RUN adduser -h /home/transport_proxy -s /bin/sh -D transport_proxy
+WORKDIR /home/transport_proxy
+USER transport_proxy:transport_proxy
+
+ADD yandex_transport_core/*.py yandex_transport_core/
+ADD transport_proxy.py .
+
+CMD /usr/bin/python3 transport_proxy.py
